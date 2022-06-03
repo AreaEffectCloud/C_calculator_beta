@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Calculator_beta.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="font_size_test" Type="System.Drawing.Font" Scope="Application">
+      <Value Profile="(Default)">游明朝, 24pt</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -16,16 +16,29 @@ namespace Calculator_beta
 
         //演算子
         string operation = null;
-        //第一項
+        //第1項
         private decimal Mem1 = 0m;
+        //第2項
+        private decimal Mem2 = 0m;
 
         //0から9の数字を "" マウスで "" 押したとき
         private void click_Number(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             Button btn = (Button)sender;
             decimal input_num = decimal.Parse(formula.Text + btn.Text);
+            string calcu = formula.Text;
+            if (0 <= calcu.IndexOf(operation))
+            {
+                //演算子を含む場合
 
-            formula.Text = input_num.ToString();
+            }
+            else
+            {
+                //演算子を含まない、第1項
+                formula.Text += input_num.ToString();
+            }
+
+            
         }
 
         //四則演算を "" マウスで "" 押したとき
@@ -37,9 +50,9 @@ namespace Calculator_beta
             {
                 operation ="+";
             }
-            else if(btn.Text == "-")
+            else if(btn.Text == "－")
             {
-                operation = "-";
+                operation = "－";
             }
             else if (btn.Text == "÷")
             {
@@ -50,22 +63,25 @@ namespace Calculator_beta
                 operation = "×";
             }
 
-            if (formula.Text == null)
-            {
-                operation = null;
-                return;
-            } 
-            else
+            try
             {
                 Mem1 = decimal.Parse(formula.Text);
-                formula.SelectedText = operation;
+                formula.Text += operation;
+            } catch (FormatException ex)
+            {
+                //第一項を入力せずに演算子を入力することは不可
+                return;
             }
+
 
         }
 
         //イコールを "" マウスで "" 押したとき
         private void click_Eq(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            Mem2 = decimal.Parse(formula.Text);
+            decimal Result = 0m;
+
 
         }
 
@@ -113,6 +129,8 @@ namespace Calculator_beta
             else return;
         }
 
+
+        //null
         private void Normal_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //Key keys = (Key)e.KeyCode;
@@ -129,21 +147,9 @@ namespace Calculator_beta
                 case Keys.Down:
                     break;
                 case Keys.NumPad0:
-                    formula.Text = "0";
+                    formula.Text += "0";
                     break;
             }
-        }
-
-        //null
-        public static void SetButtonClickShortcut(Control control, Keys keys, Button button)
-        {
-            control.KeyDown += (sender, e) =>
-            {
-                if (e.KeyCode == keys)
-                {
-                    button.PerformClick();
-                }
-            };
         }
 
         private void Form1_Load(object sender, EventArgs e)

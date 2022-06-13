@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -14,6 +14,75 @@ namespace Calculator_beta
             KeyPress += new KeyPressEventHandler(result_PressKey);
         }
 
+        //演算子
+        string operation = null;
+        //第一項
+        private decimal Mem1 = 0m;
+
+        //0から9の数字を "" マウスで "" 押したとき
+        private void click_Number(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            Button btn = (Button)sender;
+            decimal input_num = decimal.Parse(formula.Text + btn.Text);
+
+            formula.Text = input_num.ToString();
+        }
+
+        //四則演算を "" マウスで "" 押したとき
+        private void click_ope(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            if(btn.Text == "+")
+            {
+                operation ="+";
+            }
+            else if(btn.Text == "-")
+            {
+                operation = "-";
+            }
+            else if (btn.Text == "÷")
+            {
+                operation = "÷";
+            }
+            else if (btn.Text == "✕")
+            {
+                operation = "×";
+            }
+
+            if (formula.Text == null)
+            {
+                operation = null;
+                return;
+            } 
+            else
+            {
+                Mem1 = decimal.Parse(formula.Text);
+                formula.SelectedText = operation;
+            }
+
+        }
+
+        //イコールを "" マウスで "" 押したとき
+        private void click_Eq(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+
+        }
+
+        //All Clearを "" マウスで "" 押したとき
+        private void click_AC(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            //初期化
+            formula.Text = null;
+            Mem1 = 0m;
+            operation = null;
+        }
+
+        //Back Spaceを "" マウスで "" 押したとき
+        private void click_BS(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+
+        }
 
         /*
          * 文字打った時に、対応する奴が反応する
@@ -22,19 +91,7 @@ namespace Calculator_beta
          */
         private void result_PressKey(object sender, KeyPressEventArgs e)
         {
-            if(ModifierKeys == 0)
-            {
-
-            }
             
-
-            if (Keyboard.IsKeyDown(Key.NumPad0 == true))
-            {
-                formula.SelectedText = "0";
-            }
-            else return;
-            
-
         }
 
         private void Tab_Changed(object sender, TabControlEventArgs e)
@@ -58,8 +115,8 @@ namespace Calculator_beta
 
         private void Normal_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            Key keys = (Key)e.KeyCode;
-            formula.SelectedText = keys.ToString();
+            //Key keys = (Key)e.KeyCode;
+            //formula.SelectedText = keys.ToString();
 
             switch (e.KeyCode)
             {
@@ -72,6 +129,7 @@ namespace Calculator_beta
                 case Keys.Down:
                     break;
                 case Keys.NumPad0:
+                    formula.Text = "0";
                     break;
             }
         }
@@ -147,5 +205,32 @@ namespace Calculator_beta
         {
 
         }
+
+        private void click_Operation(object sender, EventArgs e)
+        {
+
+        }
+
+        private void plus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void multi_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void minus_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void divide_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

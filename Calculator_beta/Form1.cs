@@ -1,6 +1,6 @@
 using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Windows.Input;
 
 namespace Calculator_beta
 {
@@ -14,9 +14,14 @@ namespace Calculator_beta
             KeyPress += new KeyPressEventHandler(result_PressKey);
         }
 
+        string input_str = "";
+        decimal num1 = 0;
+        decimal num2 = 0;
+        decimal result = 0;
+
         //演算子
-        string operation = null;
-        //第1項
+        string operation = "";
+        //第一項
         private decimal Mem1 = 0m;
         //第2項
         private decimal Mem2 = 0m;
@@ -25,63 +30,108 @@ namespace Calculator_beta
         private void click_Number(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             Button btn = (Button)sender;
+            string text = btn.Text;
+
+            Regex re = new Regex(@"[^0-9]");
+            string digit = re.Replace(input_str, "");
+
+            //桁数上限は一旦無しで -> ∞
+            bool dot = process.Text.Contains(".");
+            if (dot)
+            {
+                input_str += text;
+                process.Text = string.Format("{0:#}", decimal.Parse(input_str));
+
+                if (input_str.Contains(".0"))
+                {
+                    process.Text = string.Format("{0:#}", decimal.Parse(input_str)) + "." + "0";
+                }
+            }
+            else if (text == "0")//最初に0押したとき
+            {
+                input_str += text;
+                process.Text = String.Format("{0:#,0}", decimal.Parse(input_str));
+                return;
+            }
+            else//0以外の数字押したとき
+            {
+                input_str += text;
+                input_str = input_str.TrimStart('0');
+                process.Text = String.Format("{0:#,0}", decimal.Parse(input_str));
+            }
+
+
+
             decimal input_num = decimal.Parse(formula.Text + btn.Text);
             string calcu = formula.Text;
             if (0 <= calcu.IndexOf(operation))
             {
                 //演算子を含む場合
-
+                
             }
             else
             {
                 //演算子を含まない、第1項
                 formula.Text += input_num.ToString();
             }
-
-            
         }
 
         //四則演算を "" マウスで "" 押したとき
         private void click_ope(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             Button btn = (Button)sender;
+            operation = btn.Text;
 
-            if(btn.Text == "+")
+            num1 = result;
+            if (input_str != "")
             {
-                operation ="+";
-            }
-            else if(btn.Text == "－")
-            {
-                operation = "－";
-            }
-            else if (btn.Text == "÷")
-            {
-                operation = "÷";
-            }
-            else if (btn.Text == "✕")
-            {
-                operation = "×";
+                num2 = decimal.Parse(input_str);
+                if (btn.Text == "+")
+                {
+                    result = num1 + num2;
+                }
+                else if (btn.Text == "－")
+                {
+                    result = num1 - num2;
+                }
+                else if (btn.Text == "÷")
+                {
+                    result = num1 / num2;
+                }
+                else if (btn.Text == "✕")
+                {
+                    result = num1 * num2;
+                }
+                else if (btn.Text == null)
+                {
+                    result = num2;
+                }
             }
 
             try
             {
                 Mem1 = decimal.Parse(formula.Text);
                 formula.Text += operation;
-            } catch (FormatException ex)
+            }
+            catch (FormatException ex)
             {
                 //第一項を入力せずに演算子を入力することは不可
                 return;
             }
 
-
         }
 
-        //イコールを "" マウスで "" 押したとき
+        // "="を "" マウスで "" 押したとき
         private void click_Eq(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            Mem2 = decimal.Parse(formula.Text);
-            decimal Result = 0m;
+            Button btn = (Button)sender;
 
+            if (formula.Text != null)
+            {
+                //計算結果を表示
+                string result_process = process.Text.ToString();
+                formula.Text = result_process;
+            }
 
         }
 
@@ -129,8 +179,6 @@ namespace Calculator_beta
             else return;
         }
 
-
-        //null
         private void Normal_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //Key keys = (Key)e.KeyCode;
@@ -147,9 +195,21 @@ namespace Calculator_beta
                 case Keys.Down:
                     break;
                 case Keys.NumPad0:
-                    formula.Text += "0";
+                    formula.Text = "0";
                     break;
             }
+        }
+
+        //null
+        public static void SetButtonClickShortcut(Control control, Keys keys, Button button)
+        {
+            control.KeyDown += (sender, e) =>
+            {
+                if (e.KeyCode == keys)
+                {
+                    button.PerformClick();
+                }
+            };
         }
 
         private void Form1_Load(object sender, EventArgs e)

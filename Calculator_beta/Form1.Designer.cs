@@ -28,6 +28,7 @@ namespace Calculator_beta
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Tab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button09 = new System.Windows.Forms.Button();
@@ -99,7 +100,7 @@ namespace Calculator_beta
             this.Tab.Controls.Add(this.tabPage2);
             this.Tab.Controls.Add(this.tabPage3);
             this.Tab.Font = new System.Drawing.Font("游明朝 Demibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Tab.Location = new System.Drawing.Point(16, 196);
+            this.Tab.Location = new System.Drawing.Point(16, 212);
             this.Tab.Name = "Tab";
             this.Tab.SelectedIndex = 0;
             this.Tab.Size = new System.Drawing.Size(592, 344);
@@ -188,6 +189,7 @@ namespace Calculator_beta
             this.dot.Text = ".";
             this.dot.UseVisualStyleBackColor = true;
             this.dot.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.dot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             this.dot.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button08
@@ -797,7 +799,7 @@ namespace Calculator_beta
             this.formula.Multiline = true;
             this.formula.Name = "formula";
             this.formula.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.formula.Size = new System.Drawing.Size(588, 131);
+            this.formula.Size = new System.Drawing.Size(588, 147);
             this.formula.TabIndex = 1;
             this.formula.TabStop = false;
             this.formula.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -807,7 +809,7 @@ namespace Calculator_beta
             // 
             this.process.Font = global::Calculator_beta.Properties.Settings.Default.font_size_test;
             this.process.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.process.Location = new System.Drawing.Point(16, 149);
+            this.process.Location = new System.Drawing.Point(16, 165);
             this.process.Multiline = true;
             this.process.Name = "process";
             this.process.Size = new System.Drawing.Size(588, 41);
@@ -818,10 +820,11 @@ namespace Calculator_beta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 543);
+            this.ClientSize = new System.Drawing.Size(628, 560);
             this.Controls.Add(this.process);
             this.Controls.Add(this.formula);
             this.Controls.Add(this.Tab);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Calculator";
             this.Load += new System.EventHandler(this.Form1_Load);

@@ -28,7 +28,6 @@ namespace Calculator_beta
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Tab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button09 = new System.Windows.Forms.Button();
@@ -100,10 +99,11 @@ namespace Calculator_beta
             this.Tab.Controls.Add(this.tabPage2);
             this.Tab.Controls.Add(this.tabPage3);
             this.Tab.Font = new System.Drawing.Font("游明朝 Demibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Tab.Location = new System.Drawing.Point(16, 212);
+            this.Tab.Location = new System.Drawing.Point(21, 265);
+            this.Tab.Margin = new System.Windows.Forms.Padding(4);
             this.Tab.Name = "Tab";
             this.Tab.SelectedIndex = 0;
-            this.Tab.Size = new System.Drawing.Size(592, 344);
+            this.Tab.Size = new System.Drawing.Size(789, 430);
             this.Tab.TabIndex = 0;
             this.Tab.Selected += new System.Windows.Forms.TabControlEventHandler(this.Tab_Changed);
             // 
@@ -133,10 +133,11 @@ namespace Calculator_beta
             this.tabPage1.Controls.Add(this.minus);
             this.tabPage1.Controls.Add(this.plus);
             this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(584, 315);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(781, 397);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Tag = "main";
             this.tabPage1.Text = "Normal";
@@ -146,9 +147,10 @@ namespace Calculator_beta
             // button09
             // 
             this.button09.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button09.Location = new System.Drawing.Point(398, 20);
+            this.button09.Location = new System.Drawing.Point(531, 25);
+            this.button09.Margin = new System.Windows.Forms.Padding(4);
             this.button09.Name = "button09";
-            this.button09.Size = new System.Drawing.Size(67, 59);
+            this.button09.Size = new System.Drawing.Size(89, 74);
             this.button09.TabIndex = 28;
             this.button09.Text = "9";
             this.button09.UseVisualStyleBackColor = true;
@@ -158,9 +160,10 @@ namespace Calculator_beta
             // button06
             // 
             this.button06.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button06.Location = new System.Drawing.Point(398, 95);
+            this.button06.Location = new System.Drawing.Point(531, 119);
+            this.button06.Margin = new System.Windows.Forms.Padding(4);
             this.button06.Name = "button06";
-            this.button06.Size = new System.Drawing.Size(67, 59);
+            this.button06.Size = new System.Drawing.Size(89, 74);
             this.button06.TabIndex = 27;
             this.button06.Text = "6";
             this.button06.UseVisualStyleBackColor = true;
@@ -170,9 +173,10 @@ namespace Calculator_beta
             // button03
             // 
             this.button03.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button03.Location = new System.Drawing.Point(398, 169);
+            this.button03.Location = new System.Drawing.Point(531, 211);
+            this.button03.Margin = new System.Windows.Forms.Padding(4);
             this.button03.Name = "button03";
-            this.button03.Size = new System.Drawing.Size(67, 59);
+            this.button03.Size = new System.Drawing.Size(89, 74);
             this.button03.TabIndex = 26;
             this.button03.Text = "3";
             this.button03.UseVisualStyleBackColor = true;
@@ -182,9 +186,10 @@ namespace Calculator_beta
             // dot
             // 
             this.dot.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dot.Location = new System.Drawing.Point(206, 243);
+            this.dot.Location = new System.Drawing.Point(275, 304);
+            this.dot.Margin = new System.Windows.Forms.Padding(4);
             this.dot.Name = "dot";
-            this.dot.Size = new System.Drawing.Size(67, 59);
+            this.dot.Size = new System.Drawing.Size(89, 74);
             this.dot.TabIndex = 25;
             this.dot.Text = ".";
             this.dot.UseVisualStyleBackColor = true;
@@ -195,9 +200,10 @@ namespace Calculator_beta
             // button08
             // 
             this.button08.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button08.Location = new System.Drawing.Point(301, 20);
+            this.button08.Location = new System.Drawing.Point(401, 25);
+            this.button08.Margin = new System.Windows.Forms.Padding(4);
             this.button08.Name = "button08";
-            this.button08.Size = new System.Drawing.Size(67, 59);
+            this.button08.Size = new System.Drawing.Size(89, 74);
             this.button08.TabIndex = 23;
             this.button08.Text = "8";
             this.button08.UseVisualStyleBackColor = true;
@@ -207,9 +213,10 @@ namespace Calculator_beta
             // button05
             // 
             this.button05.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button05.Location = new System.Drawing.Point(301, 95);
+            this.button05.Location = new System.Drawing.Point(401, 119);
+            this.button05.Margin = new System.Windows.Forms.Padding(4);
             this.button05.Name = "button05";
-            this.button05.Size = new System.Drawing.Size(67, 59);
+            this.button05.Size = new System.Drawing.Size(89, 74);
             this.button05.TabIndex = 22;
             this.button05.Text = "5";
             this.button05.UseVisualStyleBackColor = true;
@@ -219,9 +226,10 @@ namespace Calculator_beta
             // button02
             // 
             this.button02.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button02.Location = new System.Drawing.Point(301, 169);
+            this.button02.Location = new System.Drawing.Point(401, 211);
+            this.button02.Margin = new System.Windows.Forms.Padding(4);
             this.button02.Name = "button02";
-            this.button02.Size = new System.Drawing.Size(67, 59);
+            this.button02.Size = new System.Drawing.Size(89, 74);
             this.button02.TabIndex = 21;
             this.button02.Text = "2";
             this.button02.UseVisualStyleBackColor = true;
@@ -232,9 +240,10 @@ namespace Calculator_beta
             // 
             this.button00.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.button00.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button00.Location = new System.Drawing.Point(301, 243);
+            this.button00.Location = new System.Drawing.Point(401, 304);
+            this.button00.Margin = new System.Windows.Forms.Padding(4);
             this.button00.Name = "button00";
-            this.button00.Size = new System.Drawing.Size(67, 59);
+            this.button00.Size = new System.Drawing.Size(89, 74);
             this.button00.TabIndex = 20;
             this.button00.Text = "0";
             this.button00.UseVisualStyleBackColor = true;
@@ -245,9 +254,10 @@ namespace Calculator_beta
             // button07
             // 
             this.button07.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button07.Location = new System.Drawing.Point(206, 20);
+            this.button07.Location = new System.Drawing.Point(275, 25);
+            this.button07.Margin = new System.Windows.Forms.Padding(4);
             this.button07.Name = "button07";
-            this.button07.Size = new System.Drawing.Size(67, 59);
+            this.button07.Size = new System.Drawing.Size(89, 74);
             this.button07.TabIndex = 18;
             this.button07.Text = "7";
             this.button07.UseVisualStyleBackColor = true;
@@ -258,9 +268,10 @@ namespace Calculator_beta
             // button04
             // 
             this.button04.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button04.Location = new System.Drawing.Point(206, 95);
+            this.button04.Location = new System.Drawing.Point(275, 119);
+            this.button04.Margin = new System.Windows.Forms.Padding(4);
             this.button04.Name = "button04";
-            this.button04.Size = new System.Drawing.Size(67, 59);
+            this.button04.Size = new System.Drawing.Size(89, 74);
             this.button04.TabIndex = 17;
             this.button04.Text = "4";
             this.button04.UseVisualStyleBackColor = true;
@@ -270,9 +281,10 @@ namespace Calculator_beta
             // button01
             // 
             this.button01.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button01.Location = new System.Drawing.Point(206, 169);
+            this.button01.Location = new System.Drawing.Point(275, 211);
+            this.button01.Margin = new System.Windows.Forms.Padding(4);
             this.button01.Name = "button01";
-            this.button01.Size = new System.Drawing.Size(67, 59);
+            this.button01.Size = new System.Drawing.Size(89, 74);
             this.button01.TabIndex = 16;
             this.button01.Text = "1";
             this.button01.UseVisualStyleBackColor = true;
@@ -283,9 +295,10 @@ namespace Calculator_beta
             // BackSpace
             // 
             this.BackSpace.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.BackSpace.Location = new System.Drawing.Point(110, 243);
+            this.BackSpace.Location = new System.Drawing.Point(147, 304);
+            this.BackSpace.Margin = new System.Windows.Forms.Padding(4);
             this.BackSpace.Name = "BackSpace";
-            this.BackSpace.Size = new System.Drawing.Size(67, 59);
+            this.BackSpace.Size = new System.Drawing.Size(89, 74);
             this.BackSpace.TabIndex = 15;
             this.BackSpace.Text = "Back\r\nspace";
             this.BackSpace.UseVisualStyleBackColor = true;
@@ -296,9 +309,10 @@ namespace Calculator_beta
             // button13
             // 
             this.button13.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button13.Location = new System.Drawing.Point(110, 20);
+            this.button13.Location = new System.Drawing.Point(147, 25);
+            this.button13.Margin = new System.Windows.Forms.Padding(4);
             this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(67, 59);
+            this.button13.Size = new System.Drawing.Size(89, 74);
             this.button13.TabIndex = 12;
             this.button13.Text = "button13";
             this.button13.UseVisualStyleBackColor = true;
@@ -308,9 +322,10 @@ namespace Calculator_beta
             // button14
             // 
             this.button14.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button14.Location = new System.Drawing.Point(110, 94);
+            this.button14.Location = new System.Drawing.Point(147, 118);
+            this.button14.Margin = new System.Windows.Forms.Padding(4);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(67, 59);
+            this.button14.Size = new System.Drawing.Size(89, 74);
             this.button14.TabIndex = 11;
             this.button14.Text = "□²";
             this.button14.UseVisualStyleBackColor = true;
@@ -320,9 +335,10 @@ namespace Calculator_beta
             // button15
             // 
             this.button15.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button15.Location = new System.Drawing.Point(110, 168);
+            this.button15.Location = new System.Drawing.Point(147, 210);
+            this.button15.Margin = new System.Windows.Forms.Padding(4);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(67, 59);
+            this.button15.Size = new System.Drawing.Size(89, 74);
             this.button15.TabIndex = 10;
             this.button15.Text = "％";
             this.button15.UseVisualStyleBackColor = true;
@@ -332,9 +348,10 @@ namespace Calculator_beta
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button6.Location = new System.Drawing.Point(18, 243);
+            this.button6.Location = new System.Drawing.Point(24, 304);
+            this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(67, 59);
+            this.button6.Size = new System.Drawing.Size(89, 74);
             this.button6.TabIndex = 9;
             this.button6.Text = "All  Clear";
             this.button6.UseVisualStyleBackColor = true;
@@ -345,9 +362,10 @@ namespace Calculator_beta
             // button8
             // 
             this.button8.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button8.Location = new System.Drawing.Point(18, 20);
+            this.button8.Location = new System.Drawing.Point(24, 25);
+            this.button8.Margin = new System.Windows.Forms.Padding(4);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(67, 59);
+            this.button8.Size = new System.Drawing.Size(89, 74);
             this.button8.TabIndex = 7;
             this.button8.Text = "button8";
             this.button8.UseVisualStyleBackColor = true;
@@ -357,9 +375,10 @@ namespace Calculator_beta
             // button9
             // 
             this.button9.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button9.Location = new System.Drawing.Point(18, 94);
+            this.button9.Location = new System.Drawing.Point(24, 118);
+            this.button9.Margin = new System.Windows.Forms.Padding(4);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(67, 59);
+            this.button9.Size = new System.Drawing.Size(89, 74);
             this.button9.TabIndex = 6;
             this.button9.Text = "√";
             this.button9.UseVisualStyleBackColor = true;
@@ -369,9 +388,10 @@ namespace Calculator_beta
             // button10
             // 
             this.button10.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button10.Location = new System.Drawing.Point(18, 168);
+            this.button10.Location = new System.Drawing.Point(24, 210);
+            this.button10.Margin = new System.Windows.Forms.Padding(4);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(67, 59);
+            this.button10.Size = new System.Drawing.Size(89, 74);
             this.button10.TabIndex = 5;
             this.button10.Text = "□ / □";
             this.button10.UseVisualStyleBackColor = true;
@@ -381,9 +401,10 @@ namespace Calculator_beta
             // divide
             // 
             this.divide.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.divide.Location = new System.Drawing.Point(494, 20);
+            this.divide.Location = new System.Drawing.Point(659, 25);
+            this.divide.Margin = new System.Windows.Forms.Padding(4);
             this.divide.Name = "divide";
-            this.divide.Size = new System.Drawing.Size(67, 59);
+            this.divide.Size = new System.Drawing.Size(89, 74);
             this.divide.TabIndex = 4;
             this.divide.Text = "÷";
             this.divide.UseVisualStyleBackColor = true;
@@ -395,9 +416,10 @@ namespace Calculator_beta
             // multi
             // 
             this.multi.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.multi.Location = new System.Drawing.Point(494, 94);
+            this.multi.Location = new System.Drawing.Point(659, 118);
+            this.multi.Margin = new System.Windows.Forms.Padding(4);
             this.multi.Name = "multi";
-            this.multi.Size = new System.Drawing.Size(67, 59);
+            this.multi.Size = new System.Drawing.Size(89, 74);
             this.multi.TabIndex = 3;
             this.multi.Text = "✕";
             this.multi.UseVisualStyleBackColor = true;
@@ -409,9 +431,10 @@ namespace Calculator_beta
             // minus
             // 
             this.minus.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.minus.Location = new System.Drawing.Point(494, 169);
+            this.minus.Location = new System.Drawing.Point(659, 211);
+            this.minus.Margin = new System.Windows.Forms.Padding(4);
             this.minus.Name = "minus";
-            this.minus.Size = new System.Drawing.Size(67, 59);
+            this.minus.Size = new System.Drawing.Size(89, 74);
             this.minus.TabIndex = 2;
             this.minus.Text = "－";
             this.minus.UseVisualStyleBackColor = true;
@@ -423,9 +446,10 @@ namespace Calculator_beta
             // plus
             // 
             this.plus.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.plus.Location = new System.Drawing.Point(494, 243);
+            this.plus.Location = new System.Drawing.Point(659, 304);
+            this.plus.Margin = new System.Windows.Forms.Padding(4);
             this.plus.Name = "plus";
-            this.plus.Size = new System.Drawing.Size(67, 59);
+            this.plus.Size = new System.Drawing.Size(89, 74);
             this.plus.TabIndex = 1;
             this.plus.Text = "+";
             this.plus.UseVisualStyleBackColor = true;
@@ -437,9 +461,10 @@ namespace Calculator_beta
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(398, 243);
+            this.button1.Location = new System.Drawing.Point(531, 304);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 59);
+            this.button1.Size = new System.Drawing.Size(89, 74);
             this.button1.TabIndex = 0;
             this.button1.Text = "=";
             this.button1.UseVisualStyleBackColor = true;
@@ -479,10 +504,11 @@ namespace Calculator_beta
             this.tabPage2.Controls.Add(this.button35);
             this.tabPage2.Controls.Add(this.button32);
             this.tabPage2.Controls.Add(this.button33);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(584, 315);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(781, 397);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Tag = "character";
             this.tabPage2.Text = "Alphabet";
@@ -492,9 +518,10 @@ namespace Calculator_beta
             // button56
             // 
             this.button56.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button56.Location = new System.Drawing.Point(295, 250);
+            this.button56.Location = new System.Drawing.Point(393, 312);
+            this.button56.Margin = new System.Windows.Forms.Padding(4);
             this.button56.Name = "button56";
-            this.button56.Size = new System.Drawing.Size(67, 59);
+            this.button56.Size = new System.Drawing.Size(89, 74);
             this.button56.TabIndex = 46;
             this.button56.Text = "□";
             this.button56.UseVisualStyleBackColor = true;
@@ -502,9 +529,10 @@ namespace Calculator_beta
             // button57
             // 
             this.button57.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button57.Location = new System.Drawing.Point(222, 250);
+            this.button57.Location = new System.Drawing.Point(296, 312);
+            this.button57.Margin = new System.Windows.Forms.Padding(4);
             this.button57.Name = "button57";
-            this.button57.Size = new System.Drawing.Size(67, 59);
+            this.button57.Size = new System.Drawing.Size(89, 74);
             this.button57.TabIndex = 45;
             this.button57.Text = "β";
             this.button57.UseVisualStyleBackColor = true;
@@ -512,9 +540,10 @@ namespace Calculator_beta
             // button58
             // 
             this.button58.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button58.Location = new System.Drawing.Point(149, 250);
+            this.button58.Location = new System.Drawing.Point(199, 312);
+            this.button58.Margin = new System.Windows.Forms.Padding(4);
             this.button58.Name = "button58";
-            this.button58.Size = new System.Drawing.Size(67, 59);
+            this.button58.Size = new System.Drawing.Size(89, 74);
             this.button58.TabIndex = 44;
             this.button58.Text = "α";
             this.button58.UseVisualStyleBackColor = true;
@@ -522,9 +551,10 @@ namespace Calculator_beta
             // button59
             // 
             this.button59.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button59.Location = new System.Drawing.Point(76, 250);
+            this.button59.Location = new System.Drawing.Point(101, 312);
+            this.button59.Margin = new System.Windows.Forms.Padding(4);
             this.button59.Name = "button59";
-            this.button59.Size = new System.Drawing.Size(67, 59);
+            this.button59.Size = new System.Drawing.Size(89, 74);
             this.button59.TabIndex = 43;
             this.button59.Text = "z";
             this.button59.UseVisualStyleBackColor = true;
@@ -532,9 +562,10 @@ namespace Calculator_beta
             // button61
             // 
             this.button61.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button61.Location = new System.Drawing.Point(3, 250);
+            this.button61.Location = new System.Drawing.Point(4, 312);
+            this.button61.Margin = new System.Windows.Forms.Padding(4);
             this.button61.Name = "button61";
-            this.button61.Size = new System.Drawing.Size(67, 59);
+            this.button61.Size = new System.Drawing.Size(89, 74);
             this.button61.TabIndex = 41;
             this.button61.Text = "y";
             this.button61.UseVisualStyleBackColor = true;
@@ -542,9 +573,10 @@ namespace Calculator_beta
             // button47
             // 
             this.button47.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button47.Location = new System.Drawing.Point(368, 175);
+            this.button47.Location = new System.Drawing.Point(491, 219);
+            this.button47.Margin = new System.Windows.Forms.Padding(4);
             this.button47.Name = "button47";
-            this.button47.Size = new System.Drawing.Size(67, 59);
+            this.button47.Size = new System.Drawing.Size(89, 74);
             this.button47.TabIndex = 39;
             this.button47.Text = "v";
             this.button47.UseVisualStyleBackColor = true;
@@ -552,9 +584,10 @@ namespace Calculator_beta
             // button48
             // 
             this.button48.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button48.Location = new System.Drawing.Point(295, 175);
+            this.button48.Location = new System.Drawing.Point(393, 219);
+            this.button48.Margin = new System.Windows.Forms.Padding(4);
             this.button48.Name = "button48";
-            this.button48.Size = new System.Drawing.Size(67, 59);
+            this.button48.Size = new System.Drawing.Size(89, 74);
             this.button48.TabIndex = 38;
             this.button48.Text = "u";
             this.button48.UseVisualStyleBackColor = true;
@@ -562,9 +595,10 @@ namespace Calculator_beta
             // button49
             // 
             this.button49.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button49.Location = new System.Drawing.Point(222, 175);
+            this.button49.Location = new System.Drawing.Point(296, 219);
+            this.button49.Margin = new System.Windows.Forms.Padding(4);
             this.button49.Name = "button49";
-            this.button49.Size = new System.Drawing.Size(67, 59);
+            this.button49.Size = new System.Drawing.Size(89, 74);
             this.button49.TabIndex = 37;
             this.button49.Text = "t";
             this.button49.UseVisualStyleBackColor = true;
@@ -573,9 +607,10 @@ namespace Calculator_beta
             // button50
             // 
             this.button50.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button50.Location = new System.Drawing.Point(149, 175);
+            this.button50.Location = new System.Drawing.Point(199, 219);
+            this.button50.Margin = new System.Windows.Forms.Padding(4);
             this.button50.Name = "button50";
-            this.button50.Size = new System.Drawing.Size(67, 59);
+            this.button50.Size = new System.Drawing.Size(89, 74);
             this.button50.TabIndex = 36;
             this.button50.Text = "s";
             this.button50.UseVisualStyleBackColor = true;
@@ -583,9 +618,10 @@ namespace Calculator_beta
             // button51
             // 
             this.button51.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button51.Location = new System.Drawing.Point(76, 175);
+            this.button51.Location = new System.Drawing.Point(101, 219);
+            this.button51.Margin = new System.Windows.Forms.Padding(4);
             this.button51.Name = "button51";
-            this.button51.Size = new System.Drawing.Size(67, 59);
+            this.button51.Size = new System.Drawing.Size(89, 74);
             this.button51.TabIndex = 35;
             this.button51.Text = "r";
             this.button51.UseVisualStyleBackColor = true;
@@ -593,9 +629,10 @@ namespace Calculator_beta
             // button52
             // 
             this.button52.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button52.Location = new System.Drawing.Point(514, 175);
+            this.button52.Location = new System.Drawing.Point(685, 219);
+            this.button52.Margin = new System.Windows.Forms.Padding(4);
             this.button52.Name = "button52";
-            this.button52.Size = new System.Drawing.Size(67, 59);
+            this.button52.Size = new System.Drawing.Size(89, 74);
             this.button52.TabIndex = 34;
             this.button52.Text = "x";
             this.button52.UseVisualStyleBackColor = true;
@@ -603,9 +640,10 @@ namespace Calculator_beta
             // button53
             // 
             this.button53.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button53.Location = new System.Drawing.Point(3, 175);
+            this.button53.Location = new System.Drawing.Point(4, 219);
+            this.button53.Margin = new System.Windows.Forms.Padding(4);
             this.button53.Name = "button53";
-            this.button53.Size = new System.Drawing.Size(67, 59);
+            this.button53.Size = new System.Drawing.Size(89, 74);
             this.button53.TabIndex = 33;
             this.button53.Text = "q";
             this.button53.UseVisualStyleBackColor = true;
@@ -613,9 +651,10 @@ namespace Calculator_beta
             // button54
             // 
             this.button54.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button54.Location = new System.Drawing.Point(441, 175);
+            this.button54.Location = new System.Drawing.Point(588, 219);
+            this.button54.Margin = new System.Windows.Forms.Padding(4);
             this.button54.Name = "button54";
-            this.button54.Size = new System.Drawing.Size(67, 59);
+            this.button54.Size = new System.Drawing.Size(89, 74);
             this.button54.TabIndex = 32;
             this.button54.Text = "w";
             this.button54.UseVisualStyleBackColor = true;
@@ -623,9 +662,10 @@ namespace Calculator_beta
             // button34
             // 
             this.button34.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button34.Location = new System.Drawing.Point(368, 99);
+            this.button34.Location = new System.Drawing.Point(491, 124);
+            this.button34.Margin = new System.Windows.Forms.Padding(4);
             this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(67, 59);
+            this.button34.Size = new System.Drawing.Size(89, 74);
             this.button34.TabIndex = 31;
             this.button34.Text = "n";
             this.button34.UseVisualStyleBackColor = true;
@@ -633,9 +673,10 @@ namespace Calculator_beta
             // button36
             // 
             this.button36.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button36.Location = new System.Drawing.Point(295, 99);
+            this.button36.Location = new System.Drawing.Point(393, 124);
+            this.button36.Margin = new System.Windows.Forms.Padding(4);
             this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(67, 59);
+            this.button36.Size = new System.Drawing.Size(89, 74);
             this.button36.TabIndex = 30;
             this.button36.Text = "m";
             this.button36.UseVisualStyleBackColor = true;
@@ -643,9 +684,10 @@ namespace Calculator_beta
             // button38
             // 
             this.button38.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button38.Location = new System.Drawing.Point(222, 99);
+            this.button38.Location = new System.Drawing.Point(296, 124);
+            this.button38.Margin = new System.Windows.Forms.Padding(4);
             this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(67, 59);
+            this.button38.Size = new System.Drawing.Size(89, 74);
             this.button38.TabIndex = 29;
             this.button38.Text = "l";
             this.button38.UseVisualStyleBackColor = true;
@@ -653,9 +695,10 @@ namespace Calculator_beta
             // button39
             // 
             this.button39.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button39.Location = new System.Drawing.Point(149, 99);
+            this.button39.Location = new System.Drawing.Point(199, 124);
+            this.button39.Margin = new System.Windows.Forms.Padding(4);
             this.button39.Name = "button39";
-            this.button39.Size = new System.Drawing.Size(67, 59);
+            this.button39.Size = new System.Drawing.Size(89, 74);
             this.button39.TabIndex = 28;
             this.button39.Text = "k";
             this.button39.UseVisualStyleBackColor = true;
@@ -663,9 +706,10 @@ namespace Calculator_beta
             // button41
             // 
             this.button41.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button41.Location = new System.Drawing.Point(76, 99);
+            this.button41.Location = new System.Drawing.Point(101, 124);
+            this.button41.Margin = new System.Windows.Forms.Padding(4);
             this.button41.Name = "button41";
-            this.button41.Size = new System.Drawing.Size(67, 59);
+            this.button41.Size = new System.Drawing.Size(89, 74);
             this.button41.TabIndex = 27;
             this.button41.Text = "j";
             this.button41.UseVisualStyleBackColor = true;
@@ -673,9 +717,10 @@ namespace Calculator_beta
             // button42
             // 
             this.button42.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button42.Location = new System.Drawing.Point(514, 99);
+            this.button42.Location = new System.Drawing.Point(685, 124);
+            this.button42.Margin = new System.Windows.Forms.Padding(4);
             this.button42.Name = "button42";
-            this.button42.Size = new System.Drawing.Size(67, 59);
+            this.button42.Size = new System.Drawing.Size(89, 74);
             this.button42.TabIndex = 26;
             this.button42.Text = "p";
             this.button42.UseVisualStyleBackColor = true;
@@ -683,9 +728,10 @@ namespace Calculator_beta
             // button44
             // 
             this.button44.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button44.Location = new System.Drawing.Point(3, 99);
+            this.button44.Location = new System.Drawing.Point(4, 124);
+            this.button44.Margin = new System.Windows.Forms.Padding(4);
             this.button44.Name = "button44";
-            this.button44.Size = new System.Drawing.Size(67, 59);
+            this.button44.Size = new System.Drawing.Size(89, 74);
             this.button44.TabIndex = 25;
             this.button44.Text = "i";
             this.button44.UseVisualStyleBackColor = true;
@@ -693,9 +739,10 @@ namespace Calculator_beta
             // button45
             // 
             this.button45.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button45.Location = new System.Drawing.Point(441, 99);
+            this.button45.Location = new System.Drawing.Point(588, 124);
+            this.button45.Margin = new System.Windows.Forms.Padding(4);
             this.button45.Name = "button45";
-            this.button45.Size = new System.Drawing.Size(67, 59);
+            this.button45.Size = new System.Drawing.Size(89, 74);
             this.button45.TabIndex = 24;
             this.button45.Text = "o";
             this.button45.UseVisualStyleBackColor = true;
@@ -703,9 +750,10 @@ namespace Calculator_beta
             // button46
             // 
             this.button46.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button46.Location = new System.Drawing.Point(368, 20);
+            this.button46.Location = new System.Drawing.Point(491, 25);
+            this.button46.Margin = new System.Windows.Forms.Padding(4);
             this.button46.Name = "button46";
-            this.button46.Size = new System.Drawing.Size(67, 59);
+            this.button46.Size = new System.Drawing.Size(89, 74);
             this.button46.TabIndex = 23;
             this.button46.Text = "f";
             this.button46.UseVisualStyleBackColor = true;
@@ -713,9 +761,10 @@ namespace Calculator_beta
             // button43
             // 
             this.button43.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button43.Location = new System.Drawing.Point(295, 20);
+            this.button43.Location = new System.Drawing.Point(393, 25);
+            this.button43.Margin = new System.Windows.Forms.Padding(4);
             this.button43.Name = "button43";
-            this.button43.Size = new System.Drawing.Size(67, 59);
+            this.button43.Size = new System.Drawing.Size(89, 74);
             this.button43.TabIndex = 20;
             this.button43.Text = "e";
             this.button43.UseVisualStyleBackColor = true;
@@ -723,9 +772,10 @@ namespace Calculator_beta
             // button40
             // 
             this.button40.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button40.Location = new System.Drawing.Point(222, 20);
+            this.button40.Location = new System.Drawing.Point(296, 25);
+            this.button40.Margin = new System.Windows.Forms.Padding(4);
             this.button40.Name = "button40";
-            this.button40.Size = new System.Drawing.Size(67, 59);
+            this.button40.Size = new System.Drawing.Size(89, 74);
             this.button40.TabIndex = 17;
             this.button40.Text = "d";
             this.button40.UseVisualStyleBackColor = true;
@@ -733,9 +783,10 @@ namespace Calculator_beta
             // button37
             // 
             this.button37.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button37.Location = new System.Drawing.Point(149, 20);
+            this.button37.Location = new System.Drawing.Point(199, 25);
+            this.button37.Margin = new System.Windows.Forms.Padding(4);
             this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(67, 59);
+            this.button37.Size = new System.Drawing.Size(89, 74);
             this.button37.TabIndex = 14;
             this.button37.Text = "c";
             this.button37.UseVisualStyleBackColor = true;
@@ -743,9 +794,10 @@ namespace Calculator_beta
             // button31
             // 
             this.button31.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button31.Location = new System.Drawing.Point(76, 20);
+            this.button31.Location = new System.Drawing.Point(101, 25);
+            this.button31.Margin = new System.Windows.Forms.Padding(4);
             this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(67, 59);
+            this.button31.Size = new System.Drawing.Size(89, 74);
             this.button31.TabIndex = 11;
             this.button31.Text = "b";
             this.button31.UseVisualStyleBackColor = true;
@@ -753,9 +805,10 @@ namespace Calculator_beta
             // button35
             // 
             this.button35.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button35.Location = new System.Drawing.Point(514, 20);
+            this.button35.Location = new System.Drawing.Point(685, 25);
+            this.button35.Margin = new System.Windows.Forms.Padding(4);
             this.button35.Name = "button35";
-            this.button35.Size = new System.Drawing.Size(67, 59);
+            this.button35.Size = new System.Drawing.Size(89, 74);
             this.button35.TabIndex = 10;
             this.button35.Text = "h";
             this.button35.UseVisualStyleBackColor = true;
@@ -764,9 +817,10 @@ namespace Calculator_beta
             // button32
             // 
             this.button32.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button32.Location = new System.Drawing.Point(3, 20);
+            this.button32.Location = new System.Drawing.Point(4, 25);
+            this.button32.Margin = new System.Windows.Forms.Padding(4);
             this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(67, 59);
+            this.button32.Size = new System.Drawing.Size(89, 74);
             this.button32.TabIndex = 8;
             this.button32.Text = "a";
             this.button32.UseVisualStyleBackColor = true;
@@ -774,19 +828,21 @@ namespace Calculator_beta
             // button33
             // 
             this.button33.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button33.Location = new System.Drawing.Point(441, 20);
+            this.button33.Location = new System.Drawing.Point(588, 25);
+            this.button33.Margin = new System.Windows.Forms.Padding(4);
             this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(67, 59);
+            this.button33.Size = new System.Drawing.Size(89, 74);
             this.button33.TabIndex = 7;
             this.button33.Text = "g";
             this.button33.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(584, 315);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage3.Size = new System.Drawing.Size(781, 397);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Tag = "symbol";
             this.tabPage3.Text = "Other Symbols";
@@ -795,11 +851,12 @@ namespace Calculator_beta
             // formula
             // 
             this.formula.Font = global::Calculator_beta.Properties.Settings.Default.font_size_test;
-            this.formula.Location = new System.Drawing.Point(16, 12);
+            this.formula.Location = new System.Drawing.Point(21, 15);
+            this.formula.Margin = new System.Windows.Forms.Padding(4);
             this.formula.Multiline = true;
             this.formula.Name = "formula";
             this.formula.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.formula.Size = new System.Drawing.Size(588, 147);
+            this.formula.Size = new System.Drawing.Size(783, 183);
             this.formula.TabIndex = 1;
             this.formula.TabStop = false;
             this.formula.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -809,22 +866,23 @@ namespace Calculator_beta
             // 
             this.process.Font = global::Calculator_beta.Properties.Settings.Default.font_size_test;
             this.process.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.process.Location = new System.Drawing.Point(16, 165);
+            this.process.Location = new System.Drawing.Point(21, 206);
+            this.process.Margin = new System.Windows.Forms.Padding(4);
             this.process.Multiline = true;
             this.process.Name = "process";
-            this.process.Size = new System.Drawing.Size(588, 41);
+            this.process.Size = new System.Drawing.Size(783, 50);
             this.process.TabIndex = 2;
             this.process.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 560);
+            this.ClientSize = new System.Drawing.Size(837, 700);
             this.Controls.Add(this.process);
             this.Controls.Add(this.formula);
             this.Controls.Add(this.Tab);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Calculator";
             this.Load += new System.EventHandler(this.Form1_Load);

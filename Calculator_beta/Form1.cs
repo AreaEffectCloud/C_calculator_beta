@@ -32,38 +32,36 @@ namespace Calculator_beta
             Button btn = (Button)sender;
             string text = btn.Text;
 
-            Regex re = new Regex(@"[^0-9]");
-            string digit = re.Replace(input_str, "");
-
             //桁数上限は一旦無しで -> ∞
-            bool dot = process.Text.Contains(".");
+            bool dot = formula.Text.Contains(".");
             if (dot)
             {
                 input_str += text;
-                process.Text = string.Format("{0:#}", decimal.Parse(input_str));
+                formula.Text = string.Format("{0:#}", decimal.Parse(input_str));
 
                 if (input_str.Contains(".0"))
                 {
-                    process.Text = string.Format("{0:#}", decimal.Parse(input_str)) + "." + "0";
+                    formula.Text = string.Format("{0:#}", decimal.Parse(input_str)) + "." + "0";
                 }
             }
             else if (text == "0")//最初に0押したとき
             {
                 input_str += text;
-                process.Text = String.Format("{0:#,0}", decimal.Parse(input_str));
+                formula.Text = String.Format("{0:#,0}", decimal.Parse(input_str));
                 return;
             }
             else//0以外の数字押したとき
             {
                 input_str += text;
                 input_str = input_str.TrimStart('0');
-                process.Text = String.Format("{0:#,0}", decimal.Parse(input_str));
+                formula.Text = String.Format("{0:#,0}", decimal.Parse(input_str));
             }
 
 
 
             decimal input_num = decimal.Parse(formula.Text + btn.Text);
             string calcu = formula.Text;
+
             if (0 <= calcu.IndexOf(operation))
             {
                 //演算子を含む場合
@@ -72,7 +70,7 @@ namespace Calculator_beta
             else
             {
                 //演算子を含まない、第1項
-                formula.Text += input_num.ToString();
+                //formula.Text += input_num.ToString();
             }
         }
 
@@ -140,6 +138,7 @@ namespace Calculator_beta
         {
             //初期化
             formula.Text = null;
+            input_str = null;
             Mem1 = 0m;
             operation = null;
         }
@@ -296,7 +295,5 @@ namespace Calculator_beta
         {
 
         }
-
-        
     }
 }

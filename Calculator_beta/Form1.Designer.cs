@@ -87,7 +87,7 @@ namespace Calculator_beta
             this.button33 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.formula = new System.Windows.Forms.TextBox();
-            this.process = new System.Windows.Forms.TextBox();
+            this.process_null = new System.Windows.Forms.TextBox();
             this.Tab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -189,7 +189,7 @@ namespace Calculator_beta
             this.dot.Text = ".";
             this.dot.UseVisualStyleBackColor = true;
             this.dot.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
-            this.dot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
+            this.dot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Dot);
             this.dot.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button08
@@ -399,7 +399,7 @@ namespace Calculator_beta
             this.multi.Name = "multi";
             this.multi.Size = new System.Drawing.Size(67, 59);
             this.multi.TabIndex = 3;
-            this.multi.Text = "✕";
+            this.multi.Text = "×";
             this.multi.UseVisualStyleBackColor = true;
             this.multi.Click += new System.EventHandler(this.multi_Click);
             this.multi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.click_Operation);
@@ -427,7 +427,7 @@ namespace Calculator_beta
             this.plus.Name = "plus";
             this.plus.Size = new System.Drawing.Size(67, 59);
             this.plus.TabIndex = 1;
-            this.plus.Text = "+";
+            this.plus.Text = "＋";
             this.plus.UseVisualStyleBackColor = true;
             this.plus.Click += new System.EventHandler(this.plus_Click);
             this.plus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.click_Operation);
@@ -805,23 +805,23 @@ namespace Calculator_beta
             this.formula.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.formula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
             // 
-            // process
+            // process_null
             // 
-            this.process.Font = global::Calculator_beta.Properties.Settings.Default.font_size_test;
-            this.process.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.process.Location = new System.Drawing.Point(16, 165);
-            this.process.Multiline = true;
-            this.process.Name = "process";
-            this.process.Size = new System.Drawing.Size(588, 41);
-            this.process.TabIndex = 2;
-            this.process.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.process_null.Font = global::Calculator_beta.Properties.Settings.Default.font_size_test;
+            this.process_null.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.process_null.Location = new System.Drawing.Point(16, 165);
+            this.process_null.Multiline = true;
+            this.process_null.Name = "process_null";
+            this.process_null.Size = new System.Drawing.Size(588, 41);
+            this.process_null.TabIndex = 2;
+            this.process_null.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(628, 560);
-            this.Controls.Add(this.process);
+            this.Controls.Add(this.process_null);
             this.Controls.Add(this.formula);
             this.Controls.Add(this.Tab);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -848,6 +848,7 @@ namespace Calculator_beta
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox formula;
+        private System.Windows.Forms.TextBox process_null;
         private System.Windows.Forms.Button button09;
         private System.Windows.Forms.Button button06;
         private System.Windows.Forms.Button button03;
@@ -896,7 +897,5 @@ namespace Calculator_beta
         private System.Windows.Forms.Button button42;
         private System.Windows.Forms.Button button44;
         private System.Windows.Forms.Button button45;
-        private System.Windows.Forms.TextBox process;
     }
 }
-

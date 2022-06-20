@@ -194,7 +194,7 @@ namespace Calculator_beta
             this.dot.Text = ".";
             this.dot.UseVisualStyleBackColor = true;
             this.dot.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
-            this.dot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
+            this.dot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Dot);
             this.dot.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button08

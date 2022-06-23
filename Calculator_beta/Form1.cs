@@ -145,19 +145,46 @@ namespace Calculator_beta
             }
         }
 
-        // "="を "" マウスで "" 押したとき   ->  途中式は表示しない方針
+        // "="を "" マウスで "" 押したとき   ->  途中式は表示しない方針 = 途中で計算をしない
+        //
+        // このメソッドで全ての式を計算する
+        //
+        //    ＋ ,   －,   ÷,   ×  ->   ＋－÷×
+        //
         private void click_Eq(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
             Button btn = (Button)sender;
             operation = btn.Text;
 
-            bool formula_dot = formula.Text.Contains(".");
-            if (operation == "=")
+            if (formula.Text == "")
             {
-                if (formula_dot)
+                return;
+            }
+            else if (formula.Text != "")
+            {
+                if (eq)
                 {
-                    process_null.Text = String.Format("{0:0.############################################################}", result);
+                    return;
+                }
+                else if (!eq)
+                {
+                //
+                //和と差
+                //
+                    if (!(formula.Text.Contains("×") && formula.Text.Contains("÷")))
+                    {
+                        string phrase = input_str;
+
+                        char[] delimiterChars = { '＋', '－' };
+                        string[] plus_minus = phrase.Split(delimiterChars);
+
+                        foreach (var word in plus_minus)
+                        {
+                            formula.Text = $"<{word}>";
+                            eq = true;
+                        }
+                    }
                 }
             }
         }

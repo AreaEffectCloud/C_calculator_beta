@@ -93,7 +93,7 @@ namespace Calculator_beta
                     {
                         operation = null;
                         formula.ForeColor = Color.DarkRed;
-                        formula.Text = "Error!"; 
+                        formula.Text = "Format Error!"; 
                         button_Enable(false);
                         input_str = null;
                     }
@@ -108,7 +108,6 @@ namespace Calculator_beta
                 }
             }
 
-            process.Text += input_str;
             input_str = "";
 
             if (enzanshi)//演算子ボタンが連続で押されたときに置換する (enzanshi == true)
@@ -120,37 +119,6 @@ namespace Calculator_beta
             {
                 formula.Text += operation;
                 enzanshi = true;
-            }
-
-            // = 押さなくても結果表示
-            if (result != 0)
-            {
-                process.Text = String.Format("{0:0.############################################################}", result);
-            }
-
-            bool formula_dot = formula.Text.Contains(".");
-            bool process_dot = Convert.ToString(result).Contains(".");
-            if (formula_dot)//計算式に小数点がある
-            {
-                process.Text = String.Format("{0:0.############################################################}", result);
-            }
-            else if (process_dot)//計算式にないが、結果にある
-            {
-                process.Text = String.Format("{0:0.############################################################}", result);
-            }
-
-            if (operation == "=")
-            {
-                process.Text = String.Format("{0:0.############################################################}", result);
-
-                if (formula_dot)
-                {
-                    process.Text = String.Format("{0:0.############################################################}", result);
-                }
-                else if (process_dot)
-                {
-                    process.Text = String.Format("{0:0.############################################################}", result);
-                }
             }
         }
 
@@ -165,28 +133,33 @@ namespace Calculator_beta
             }
             else
             {
-                if(formula.Text == "")
+                input_str += dot.Text;
+                if (formula.Text == "")
                 {
-                    input_str += dot.Text;
-                    formula.Text = string.Format("{0:0.############################################################}", decimal.Parse(input_str)) + "0" + ".";
+                    formula.Text += "0.";
+                }
+                else
+                {
+                    formula.Text += ".";
                 }
             }
         }
 
-        // "="を "" マウスで "" 押したとき
+        // "="を "" マウスで "" 押したとき   ->  途中式は表示しない方針
         private void click_Eq(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
             Button btn = (Button)sender;
+            operation = btn.Text;
 
-            if (process.Text != null)
+            bool formula_dot = formula.Text.Contains(".");
+            if (operation == "=")
             {
-                //計算結果を表示
-                formula.Text = process.Text;
-                process.Text = "";
+                if (formula_dot)
+                {
+                    process_null.Text = String.Format("{0:0.############################################################}", result);
+                }
             }
-            else return;
-
         }
 
         //All Clearを "" マウスで "" 押したとき
@@ -195,7 +168,7 @@ namespace Calculator_beta
             formula.ForeColor = Color.Black;
             //初期化
             formula.Text = null;
-            process.Text = null;
+            process_null.Text = null;
             input_str = null;
             operation = null;
             num1 = 0m;
@@ -204,7 +177,8 @@ namespace Calculator_beta
         //Back Spaceを "" マウスで "" 押したとき
         private void click_BS(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-
+            formula.Text = formula.Text.Remove(formula.Text.Length - 1);
+            formula.Text = String.Format("{0:#,0}", decimal.Parse(formula.Text));
         }
 
         /*
@@ -274,23 +248,9 @@ namespace Calculator_beta
             
         }
 
-        /*
-         * found pressed key -> null
-         * 
-        public static void SetButtonClickShortcut(Control control, Keys keys, Button button)
-        {
-            control.KeyDown += (sender, e) =>
-            {
-                if (e.KeyCode == keys)
-                {
-                    button.PerformClick();
-                }
-            };
-        }
-        */
-
-
-        //エラー処理
+        //
+        //ボタンの無効化
+        //
         private void button_Enable(bool use)
         {
             Control.ControlCollection controls = Controls;

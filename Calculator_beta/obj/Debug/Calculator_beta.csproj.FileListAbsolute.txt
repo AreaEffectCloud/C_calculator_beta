@@ -13,9 +13,9 @@ C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\bin\Debu
 C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\bin\Debug\Calculator_beta.pdb
 C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.csproj.AssemblyReference.cache
 C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.csproj.SuggestedBindingRedirects.cache
-C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.Form1.resources
 C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.Properties.Resources.resources
 C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.csproj.GenerateResource.cache
 C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.csproj.CoreCompileInputs.cache
 C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.exe
 C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.pdb
+C:\Users\AreaEffectCloud\source\repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.Function_Calculator.resources

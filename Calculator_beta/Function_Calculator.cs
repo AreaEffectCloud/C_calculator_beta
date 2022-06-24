@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -12,33 +10,32 @@ namespace Calculator_beta
         public Function_Calculator()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //最大サイズ、最小サイズを固定
+            this.MaximumSize = this.Size;
+            this.MinimumSize = this.Size;
+            //フォームが最大化されないようにする
+            this.MaximizeBox = false;
 
             KeyPreview = true;
             KeyPress += new KeyPressEventHandler(result_PressKey);
         }
 
-        /*
-         * 数値を入力したら、途中で答えを表示せずに、＝(Enter Key)を押したら、計算結果を表示する
-         *    ---> Process TextBox の 廃止
-         * 
-         * 
-         */
-
         //String
-        private string input_str = "";
+        public string input_str = "";
         private string tab_name = "";
 
         //Decimal
         private decimal num1 = 0m;
         private decimal num2 = 0m;
-        private decimal result = 0m;
+        public decimal result = 0m;
 
         //Bool
         private bool enzanshi = false;
-        private bool eq = false;
+        public bool eq = false;
 
         //演算子
-        private string operation = null;
+        public string operation = "";
 
         //0から9の数字を "" マウスで "" 押したとき
         private void click_Number(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -49,36 +46,24 @@ namespace Calculator_beta
             Button btn = (Button)sender;
             string text = btn.Text;
 
-            //桁数 は ∞, 小数点以下は60桁まで
-            bool dot = formula.Text.Contains(".");
-            if (dot)
+            
             {
-                input_str += text;
-                formula.Text = string.Format("{0:0.############################################################}", decimal.Parse(input_str));
-
-                if (input_str.Contains(".0"))
+                if (text == "0")//最初に0押したとき
                 {
-                    formula.Text = string.Format("{0:0.############################################################}", decimal.Parse(input_str)) + "." + "0";
+                    input_str += text;
+                    formula.Text = String.Format("{0:#,0}", input_str);
+                    return;
                 }
-            }
-            else if (text == "0")//最初に0押したとき
-            {
-                input_str += text;
-                formula.Text = String.Format("{0:#,0}", decimal.Parse(input_str));
-                return;
-            }
-            else//0以外の数字押したとき
-            {
-                input_str += text;
-                input_str = input_str.TrimStart('0');
-                formula.Text = String.Format("{0:#,0}", decimal.Parse(input_str));
+                else//0以外の数字押したとき
+                {
+                    input_str += text;
+                    input_str = input_str.TrimStart('0');
+                    formula.Text = String.Format("{0:#,0}", input_str);
+                }
             }
         }
 
         //四則演算を "" マウスで "" 押したとき
-        //
-        // 直接計算することはほぼないに等しい  -> 変数の代入のみも有り  
-        //
         private void click_ope(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             eq = false;
@@ -86,10 +71,8 @@ namespace Calculator_beta
             Button btn = (Button)sender;
             operation = btn.Text;
 
-            num1 = result;
             if (input_str != "")
             {
-                num2 = decimal.Parse(input_str);
                 if (btn.Text == "＋")
                 {
                     result = num1 + num2;
@@ -103,7 +86,8 @@ namespace Calculator_beta
                     try
                     {
                         result = num1 / num2;
-                    } catch (DivideByZeroException ex)
+                    }
+                    catch (DivideByZeroException ex)
                     {
                         Format_Error();
                     }
@@ -118,12 +102,23 @@ namespace Calculator_beta
                 }
             }
 
-            input_str = "";
+            //input_str = "";
 
             if (enzanshi)//演算子ボタンが連続で押されたときに置換する (enzanshi == true)
             {
-                string keisan = formula.Text = formula.Text.Remove(formula.Text.Length - 1);
-                formula.Text = keisan + operation;
+                bool dot_ = input_str.Contains(".");
+                if (dot_)
+                {
+                    string keisan = formula.Text = formula.Text.Remove(formula.Text.Length - 1);
+                    formula.Text = keisan + operation;
+                    formula.Text += ".";
+                }
+                else
+                {
+                    string keisan = formula.Text = formula.Text.Remove(formula.Text.Length - 1);
+                    formula.Text = keisan + operation;
+                }
+                
             }
             else//first
             {
@@ -139,7 +134,7 @@ namespace Calculator_beta
             formula.ForeColor = Color.Black;
             if (formula.Text != null)
             {
-                bool dot_ = formula.Text.Contains(".");
+                bool dot_ = input_str.Contains(".");
                 if (dot_)
                 {
                     return;
@@ -156,6 +151,9 @@ namespace Calculator_beta
             }
         }
 
+        //
+        // Normal Type
+        //
         private void click_Special(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             eq = false;
@@ -173,7 +171,6 @@ namespace Calculator_beta
                 root_pi_nepiers(btn);
             }
         }
-
         //特殊文字の入力
         private void power_fac_per(Button btn)
         {
@@ -222,10 +219,6 @@ namespace Calculator_beta
         private void root_pi_nepiers(Button btn)
         {
             // これらは連続で打っても計算可  ->  √ は例外
-            //bool root_ = formula.Text.Contains("√");
-            //bool pi_ = formula.Text.Contains("π");
-            //bool nepiers_ = formula.Text.Contains("e");
-
             //根号
             if (btn.Name == "root")
             {
@@ -243,11 +236,11 @@ namespace Calculator_beta
             }
         }
 
-        // "="を "" マウスで "" 押したとき   ->  途中式は表示しない方針
+        // "="を "" マウスで "" 押したとき   ->  途中式は表示しない方針 = 途中で計算をしない
         //
-        // 演算子を抽出して計算する。 String.Split を使用して文字列を分割
+        // このメソッドで全ての式を計算する
         //
-        // Alphabet 要る？
+        //    ＋ ,   －,   ÷,   ×  ->   ＋－÷×
         //
         private void click_Eq(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -263,7 +256,6 @@ namespace Calculator_beta
                 formula.Text = String.Format("{0:0.############################################################}", result);
             }
 
-
             if (formula.Text == "")
             {
                 return;
@@ -276,9 +268,9 @@ namespace Calculator_beta
                 }
                 else if (!eq)
                 {
-                    //
-                    //和と差
-                    //
+                //
+                //和と差
+                //
                     if (!(formula.Text.Contains("×") && formula.Text.Contains("÷")))
                     {
                         string phrase = input_str;
@@ -310,7 +302,7 @@ namespace Calculator_beta
         //Back Spaceを "" マウスで "" 押したとき
         private void click_BS(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if(formula.Text == null)
+            if (formula.Text == null)
             {
                 return;
             }
@@ -325,12 +317,19 @@ namespace Calculator_beta
                     {
                         try // 小数点有りでエラー
                         {
+                            //数字の末尾がドットかどうか
+                            bool dot_end = input_str.EndsWith(".");
+                            if (dot_end)
+                            {
+                                formula.Text = formula.Text.Remove(int.Parse("."));
+                            }
+                            else
                             //カンマ区切り付き
-                            formula.Text = String.Format("{0:#,0}", decimal.Parse(bs_text));
+                            formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(bs_text));
                         }
                         catch (FormatException ex)
                         {
-                            formula.Text = String.Format("{0:#,0}", bs_text);
+                            formula.Text = String.Format("{0:#,0.############################################################}", bs_text);
                         }
                     }
                     else
@@ -338,7 +337,8 @@ namespace Calculator_beta
                         formula.Text = "";
                     }
 
-                } catch (ArgumentOutOfRangeException)
+                }
+                catch (ArgumentOutOfRangeException)
                 {
                     return;
                 }
@@ -355,50 +355,17 @@ namespace Calculator_beta
 
             if (tab_name == "Normal")
             {
-                switch (key)
-                {
-                    case Key.NumPad0:
-                        formula.Text += 0;
-                        break;
-                    case Key.NumPad1:
-                        formula.Text += 1;
-                        break;
-                    case Key.NumPad2:
-                        formula.Text += 2;
-                        break;
-                    case Key.NumPad3:
-                        formula.Text += 3;
-                        break;
-                    case Key.NumPad4:
-                        formula.Text += 4;
-                        break;
-                    case Key.NumPad5:
-                        formula.Text += 5;
-                        break;
-                    case Key.NumPad6:
-                        formula.Text += 6;
-                        break;
-                    case Key.NumPad7:
-                        formula.Text += 7;
-                        break;
-                    case Key.NumPad8:
-                        formula.Text += 8;
-                        break;
-                    case Key.NumPad9:
-                        formula.Text += 9;
-                        break;
-                }
+                //null
             }
             else if (tab_name == "Alphabet")
             {
-
+                //delete this tab soon
             }
             else if (tab_name == "Other Symbols")
             {
-
+                //add a bit
             }
         }
-
         private void Tab_Changed(object sender, TabControlEventArgs e)
         {
             //現在のTabがどれかを取得する
@@ -409,15 +376,20 @@ namespace Calculator_beta
         private void Normal_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //null
+            Key key_ = (Key)e.KeyData;
+
+            if (key_.Equals("0"))
+            {
+                formula.Text += "0";
+            }
         }
 
 
         //
         //   基本的なエラー
         //
-
         //Format error
-        private void Format_Error()
+        public void Format_Error()
         {
             operation = null;
             formula.ForeColor = Color.DarkRed;
@@ -426,7 +398,6 @@ namespace Calculator_beta
             button_Enable(false);
             input_str = null;
         }
-
         //
         //ボタンの無効化
         //
@@ -440,6 +411,14 @@ namespace Calculator_beta
                     ctrl.Enabled = use;
                 }
             }
+        }
+
+        // 
+        //   計算履歴
+        //
+        private void click_History(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            History_form.Instance.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -523,6 +502,11 @@ namespace Calculator_beta
         }
 
         private void divide_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

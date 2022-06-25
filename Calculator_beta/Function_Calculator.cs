@@ -7,9 +7,15 @@ namespace Calculator_beta
 {
     public partial class Function_Calculator : Form
     {
+        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        private static extern bool AllocConsole();
+
         public Function_Calculator()
         {
             InitializeComponent();
+            //output to Cmd
+            AllocConsole();
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             //最大サイズ、最小サイズを固定
             this.MaximumSize = this.Size;
@@ -38,7 +44,7 @@ namespace Calculator_beta
         public string operation = "";
 
         //0から9の数字を "" マウスで "" 押したとき
-        private void click_Number(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void click_Number(object sender, MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
             enzanshi = false;
@@ -64,7 +70,7 @@ namespace Calculator_beta
         }
 
         //四則演算を "" マウスで "" 押したとき
-        private void click_ope(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void click_ope(object sender, MouseEventArgs e)
         {
             eq = false;
             formula.ForeColor = Color.Black;
@@ -128,7 +134,7 @@ namespace Calculator_beta
         }
 
         //Dot Click
-        private void click_Dot(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void click_Dot(object sender, MouseEventArgs e)
         {
             eq = false;
             formula.ForeColor = Color.Black;
@@ -154,7 +160,7 @@ namespace Calculator_beta
         //
         // Normal Type
         //
-        private void click_Special(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void click_Special(object sender, MouseEventArgs e)
         {
             eq = false;
             formula.ForeColor = Color.Black;
@@ -242,7 +248,7 @@ namespace Calculator_beta
         //
         //    ＋ ,   －,   ÷,   ×  ->   ＋－÷×
         //
-        private void click_Eq(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void click_Eq(object sender, MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
             Button btn = (Button)sender;
@@ -289,7 +295,7 @@ namespace Calculator_beta
         }
 
         //All Clearを "" マウスで "" 押したとき
-        private void click_AC(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void click_AC(object sender, MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
             //初期化
@@ -300,7 +306,7 @@ namespace Calculator_beta
         }
 
         //Back Spaceを "" マウスで "" 押したとき
-        private void click_BS(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void click_BS(object sender, MouseEventArgs e)
         {
             if (formula.Text == null)
             {
@@ -416,8 +422,9 @@ namespace Calculator_beta
         // 
         //   計算履歴
         //
-        private void click_History(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void click_History(object sender, MouseEventArgs e)
         {
+            //Calculator_beta.csproj に変更加える必要有
             History_form.Instance.Show();
         }
 

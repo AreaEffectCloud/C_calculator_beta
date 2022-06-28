@@ -7,14 +7,14 @@ namespace Calculator_beta
 {
     public partial class Function_Calculator : Form
     {
-        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
-        private static extern bool AllocConsole();
+        //[System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        //private static extern bool AllocConsole();
 
         public Function_Calculator()
         {
             InitializeComponent();
             //output to Cmd
-            AllocConsole();
+            //AllocConsole();
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             //最大サイズ、最小サイズを固定
@@ -70,6 +70,9 @@ namespace Calculator_beta
         }
 
         //四則演算を "" マウスで "" 押したとき
+        //
+        //配列を作って、50項まで数値を入力出来るようにする
+        //
         private void click_ope(object sender, MouseEventArgs e)
         {
             eq = false;
@@ -91,7 +94,7 @@ namespace Calculator_beta
                 {
                     try
                     {
-                        result = num1 / num2;
+                        num1 -= input_str.Length - 1;
                     }
                     catch (DivideByZeroException ex)
                     {
@@ -112,19 +115,25 @@ namespace Calculator_beta
 
             if (enzanshi)//演算子ボタンが連続で押されたときに置換する (enzanshi == true)
             {
-                bool dot_ = input_str.Contains(".");
-                if (dot_)
+                //NullReferenceException
+                try
                 {
-                    string keisan = formula.Text = formula.Text.Remove(formula.Text.Length - 1);
-                    formula.Text = keisan + operation;
-                    formula.Text += ".";
-                }
-                else
+                    bool dot_ = input_str.Contains(".");
+                    if (dot_)
+                    {
+                        string keisan = formula.Text = formula.Text.Remove(formula.Text.Length - 1);
+                        formula.Text = keisan + operation;
+                        formula.Text += ".";
+                    }
+                    else
+                    {
+                        string keisan = formula.Text = formula.Text.Remove(formula.Text.Length - 1);
+                        formula.Text = keisan + operation;
+                    }
+                } catch (NullReferenceException nrex)
                 {
-                    string keisan = formula.Text = formula.Text.Remove(formula.Text.Length - 1);
-                    formula.Text = keisan + operation;
+                    return;
                 }
-                
             }
             else//first
             {
@@ -414,9 +423,18 @@ namespace Calculator_beta
             {
                 if (ctrl is Button)
                 {
+                    if (ctrl.Controls == History_form.Instance.Controls)
+                    {
+                        History_form.Instance.Enabled = true;
+                        return;
+                    }
                     ctrl.Enabled = use;
                 }
             }
+
+            //only History Form is Enable
+            //History_form his_form = new History_form();
+            //his_form.Enabled = true;
         }
 
         // 

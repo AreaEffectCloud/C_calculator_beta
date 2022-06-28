@@ -36,24 +36,27 @@
             // 
             this.history.Font = new System.Drawing.Font("游明朝", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.history.FormattingEnabled = true;
-            this.history.ItemHeight = 27;
+            this.history.ItemHeight = 34;
             this.history.Items.AddRange(new object[] {
             "履歴"});
-            this.history.Location = new System.Drawing.Point(-2, 0);
+            this.history.Location = new System.Drawing.Point(-3, 0);
+            this.history.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.history.Name = "history";
-            this.history.Size = new System.Drawing.Size(418, 544);
+            this.history.Size = new System.Drawing.Size(556, 650);
             this.history.TabIndex = 0;
             // 
             // History_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 554);
+            this.ClientSize = new System.Drawing.Size(553, 692);
             this.Controls.Add(this.history);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "History_form";
-            this.Text = "History_form";
+            this.Text = "History";
+            this.Load += new System.EventHandler(this.History_form_Load);
             this.ResumeLayout(false);
 
         }

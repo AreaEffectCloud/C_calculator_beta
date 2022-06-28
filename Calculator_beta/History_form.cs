@@ -42,5 +42,10 @@ namespace Calculator_beta
                 return hf_instance;
             }
         }
+
+        private void History_form_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,20 +1,23 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Input;
+using Antlr.Runtime;
+using NCalc2.Grammar;
 
 namespace Calculator_beta
 {
     public partial class Function_Calculator : Form
     {
-        //[System.Runtime.InteropServices.DllImport("kernel32.dll")]
-        //private static extern bool AllocConsole();
+        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
+        private static extern bool AllocConsole();
 
         public Function_Calculator()
         {
             InitializeComponent();
             //output to Cmd
-            //AllocConsole();
+            AllocConsole();
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             //最大サイズ、最小サイズを固定
@@ -31,6 +34,9 @@ namespace Calculator_beta
         public string input_str = "";
         private string tab_name = "";
 
+        // String List
+        List<string> num_list = new List<string>();
+
         //Decimal
         private decimal num1 = 0m;
         private decimal num2 = 0m;
@@ -44,54 +50,56 @@ namespace Calculator_beta
         public string operation = "";
 
         //0から9の数字を "" マウスで "" 押したとき
-        private void click_Number(object sender, MouseEventArgs e)
+        private void click_Number(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+
             formula.ForeColor = Color.Black;
             enzanshi = false;
 
             Button btn = (Button)sender;
             string text = btn.Text;
 
-            
+
             {
                 if (text == "0")//最初に0押したとき
                 {
                     input_str += text;
-                    formula.Text = String.Format("{0:#,0}", input_str);
+                    formula.Text = input_str;
                     return;
                 }
                 else//0以外の数字押したとき
                 {
                     input_str += text;
                     input_str = input_str.TrimStart('0');
-                    formula.Text = String.Format("{0:#,0}", input_str);
+                    formula.Text = String.Format("{0:#,0.############################################################}", input_str);
                 }
             }
         }
 
-        //四則演算を "" マウスで "" 押したとき
-        //
-        //配列を作って、50項まで数値を入力出来るようにする
-        //
-        private void click_ope(object sender, MouseEventArgs e)
+        //四則演算を "" マウスで "" 押したとき  ＋－÷×
+        private void click_ope(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             eq = false;
             formula.ForeColor = Color.Black;
             Button btn = (Button)sender;
             operation = btn.Text;
 
+            /*
             if (input_str != "")
             {
-                if (btn.Text == "＋")
+                if (btn.Name == "plus")
                 {
-                    result = num1 + num2;
+                    input_str += "＋";
                 }
-                else if (btn.Text == "－")
+                else if (btn.Name == "minus")
                 {
-                    result = num1 - num2;
+                    input_str += "－";
                 }
-                else if (btn.Text == "÷")
+                else if (btn.Name == "divide")
                 {
+                    input_str += "÷";
+
+                    //0で割ったときのError
                     try
                     {
                         num1 -= input_str.Length - 1;
@@ -99,19 +107,15 @@ namespace Calculator_beta
                     catch (DivideByZeroException ex)
                     {
                         Format_Error();
+                        Console.WriteLine(ex);
                     }
                 }
-                else if (btn.Text == "×")
+                else if (btn.Name == "multi")
                 {
-                    result = num1 * num2;
-                }
-                else if (btn.Text == null)
-                {
-                    result = num2;
+                    input_str += "×";
                 }
             }
-
-            //input_str = "";
+            */
 
             if (enzanshi)//演算子ボタンが連続で押されたときに置換する (enzanshi == true)
             {
@@ -130,8 +134,10 @@ namespace Calculator_beta
                         string keisan = formula.Text = formula.Text.Remove(formula.Text.Length - 1);
                         formula.Text = keisan + operation;
                     }
-                } catch (NullReferenceException nrex)
+                }
+                catch (NullReferenceException nrex)
                 {
+                    Console.WriteLine(nrex);
                     return;
                 }
             }
@@ -143,11 +149,12 @@ namespace Calculator_beta
         }
 
         //Dot Click
-        private void click_Dot(object sender, MouseEventArgs e)
+        // 若干の修正必要
+        private void click_Dot(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             eq = false;
             formula.ForeColor = Color.Black;
-            if (formula.Text != null)
+            if (input_str != "")
             {
                 bool dot_ = input_str.Contains(".");
                 if (dot_)
@@ -157,19 +164,20 @@ namespace Calculator_beta
                 else
                 {
                     input_str += dot.Text;
-                    formula.Text += ".";
+                    formula.Text += "0.";
                 }
             }
             else
             {
-                formula.Text += "0.";
+                input_str += "0.";
+                formula.Text = input_str;
             }
         }
 
         //
         // Normal Type
         //
-        private void click_Special(object sender, MouseEventArgs e)
+        private void click_Special(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             eq = false;
             formula.ForeColor = Color.Black;
@@ -185,6 +193,8 @@ namespace Calculator_beta
             {
                 root_pi_nepiers(btn);
             }
+
+            formula.Text = input_str.Remove(input_str.Length - 1);
         }
         //特殊文字の入力
         private void power_fac_per(Button btn)
@@ -203,11 +213,11 @@ namespace Calculator_beta
                 }
                 else
                 {
-                    formula.Text += "^";
+                    input_str += "^";
                 }
             }
             //階乗
-            else if (btn.Name == "factorial")
+            else if (btn.Name== "factorial")
             {
                 if (fac)
                 {
@@ -215,7 +225,7 @@ namespace Calculator_beta
                 }
                 else
                 {
-                    formula.Text += "!";
+                    input_str += "!";
                 }
             }
             //パーセント
@@ -227,7 +237,7 @@ namespace Calculator_beta
                 }
                 else
                 {
-                    formula.Text += "％";
+                    input_str += "％";
                 }
             }
         }
@@ -237,38 +247,57 @@ namespace Calculator_beta
             //根号
             if (btn.Name == "root")
             {
-                formula.Text += "√";
+                input_str += "√";
             }
             //円周率
             else if (btn.Name == "pi")
             {
-                formula.Text += "π";
+                input_str += "π";
             }
             //ネピア数
             else if (btn.Name == "napiers")
             {
-                formula.Text += "e";
+                input_str += "e";
             }
         }
 
         // "="を "" マウスで "" 押したとき   ->  途中式は表示しない方針 = 途中で計算をしない
         //
-        // このメソッドで全ての式を計算する
+        // このメソッドで全ての式を計算する -> 同時に履歴への追加も
         //
         //    ＋ ,   －,   ÷,   ×  ->   ＋－÷×
         //
-        private void click_Eq(object sender, MouseEventArgs e)
+        private void click_Eq(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
             Button btn = (Button)sender;
             operation = btn.Text;
+
+            //参照
+            //https://www.codeproject.com/Articles/18880/State-of-the-Art-Expression-Evaluation
+            //
+            //不適切な式の場合
+            NCalc2Lexer lexer = new NCalc2Lexer(new ANTLRStringStream("3*(5+2"));
+            NCalc2Parser parser = new NCalc2Parser(new CommonTokenStream(lexer));
+
+            try
+            {
+                parser.expression();
+                Assert.Fail();
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine("Parser exception: " + e.Message);
+            }
+
+
 
             bool formula_dot = formula.Text.Contains(".");
 
             //Dotの検討中  
             if (formula_dot)
             {
-                formula.Text = String.Format("{0:0.############################################################}", result);
+                formula.Text = String.Format("{0:#,0.############################################################}", result);
             }
 
             if (formula.Text == "")
@@ -283,9 +312,9 @@ namespace Calculator_beta
                 }
                 else if (!eq)
                 {
-                //
-                //和と差
-                //
+                    //
+                    //和と差
+                    //
                     if (!(formula.Text.Contains("×") && formula.Text.Contains("÷")))
                     {
                         string phrase = input_str;
@@ -304,18 +333,18 @@ namespace Calculator_beta
         }
 
         //All Clearを "" マウスで "" 押したとき
-        private void click_AC(object sender, MouseEventArgs e)
+        private void click_AC(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
             //初期化
-            formula.Text = null;
-            input_str = null;
-            operation = null;
-            num1 = 0m;
+            formula.Text = "";
+            input_str = "";
+            operation = "";
+            num_list.Clear();
         }
 
         //Back Spaceを "" マウスで "" 押したとき
-        private void click_BS(object sender, MouseEventArgs e)
+        private void click_BS(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (formula.Text == null)
             {
@@ -336,15 +365,17 @@ namespace Calculator_beta
                             bool dot_end = input_str.EndsWith(".");
                             if (dot_end)
                             {
-                                formula.Text = formula.Text.Remove(int.Parse("."));
+                                formula.Text = bs_text;
+                                // input_str = bs_text; ここに入れる希ガス
                             }
                             else
-                            //カンマ区切り付き
-                            formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(bs_text));
+                                //カンマ区切り付き
+                                formula.Text = String.Format("{0:#,0.############################################################}", bs_text);
                         }
                         catch (FormatException ex)
                         {
-                            formula.Text = String.Format("{0:#,0.############################################################}", bs_text);
+                            formula.Text = bs_text;
+                            Console.WriteLine(ex);
                         }
                     }
                     else
@@ -387,7 +418,7 @@ namespace Calculator_beta
             tab_name = e.TabPage.Text;
         }
 
-        
+
         private void Normal_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //null
@@ -440,7 +471,7 @@ namespace Calculator_beta
         // 
         //   計算履歴
         //
-        private void click_History(object sender, MouseEventArgs e)
+        private void click_History(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             //Calculator_beta.csproj に変更加える必要有
             History_form.Instance.Show();
@@ -453,7 +484,7 @@ namespace Calculator_beta
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void tabPage2_Click(object sender, EventArgs e)

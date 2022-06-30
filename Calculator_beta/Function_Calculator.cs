@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
 using Antlr.Runtime;
-using NCalc2.Grammar;
+using NCalc;
 
 namespace Calculator_beta
 {
@@ -277,19 +278,36 @@ namespace Calculator_beta
             //https://www.codeproject.com/Articles/18880/State-of-the-Art-Expression-Evaluation
             //
             //不適切な式の場合
-            NCalc2Lexer lexer = new NCalc2Lexer(new ANTLRStringStream("3*(5+2"));
-            NCalc2Parser parser = new NCalc2Parser(new CommonTokenStream(lexer));
+            NCalcLexer lexer = new NCalcLexer(new ANTLRStringStream("3*(5+2"));
+            NCalcParser parser = new NCalcParser(new CommonTokenStream(lexer));
 
+            //null
             try
             {
-                parser.expression();
-                Assert.Fail();
+                parser.GetExpression();
+                //Assert.Fail();
             }
-            catch (Exception e)
+            catch (Exception exception)
             {
-                Console.Error.WriteLine("Parser exception: " + e.Message);
+                Console.Error.WriteLine("Parser exception: " + exception.Message);
             }
 
+            //DataTable.Compute
+            //計算式
+            string exp = "(8+96)*25";
+            //式を計算する
+            DataTable dt = new DataTable();
+            try
+            {
+                double result = (double)dt.Compute(exp, "");
+            } catch (InvalidCastException icex)
+            {
+                Console.WriteLine(icex);
+                return;
+            }
+            
+
+            Console.WriteLine(result);
 
 
             bool formula_dot = formula.Text.Contains(".");

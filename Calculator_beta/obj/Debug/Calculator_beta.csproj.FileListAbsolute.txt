@@ -20,3 +20,7 @@ C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\obj\Debu
 C:\Users\AreaEffectCloud\Source\Repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.pdb
 C:\Users\AreaEffectCloud\source\repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.Function_Calculator.resources
 C:\Users\AreaEffectCloud\source\repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.History_form.resources
+C:\Users\AreaEffectCloud\source\repos\C_calculator_beta\Calculator_beta\bin\Debug\Antlr3.Runtime.dll
+C:\Users\AreaEffectCloud\source\repos\C_calculator_beta\Calculator_beta\bin\Debug\NCalc.dll
+C:\Users\AreaEffectCloud\source\repos\C_calculator_beta\Calculator_beta\bin\Debug\Antlr3.Runtime.xml
+C:\Users\AreaEffectCloud\source\repos\C_calculator_beta\Calculator_beta\obj\Debug\Calculator_beta.csproj.CopyComplete

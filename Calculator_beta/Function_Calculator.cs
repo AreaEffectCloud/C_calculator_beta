@@ -251,25 +251,25 @@ namespace Calculator_beta
 
             //DataTable.Compute
             //計算式
-            string exp = "(8+96)*25";
+            string exp = "(89.0+7)*25.5";
             //式を計算する
             DataTable dt = new DataTable();
             try
             {
-                object result = dt.Compute(exp, "");
+                decimal result = (decimal)dt.Compute(exp, "");
+                //ここで計算結果を表示する
+                Console.WriteLine(result);
+
+                //履歴に追加
+                History_form.Instance.ListAddItem(exp, result.ToString());
+               
+
             }
             catch (InvalidCastException icex)
             {
-                Console.WriteLine(icex);
+                Console.WriteLine(icex.ToString());
                 return;
             }
-            Console.WriteLine(result);
-
-
-            
-
-            //結果を表示
-            Console.WriteLine(result);
 
 
             bool formula_dot = formula.Text.Contains(".");
@@ -292,22 +292,7 @@ namespace Calculator_beta
                 }
                 else if (!eq)
                 {
-                    //
-                    //和と差
-                    //
-                    if (!(formula.Text.Contains("×") && formula.Text.Contains("÷")))
-                    {
-                        string phrase = input_str;
-
-                        char[] delimiterChars = { '＋', '－' };
-                        string[] plus_minus = phrase.Split(delimiterChars);
-
-                        foreach (var word in plus_minus)
-                        {
-                            formula.Text = $"<{word}>";
-                            eq = true;
-                        }
-                    }
+                    //Code Here
                 }
             }
         }

@@ -21,6 +21,9 @@ namespace Calculator_beta
             this.MinimumSize = this.Size;
             //フォームが最大化されないようにする
             this.MaximizeBox = false;
+
+            list_history.Items.Clear();
+            //list_history.Items.Add("848464^94449884886468.656");
         }
 
         /*
@@ -42,8 +45,27 @@ namespace Calculator_beta
                 return hf_instance;
             }
         }
+        // Ex. History_form.Instance.---();
+
+        /*
+         * Listを使うよりも、TextBoxを使ってリストのように扱った方が勝手がいいかも
+         * 一行ごとに色変えられるかも？
+         */
+        public void ListAddItem(string formula, string result)
+        {
+            //途中式と計算結果を色で差別化する(出来ない)
+            list_history.Items.Add(formula);
+            list_history.ForeColor = Color.Gray;
+            list_history.Items.Add(result);
+            //list_history.ResetForeColor();
+        }
 
         private void History_form_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void list_history_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

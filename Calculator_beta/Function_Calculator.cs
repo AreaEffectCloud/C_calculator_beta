@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
-using Antlr.Runtime;
-using NCalc;
+using System.Data;
 
 namespace Calculator_beta
 {
@@ -35,12 +32,7 @@ namespace Calculator_beta
         public string input_str = "";
         private string tab_name = "";
 
-        // String List
-        List<string> num_list = new List<string>();
-
         //Decimal
-        private decimal num1 = 0m;
-        private decimal num2 = 0m;
         public decimal result = 0m;
 
         //Bool
@@ -60,19 +52,28 @@ namespace Calculator_beta
             Button btn = (Button)sender;
             string text = btn.Text;
 
-
+            input_str = "";
             {
                 if (text == "0")//最初に0押したとき
                 {
                     input_str += text;
-                    formula.Text = input_str;
+                    formula.Text += input_str;
                     return;
                 }
                 else//0以外の数字押したとき
                 {
-                    input_str += text;
-                    input_str = input_str.TrimStart('0');
-                    formula.Text = String.Format("{0:#,0.############################################################}", input_str);
+                    if (input_str.StartsWith("0"))
+                    {
+                        if (!input_str.Contains("."))
+                        {
+                            input_str = input_str.Remove(input_str.Length - 1);
+                            input_str = text;
+                            formula.Text = formula.Text.Remove(formula.Text.Length - 1);
+                        }
+                        else input_str += text;
+                    }
+                    else input_str += text;
+                    formula.Text += String.Format("{0:#,0.############################################################}", input_str);
                 }
             }
         }
@@ -81,42 +82,10 @@ namespace Calculator_beta
         private void click_ope(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             eq = false;
+            input_str = "";
             formula.ForeColor = Color.Black;
             Button btn = (Button)sender;
             operation = btn.Text;
-
-            /*
-            if (input_str != "")
-            {
-                if (btn.Name == "plus")
-                {
-                    input_str += "＋";
-                }
-                else if (btn.Name == "minus")
-                {
-                    input_str += "－";
-                }
-                else if (btn.Name == "divide")
-                {
-                    input_str += "÷";
-
-                    //0で割ったときのError
-                    try
-                    {
-                        num1 -= input_str.Length - 1;
-                    }
-                    catch (DivideByZeroException ex)
-                    {
-                        Format_Error();
-                        Console.WriteLine(ex);
-                    }
-                }
-                else if (btn.Name == "multi")
-                {
-                    input_str += "×";
-                }
-            }
-            */
 
             if (enzanshi)//演算子ボタンが連続で押されたときに置換する (enzanshi == true)
             {
@@ -155,7 +124,7 @@ namespace Calculator_beta
         {
             eq = false;
             formula.ForeColor = Color.Black;
-            if (input_str != "")
+            if (formula.Text != "")
             {
                 bool dot_ = input_str.Contains(".");
                 if (dot_)
@@ -165,7 +134,11 @@ namespace Calculator_beta
                 else
                 {
                     input_str += dot.Text;
-                    formula.Text += "0.";
+                    if (input_str != "")
+                    {
+                        formula.Text += ".";
+                    }
+                    else formula.Text += "0.";
                 }
             }
             else
@@ -274,23 +247,7 @@ namespace Calculator_beta
             Button btn = (Button)sender;
             operation = btn.Text;
 
-            //参照
-            //https://www.codeproject.com/Articles/18880/State-of-the-Art-Expression-Evaluation
-            //
-            //不適切な式の場合
-            NCalcLexer lexer = new NCalcLexer(new ANTLRStringStream("3*(5+2"));
-            NCalcParser parser = new NCalcParser(new CommonTokenStream(lexer));
 
-            //null
-            try
-            {
-                parser.GetExpression();
-                //Assert.Fail();
-            }
-            catch (Exception exception)
-            {
-                Console.Error.WriteLine("Parser exception: " + exception.Message);
-            }
 
             //DataTable.Compute
             //計算式
@@ -299,14 +256,19 @@ namespace Calculator_beta
             DataTable dt = new DataTable();
             try
             {
-                double result = (double)dt.Compute(exp, "");
-            } catch (InvalidCastException icex)
+                object result = dt.Compute(exp, "");
+            }
+            catch (InvalidCastException icex)
             {
                 Console.WriteLine(icex);
                 return;
             }
+            Console.WriteLine(result);
+
+
             
 
+            //結果を表示
             Console.WriteLine(result);
 
 
@@ -358,7 +320,6 @@ namespace Calculator_beta
             formula.Text = "";
             input_str = "";
             operation = "";
-            num_list.Clear();
         }
 
         //Back Spaceを "" マウスで "" 押したとき

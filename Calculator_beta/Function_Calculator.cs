@@ -8,6 +8,7 @@ namespace Calculator_beta
 {
     public partial class Function_Calculator : Form
     {
+        //Display Console
         [System.Runtime.InteropServices.DllImport("kernel32.dll")]
         private static extern bool AllocConsole();
 
@@ -251,15 +252,19 @@ namespace Calculator_beta
 
             //DataTable.Compute
             //計算式
-            string exp = "(89.0+7)*25.5";
+            //log, sin, ! は不可
+            //var で桁数無限可
+            string exp = "9999999999999999999999999999999999999999999999999999999999999999999999999999999999*789797897987979877887779";
             //式を計算する
             DataTable dt = new DataTable();
+            
             try
             {
-                decimal result = (decimal)dt.Compute(exp, "");
-                //ここで計算結果を表示する
-                Console.WriteLine(result);
+                //整数だとint, 小数点有りだとdecimalが有効　-> var
+                // + bool Contains(".")
+                var result = dt.Compute(exp, "");
 
+                Console.WriteLine(result);
                 //履歴に追加
                 History_form.Instance.ListAddItem(exp, result.ToString());
                
@@ -267,8 +272,12 @@ namespace Calculator_beta
             }
             catch (InvalidCastException icex)
             {
-                Console.WriteLine(icex.ToString());
-                return;
+                Console.WriteLine(icex);
+            }
+            //ゼロ除算
+            catch (DivideByZeroException dbzex)
+            {
+                Console.WriteLine(dbzex);
             }
 
 

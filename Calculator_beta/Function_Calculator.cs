@@ -30,6 +30,7 @@ namespace Calculator_beta
         }
 
         //String
+        //input_str は fromula.text と違い、カンマ区切りがされていない数値のstring型
         public string input_str = "";
         private string tab_name = "";
 
@@ -46,54 +47,71 @@ namespace Calculator_beta
         //0から9の数字を "" マウスで "" 押したとき
         private void click_Number(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-
+            bool dot_ = input_str.Contains(".");
             formula.ForeColor = Color.Black;
             enzanshi = false;
 
             Button btn = (Button)sender;
             string text = btn.Text;
 
-            input_str = "";
+            //input_str = "";
             {
                 if (text == "0")//最初に0押したとき
                 {
                     input_str += text;
                     formula.Text += input_str;
-                    return;
+
+                    Console.WriteLine(input_str);
                 }
-                else//0以外の数字押したとき
+                else if (text != "0")//0以外の数字押したとき
                 {
-                    if (input_str.StartsWith("0"))
+                    if (dot_)
                     {
-                        if (!input_str.Contains("."))
+                        if (input_str.StartsWith("0."))
                         {
-                            input_str = input_str.Remove(input_str.Length - 1);
-                            input_str = text;
-                            formula.Text = formula.Text.Remove(formula.Text.Length - 1);
+                            input_str += text;
+                            formula.Text += input_str;
                         }
-                        else input_str += text;
+                        else
+                        {
+                            input_str += text;
+                            formula.Text += input_str;
+                        }
                     }
-                    else input_str += text;
-                    formula.Text += String.Format("{0:#,0.############################################################}", input_str);
+                    else if (!dot_) 
+                    {
+                        if (input_str.StartsWith("0"))
+                        {
+                            input_str = text;
+                            formula.Text = input_str;
+                        }
+                        else
+                        {
+                            input_str += text;
+                            formula.Text += input_str;
+                        }
+                    }
                 }
             }
+
+            formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(input_str));
+            Console.WriteLine(input_str);
         }
 
         //四則演算を "" マウスで "" 押したとき  ＋－÷×
         private void click_ope(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            bool dot_ = input_str.Contains(".");
             eq = false;
             input_str = "";
             formula.ForeColor = Color.Black;
             Button btn = (Button)sender;
             operation = btn.Text;
 
-            if (enzanshi)//演算子ボタンが連続で押されたときに置換する (enzanshi == true)
+            if (enzanshi)//演算子ボタンが連続で押されたときに置換
             {
-                //NullReferenceException
                 try
                 {
-                    bool dot_ = input_str.Contains(".");
                     if (dot_)
                     {
                         string keisan = formula.Text = formula.Text.Remove(formula.Text.Length - 1);
@@ -123,28 +141,24 @@ namespace Calculator_beta
         // 若干の修正必要
         private void click_Dot(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            bool dot_ = input_str.Contains(".");
             eq = false;
             formula.ForeColor = Color.Black;
-            if (formula.Text != "")
+            if (input_str != "")
             {
-                bool dot_ = input_str.Contains(".");
                 if (dot_)
                 {
                     return;
                 }
-                else
+                else if (!dot_)
                 {
                     input_str += dot.Text;
-                    if (input_str != "")
-                    {
-                        formula.Text += ".";
-                    }
-                    else formula.Text += "0.";
+                    formula.Text += ".";
                 }
             }
             else
             {
-                input_str += "0.";
+                input_str = "0.";
                 formula.Text = input_str;
             }
         }
@@ -163,13 +177,14 @@ namespace Calculator_beta
             {
                 power_fac_per(btn);
                 root_pi_nepiers(btn);
+
+                formula.Text = input_str;
             }
             else if (formula.Text == "")
             {
                 root_pi_nepiers(btn);
+                formula.Text = input_str;
             }
-
-            formula.Text = input_str.Remove(input_str.Length - 1);
         }
         //特殊文字の入力
         private void power_fac_per(Button btn)
@@ -192,7 +207,7 @@ namespace Calculator_beta
                 }
             }
             //階乗
-            else if (btn.Name== "factorial")
+            else if (btn.Name == "factorial")
             {
                 if (fac)
                 {
@@ -254,22 +269,20 @@ namespace Calculator_beta
             //計算式
             //log, sin, ! は不可
             //var で桁数無限可
-            string exp = "9999999999999999999999999999999999999999999999999999999999999999999999999999999999*789797897987979877887779";
+            string exp = "5.256*78900000";
             //式を計算する
             DataTable dt = new DataTable();
-            
+
             try
             {
-                //整数だとint, 小数点有りだとdecimalが有効　-> var
-                // + bool Contains(".")
+                //計算
                 var result = dt.Compute(exp, "");
 
                 Console.WriteLine(result);
                 //履歴に追加
                 History_form.Instance.ListAddItem(exp, result.ToString());
-               
-
             }
+            //can't Cast (for Debug)
             catch (InvalidCastException icex)
             {
                 Console.WriteLine(icex);
@@ -327,23 +340,41 @@ namespace Calculator_beta
             {
                 try
                 {
-                    string bs_text = formula.Text.Remove(formula.Text.Length - 1);
-                    input_str = bs_text;
-
-                    if (bs_text.Length > 0)
+                    string bs_text = input_str.Remove(input_str.Length - 1);
+                    if (bs_text.Length >= 0)
                     {
                         try // 小数点有りでエラー
                         {
-                            //数字の末尾がドットかどうか
-                            bool dot_end = input_str.EndsWith(".");
-                            if (dot_end)
+                            //
+                            if (bs_text.Length == 0)
                             {
-                                formula.Text = bs_text;
-                                // input_str = bs_text; ここに入れる希ガス
+                                input_str = bs_text;
+                                formula.Text = "";
                             }
                             else
-                                //カンマ区切り付き
-                                formula.Text = String.Format("{0:#,0.############################################################}", bs_text);
+                            {
+                                //数字の末尾がドットかどうか
+                                bool dot_end = bs_text.EndsWith(".");
+                                if (dot_end)
+                                {
+                                    if (input_str.StartsWith("0"))
+                                    {
+                                        input_str = bs_text;
+                                        Console.WriteLine(input_str);
+                                        formula.Text = input_str;
+                                    }
+                                    input_str = bs_text;
+                                    Console.WriteLine(input_str);
+                                    formula.Text = input_str;
+                                }
+                                else if (!dot_end)
+                                {
+                                    //カンマ区切り付き
+                                    input_str = bs_text;
+                                    Console.WriteLine("###" + input_str);
+                                    formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(input_str));
+                                }
+                            }
                         }
                         catch (FormatException ex)
                         {
@@ -351,14 +382,11 @@ namespace Calculator_beta
                             Console.WriteLine(ex);
                         }
                     }
-                    else
-                    {
-                        formula.Text = "";
-                    }
 
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ArgumentOutOfRangeException argumentoutofrange)
                 {
+                    Console.WriteLine(argumentoutofrange);
                     return;
                 }
             }
@@ -391,7 +419,7 @@ namespace Calculator_beta
             tab_name = e.TabPage.Text;
         }
 
-
+        //null
         private void Normal_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //null

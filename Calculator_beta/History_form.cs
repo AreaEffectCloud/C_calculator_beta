@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -45,10 +45,55 @@ namespace Calculator_beta
          */
         public void ListAddItem(string formula, string result)
         {
-            history_box.ForeColor = Color.Red;
-            //途中式と計算結果を色で差別化する(出来ない)
-            history_box.Text += formula;
+            string bar = "----------------------------------";
+            //途中式と計算結果を色で差別化
+            if (history_box.Text == "")
+            {
+                history_box.Text += formula;
+            }
+            else if (history_box.Text != "")
+            {
+                history_box.Text += "\n" + formula;
+            }
             history_box.Text += "\n" + result;
+            history_box.Text += "\n" + bar;
+
+            //現在の選択状態を覚えておく
+            int currentSelectionStart = history_box.SelectionStart;
+            int currentSelectionLength = history_box.SelectionLength;
+
+            int pos = 0;
+
+            //Result
+            for (; ; )
+            {
+                //文字列を検索して、選択状態にする
+                pos = history_box.Find(result, pos, RichTextBoxFinds.None);
+                if (pos < 0)
+                {
+                    break;
+                }
+                //字の色を灰色
+                history_box.SelectionColor = Color.Gray;
+                pos++;
+            }
+            pos = 0;
+            //Bar
+            for (; ; )
+            {
+                //文字列を検索して、選択状態にする
+                pos = history_box.Find(bar, pos, RichTextBoxFinds.None);
+                if (pos < 0)
+                {
+                    break;
+                }
+                //字の色を灰色
+                history_box.SelectionColor = Color.Gray;
+                pos++;
+            }
+
+            //選択状態を元に戻す
+            history_box.Select(currentSelectionStart, currentSelectionLength);
         }
 
         private void History_form_Load(object sender, EventArgs e)

@@ -310,6 +310,8 @@ namespace Calculator_beta
                 DataTable dt = new DataTable();
                 var result = dt.Compute(exp, "");
 
+                //計算式の表示を、数値から記号にして見やすくする
+                exp = exp.Replace("*0.01", "%");
                 Console.WriteLine(result);
                 //履歴に追加
                 History_form.Instance.ListAddItem(exp, result.ToString());

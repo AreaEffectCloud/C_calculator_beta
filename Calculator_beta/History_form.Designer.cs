@@ -34,21 +34,23 @@ namespace Calculator_beta
             // 
             // history_box
             // 
-            this.history_box.Font = new System.Drawing.Font("游明朝 Demibold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.history_box.Location = new System.Drawing.Point(-2, 1);
+            this.history_box.Font = new System.Drawing.Font("游明朝 Demibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.history_box.Location = new System.Drawing.Point(-3, 1);
+            this.history_box.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.history_box.Name = "history_box";
-            this.history_box.Size = new System.Drawing.Size(418, 547);
+            this.history_box.Size = new System.Drawing.Size(556, 683);
             this.history_box.TabIndex = 2;
             this.history_box.Text = "";
             // 
             // History_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(415, 546);
+            this.ClientSize = new System.Drawing.Size(553, 682);
             this.Controls.Add(this.history_box);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "History_form";
             this.Text = "History";
             this.Load += new System.EventHandler(this.History_form_Load);

@@ -45,7 +45,7 @@ namespace Calculator_beta
          */
         public void ListAddItem(string formula, string result)
         {
-            string bar = "----------------------------------";
+            string bar = "-------------------------------------------";
             //途中式と計算結果を色で差別化
             if (history_box.Text == "")
             {

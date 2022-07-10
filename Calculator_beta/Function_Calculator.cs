@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Data;
+using System.Linq;
 
 namespace Calculator_beta
 {
@@ -266,10 +267,10 @@ namespace Calculator_beta
 
 
             //DataTable.Compute
-            //計算式
-            //log, sin, ! は不可
+            //四則演算、mod(%)は可
+            //log, sin, !, PI, ^, root, e は不可
             //var で桁数無限可
-            string exp = "5.256*78900000";
+            string exp = "5.256*78900000+10-3/(2546545)*2094564654849";
             //式を計算する
             DataTable dt = new DataTable();
 
@@ -281,6 +282,10 @@ namespace Calculator_beta
                 Console.WriteLine(result);
                 //履歴に追加
                 History_form.Instance.ListAddItem(exp, result.ToString());
+            }
+            catch (EvaluateException eex)
+            {
+                Console.WriteLine(eex); 
             }
             //can't Cast (for Debug)
             catch (InvalidCastException icex)

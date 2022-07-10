@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Data;
-using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Calculator_beta
 {
@@ -219,7 +219,7 @@ namespace Calculator_beta
                     input_str += "!";
                 }
             }
-            //パーセント
+            //パーセント (≠mod)
             else if (btn.Name == "percent")
             {
                 if (per)
@@ -264,24 +264,59 @@ namespace Calculator_beta
             Button btn = (Button)sender;
             operation = btn.Text;
 
+            //入力された計算式
+            string input_exp = "0.25*4+2600%";
 
+            /*
+             * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
+             */
 
-            //DataTable.Compute
-            //四則演算、mod(%)は可
-            //log, sin, !, PI, ^, root, e は不可
-            //var で桁数無限可
-            string exp = "5.256*78900000+10-3/(2546545)*2094564654849";
-            //式を計算する
-            DataTable dt = new DataTable();
+            //据え置き
+            //π 三角関数と共に使う場合は、そちらを優先
+            while (input_exp.Contains("π"))
+            {
+                //型代入をしないと Replace 出来ない
+                input_exp = input_exp.Replace("π", Math.PI.ToString());
+                //breakがないとプログラムが応答しなくなる
+                break;
+            }
 
+            //e ネピア数
+            while (input_exp.Contains("e"))
+            {
+                input_exp = input_exp.Replace("e", Math.E.ToString());
+                break;
+            }
+
+            // % (剰余を求めるものではない ≠ mod)
+            while (input_exp.Contains("%"))
+            {
+                input_exp = input_exp.Replace("%", "*0.01");
+                break;
+            }
+
+            //階乗
+            while (input_exp.Contains("!"))
+            {
+                //!の前の括弧の中にある数値をどうにかして抽出する
+                input_exp = input_exp.Replace("!", "*6");
+                break;
+            }
+
+            string exp = input_exp;
             try
             {
                 //計算
+                DataTable dt = new DataTable();
                 var result = dt.Compute(exp, "");
 
                 Console.WriteLine(result);
                 //履歴に追加
                 History_form.Instance.ListAddItem(exp, result.ToString());
+            }
+            catch (SyntaxErrorException see)
+            {
+                Console.WriteLine(see);
             }
             catch (EvaluateException eex)
             {
@@ -436,6 +471,15 @@ namespace Calculator_beta
             }
         }
 
+        //
+        // 階乗
+        //
+        private static int factr(int num)
+        {
+            if (num <= 1)
+                return 1;
+            else return num * factr(num - 1);
+        }
 
         //
         //   基本的なエラー

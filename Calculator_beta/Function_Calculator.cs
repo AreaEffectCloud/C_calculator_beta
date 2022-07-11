@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Data;
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace Calculator_beta
 {
@@ -219,7 +219,7 @@ namespace Calculator_beta
                     input_str += "!";
                 }
             }
-            //パーセント (≠mod)
+            //パーセント
             else if (btn.Name == "percent")
             {
                 if (per)
@@ -252,12 +252,9 @@ namespace Calculator_beta
             }
         }
 
-        // "="を "" マウスで "" 押したとき   ->  途中式は表示しない方針 = 途中で計算をしない
-        //
+        // "="を "" マウスで "" 押したとき
+        // ＋－×÷
         // このメソッドで全ての式を計算する -> 同時に履歴への追加も
-        //
-        //    ＋ ,   －,   ÷,   ×  ->   ＋－÷×
-        //
         private void click_Eq(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
@@ -265,7 +262,9 @@ namespace Calculator_beta
             operation = btn.Text;
 
             //入力された計算式
-            string input_exp = "0.25*4+2600%";
+            //×の省略は不可
+            //string input_exp = formula.Text;
+            string input_exp = "0.25*4+9+7!";
 
             /*
              * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
@@ -299,7 +298,27 @@ namespace Calculator_beta
             while (input_exp.Contains("!"))
             {
                 //!の前と演算子の間にある数値をどうにかして抽出したい
-                input_exp = input_exp.Replace("!", "*6");
+                List<string> ope = new List<string>();
+                ope.Add("＋");
+                ope.Add("－");
+                ope.Add("×");
+                ope.Add("÷");
+
+                string fact = "!";
+                string FinalString;
+
+                int Pos1 = input_exp.IndexOf(ope.ToString()) + 1;
+                int Pos2 = input_exp.IndexOf(fact);
+
+
+                //間の文字を抽出
+                FinalString = input_exp.Substring(Pos1, Pos2 - Pos1);
+                Console.WriteLine(FinalString);
+                string replace_fact = FinalString + "!";
+                Int16 final_factr = Int16.Parse(FinalString);
+                factr(final_factr);
+
+                input_exp = input_exp.Replace(replace_fact, final_factr.ToString());
                 break;
             }
 
@@ -309,7 +328,7 @@ namespace Calculator_beta
             while (org.Contains("い"))
             {
                 string str1 = org.Substring(org.IndexOf("あ"), org.IndexOf("う"));
-                org = org.Remove(org.Length - 6);
+                org.Remove(org.Length - 6);
                 Console.WriteLine(str1);
                 break;
             }
@@ -321,19 +340,9 @@ namespace Calculator_beta
                 DataTable dt = new DataTable();
                 var result = dt.Compute(exp, "");
 
-                //計算式の表示を、数値から記号にして見やすくする
-                exp = exp.Replace("*0.01", "%");
                 Console.WriteLine(result);
                 //履歴に追加
                 History_form.Instance.ListAddItem(exp, result.ToString());
-            }
-            catch (SyntaxErrorException see)
-            {
-                Console.WriteLine(see);
-            }
-            catch (EvaluateException eex)
-            {
-                Console.WriteLine(eex); 
             }
             //can't Cast (for Debug)
             catch (InvalidCastException icex)
@@ -455,15 +464,11 @@ namespace Calculator_beta
 
             if (tab_name == "Normal")
             {
-                //null
-            }
-            else if (tab_name == "Alphabet")
-            {
-                //delete this tab soon
+                //四則演算
             }
             else if (tab_name == "Other Symbols")
             {
-                //add a bit
+                //関数
             }
         }
         private void Tab_Changed(object sender, TabControlEventArgs e)
@@ -485,8 +490,9 @@ namespace Calculator_beta
         }
 
         //
-        // 階乗
+        //計算Method
         //
+        //階乗 num!
         private static int factr(int num)
         {
             if (num <= 1)
@@ -507,9 +513,7 @@ namespace Calculator_beta
             button_Enable(false);
             input_str = null;
         }
-        //
         //ボタンの無効化
-        //
         private void button_Enable(bool use)
         {
             Control.ControlCollection controls = Controls;

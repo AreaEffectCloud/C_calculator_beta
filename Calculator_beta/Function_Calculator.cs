@@ -303,6 +303,17 @@ namespace Calculator_beta
                 break;
             }
 
+            //get string between two strings
+            string org = "あいうえお、あいうえお、あいうえお、あいうえお、あいうえお";
+
+            while (org.Contains("い"))
+            {
+                string str1 = org.Substring(org.IndexOf("あ"), org.IndexOf("う"));
+                org = org.Remove(org.Length - 6);
+                Console.WriteLine(str1);
+                break;
+            }
+
             string exp = input_exp;
             try
             {

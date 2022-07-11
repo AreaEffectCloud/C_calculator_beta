@@ -298,7 +298,7 @@ namespace Calculator_beta
             //階乗
             while (input_exp.Contains("!"))
             {
-                //!の前の括弧の中にある数値をどうにかして抽出する
+                //!の前と演算子の間にある数値をどうにかして抽出したい
                 input_exp = input_exp.Replace("!", "*6");
                 break;
             }

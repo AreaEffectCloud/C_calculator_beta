@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Data;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Calculator_beta
 {
@@ -34,9 +35,6 @@ namespace Calculator_beta
         //input_str は fromula.text と違い、カンマ区切りがされていない数値のstring型
         public string input_str = "";
         private string tab_name = "";
-
-        //Decimal
-        public decimal result = 0m;
 
         //Bool
         private bool enzanshi = false;
@@ -94,9 +92,17 @@ namespace Calculator_beta
                     }
                 }
             }
-
-            formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(input_str));
-            Console.WriteLine(input_str);
+            //bool dot_end = input_str.Contains(".");
+            bool zero_end = input_str.EndsWith("0");
+            if (zero_end)
+            {
+                formula.Text = String.Format("{0:#}", decimal.Parse(input_str));
+            }
+            else
+            {
+                formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(input_str));
+                Console.WriteLine(input_str);
+            }
         }
 
         //四則演算を "" マウスで "" 押したとき  ＋－÷×
@@ -171,6 +177,7 @@ namespace Calculator_beta
         {
             eq = false;
             formula.ForeColor = Color.Black;
+            enzanshi = false;
             Button btn = (Button)sender;
 
             //数字がないとエラーになる特殊文字
@@ -264,7 +271,7 @@ namespace Calculator_beta
             //入力された計算式
             //×の省略は不可
             //string input_exp = formula.Text;
-            string input_exp = "0.25*4+9+7!";
+            string input_exp = "10+3!";
 
             /*
              * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
@@ -274,9 +281,7 @@ namespace Calculator_beta
             //π 三角関数と共に使う場合は、そちらを優先
             while (input_exp.Contains("π"))
             {
-                //型代入をしないと Replace 出来ない
                 input_exp = input_exp.Replace("π", Math.PI.ToString());
-                //breakがないとプログラムが応答しなくなる
                 break;
             }
 
@@ -294,43 +299,31 @@ namespace Calculator_beta
                 break;
             }
 
+            List<string> ope = new List<string>();
+            ope.Add("＋");
+            ope.Add("－");
+            ope.Add("×");
+            ope.Add("÷");
+
+            string fact = "!";
+            string FirstNumber;
+
+            int Pos1 = input_exp.IndexOf(ope.ToString());
+            int Pos2 = input_exp.IndexOf(fact);
+
             //階乗
             while (input_exp.Contains("!"))
             {
-                //!の前と演算子の間にある数値をどうにかして抽出したい
-                //正規表現を使えばパターン化した文字列を簡単に抽出できるかも
-                List<string> ope = new List<string>();
-                ope.Add("＋");
-                ope.Add("－");
-                ope.Add("×");
-                ope.Add("÷");
-
-                string fact = "!";
-                string FinalString;
-
-                int Pos1 = input_exp.IndexOf(ope.ToString()) + 1;
-                int Pos2 = input_exp.IndexOf(fact);
-
-
                 //間の文字を抽出
-                FinalString = input_exp.Substring(Pos1, Pos2 - Pos1);
-                Console.WriteLine(FinalString);
-                string replace_fact = FinalString + "!";
-                Int16 final_factr = Int16.Parse(FinalString);
+                //正規表現を使えばパターン化した文字列を簡単に抽出できるかも
+                FirstNumber = input_exp.Substring(Pos1, Pos2);
+                Console.WriteLine(FirstNumber);
+                string replace_fact = FirstNumber + "!";
+                //intに変換出来ない
+                int final_factr = int.Parse(FirstNumber);
                 factr(final_factr);
 
                 input_exp = input_exp.Replace(replace_fact, final_factr.ToString());
-                break;
-            }
-
-            //get string between two strings
-            string org = "あいうえお、あいうえお、あいうえお、あいうえお、あいうえお";
-
-            while (org.Contains("い"))
-            {
-                string str1 = org.Substring(org.IndexOf("あ"), org.IndexOf("う"));
-                org.Remove(org.Length - 6);
-                Console.WriteLine(str1);
                 break;
             }
 
@@ -343,6 +336,9 @@ namespace Calculator_beta
 
                 Console.WriteLine(result);
                 //履歴に追加
+                exp = exp.Replace(Math.PI.ToString(), "π");
+                exp = exp.Replace(Math.E.ToString(), "e");
+                exp = exp.Replace("*0.01", "%");
                 History_form.Instance.ListAddItem(exp, result.ToString());
             }
             //can't Cast (for Debug)
@@ -362,7 +358,7 @@ namespace Calculator_beta
             //Dotの検討中  
             if (formula_dot)
             {
-                formula.Text = String.Format("{0:#,0.############################################################}", result);
+                formula.Text = String.Format("{0:#,0.############################################################}", input_str);
             }
 
             if (formula.Text == "")
@@ -420,22 +416,27 @@ namespace Calculator_beta
                                 bool dot_end = bs_text.EndsWith(".");
                                 if (dot_end)
                                 {
-                                    if (input_str.StartsWith("0"))
-                                    {
-                                        input_str = bs_text;
-                                        Console.WriteLine(input_str);
-                                        formula.Text = input_str;
-                                    }
                                     input_str = bs_text;
-                                    Console.WriteLine(input_str);
-                                    formula.Text = input_str;
+                                    formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(input_str));
+                                    Console.WriteLine("^q^" + input_str);
+                                    formula.Text += ".";
                                 }
                                 else if (!dot_end)
                                 {
-                                    //カンマ区切り付き
-                                    input_str = bs_text;
-                                    Console.WriteLine("###" + input_str);
-                                    formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(input_str));
+                                    bool zero_end = bs_text.EndsWith("0");
+                                    if (zero_end)
+                                    {
+                                        //小数点以下の0が消えないように
+                                        input_str = bs_text;
+                                        formula.Text = input_str;
+                                    }
+                                    else
+                                    {
+                                        //カンマ区切り付き
+                                        input_str = bs_text;
+                                        Console.WriteLine("###" + input_str);
+                                        formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(input_str));
+                                    }
                                 }
                             }
                         }
@@ -444,6 +445,10 @@ namespace Calculator_beta
                             formula.Text = bs_text;
                             Console.WriteLine(ex);
                         }
+                    }
+                    else
+                    {
+                        return;
                     }
 
                 }

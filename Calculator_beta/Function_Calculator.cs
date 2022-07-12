@@ -298,6 +298,7 @@ namespace Calculator_beta
             while (input_exp.Contains("!"))
             {
                 //!の前と演算子の間にある数値をどうにかして抽出したい
+                //正規表現を使えばパターン化した文字列を簡単に抽出できるかも
                 List<string> ope = new List<string>();
                 ope.Add("＋");
                 ope.Add("－");

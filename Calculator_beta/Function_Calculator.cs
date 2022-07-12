@@ -32,7 +32,8 @@ namespace Calculator_beta
         }
 
         //String
-        //input_str は fromula.text と違い、カンマ区切りがされていない数値のstring型
+        //input_str は 演算子記号が TextBox と同等 (＋－×÷)
+        //DataTable では、+-*/ に変換する
         public string input_str = "";
         private string tab_name = "";
 
@@ -44,6 +45,7 @@ namespace Calculator_beta
         public string operation = "";
 
         //0から9の数字を "" マウスで "" 押したとき
+        //カンマ区切り表現は廃止
         private void click_Number(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             bool dot_ = input_str.Contains(".");
@@ -77,7 +79,7 @@ namespace Calculator_beta
                             formula.Text += input_str;
                         }
                     }
-                    else if (!dot_) 
+                    else if (!dot_)
                     {
                         if (input_str.StartsWith("0"))
                         {
@@ -100,24 +102,6 @@ namespace Calculator_beta
                         }
                     }
                 }
-            }
-            //bool dot_end = input_str.Contains(".");
-            bool zero_end = input_str.EndsWith("0");
-            if (zero_end)
-            {
-                formula.Text = String.Format("{0:#}", decimal.Parse(input_str));
-            }
-            else
-            {
-                try
-                {
-                    formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(input_str));
-                } catch (FormatException fex)
-                {
-                    Console.WriteLine(fex);
-                }
-                formula.Text = String.Format("{0:#,0.############################################################}", input_str);
-                Console.WriteLine(input_str);
             }
         }
 
@@ -276,6 +260,11 @@ namespace Calculator_beta
             }
         }
 
+        private void Excahnge(string meta)
+        {
+
+        }
+
         // "="を "" マウスで "" 押したとき
         // ＋－×÷
         // このメソッドで全ての式を計算する -> 同時に履歴への追加も
@@ -288,7 +277,7 @@ namespace Calculator_beta
             //入力された計算式
             //×の省略は不可
             //string input_exp = formula.Text;
-            string input_exp = "10+3!*465494*98491!";
+            string input_exp = "10－56469*846+6!";
 
             /*
              * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
@@ -320,13 +309,36 @@ namespace Calculator_beta
             //Regex "[!]"
 
             //階乗
+            //正規表現用の式
+            var pattern = input_exp;
             while (input_exp.Contains("!"))
             {
+                if (Regex.IsMatch(pattern, "[＋－×÷]"))
+                {
+
+                }
                 //間の文字を抽出
                 //正規表現を使えばパターン化した文字列を簡単に抽出できるかも
-                Match match = Regex.Match(input_exp, "(^[＋－×÷])/d+?($[!])");
                 
-                Console.WriteLine(match.Groups[1].Value);
+                //演算子の抽出
+                var match_R = Regex.Matches(pattern, @"[+－/*]\d\d[!]");
+                foreach (Match match_factr in match_R)
+                {
+                    Console.WriteLine("正規表現 : " + match_factr.Value);
+                }
+
+                var str = "ABC123DEF456GHI";
+                var match_ = Regex.Match(str, @"[A-Za-z][0-9]");
+                Console.WriteLine("Test : " + match_.Value);
+
+                var str_ = "ABC123DEF456GHI";
+                var matchs = Regex.Matches(str, @"\d");
+                //一致した文字列の表示
+                foreach (Match match__ in matchs)
+                {
+                    Console.WriteLine("数値 : " + match__.Value);
+                }
+
 
                 //input_exp = input_exp.Replace(replace_fact, final_factr.ToString());
                 break;
@@ -335,16 +347,37 @@ namespace Calculator_beta
             string exp = input_exp;
             try
             {
+                //計算用の記号に変換する
+                while (input_exp.Contains("－"))
+                {
+                    exp = exp.Replace("－", "-");
+                    break;
+                }
+
                 //計算
                 DataTable dt = new DataTable();
+                //Debug
+                Console.WriteLine("計算式" + input_exp);
+
                 var result = dt.Compute(exp, "");
 
                 Console.WriteLine(result);
-                //履歴に追加
+                //記号表現に変換
                 exp = exp.Replace(Math.PI.ToString(), "π");
                 exp = exp.Replace(Math.E.ToString(), "e");
                 exp = exp.Replace("*0.01", "%");
+                //履歴に追加
                 History_form.Instance.ListAddItem(exp, result.ToString());
+
+            }
+            catch (OverflowException overflow)
+            {
+                OverFlow();
+                Console.WriteLine(overflow);
+            }
+            catch (SyntaxErrorException syntaxerror)
+            {
+                Console.WriteLine(syntaxerror);
             }
             //can't Cast (for Debug)
             catch (InvalidCastException icex)
@@ -412,8 +445,7 @@ namespace Calculator_beta
                             //
                             if (bs_text.Length == 0)
                             {
-                                input_str = bs_text;
-                                formula.Text = "";
+                                formula.Text = input_str = bs_text;
                             }
                             else
                             {
@@ -421,27 +453,13 @@ namespace Calculator_beta
                                 bool dot_end = bs_text.EndsWith(".");
                                 if (dot_end)
                                 {
-                                    input_str = bs_text;
-                                    formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(input_str));
+                                    formula.Text = input_str = bs_text;
                                     Console.WriteLine("^q^" + input_str);
                                     formula.Text += ".";
                                 }
                                 else if (!dot_end)
                                 {
-                                    bool zero_end = bs_text.EndsWith("0");
-                                    if (zero_end)
-                                    {
-                                        //小数点以下の0が消えないように
-                                        input_str = bs_text;
-                                        formula.Text = input_str;
-                                    }
-                                    else
-                                    {
-                                        //カンマ区切り付き
-                                        input_str = bs_text;
-                                        Console.WriteLine("###" + input_str);
-                                        formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(input_str));
-                                    }
+                                    formula.Text = input_str = bs_text;
                                 }
                             }
                         }
@@ -450,10 +468,6 @@ namespace Calculator_beta
                             formula.Text = bs_text;
                             Console.WriteLine(ex);
                         }
-                    }
-                    else
-                    {
-                        return;
                     }
 
                 }
@@ -517,12 +531,22 @@ namespace Calculator_beta
         //Format error
         public void Format_Error()
         {
-            operation = null;
+            operation = "";
             formula.ForeColor = Color.DarkRed;
             formula.Text = "Format error!";
 
             button_Enable(false);
-            input_str = null;
+            input_str = "";
+        }
+        //Over Flow
+        public void OverFlow()
+        {
+            operation = "";
+            formula.ForeColor = Color.DarkRed;
+            formula.Text = "Over Flow!";
+
+            button_Enable(false);
+            input_str = "";
         }
         //ボタンの無効化
         private void button_Enable(bool use)

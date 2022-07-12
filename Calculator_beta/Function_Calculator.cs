@@ -260,10 +260,7 @@ namespace Calculator_beta
             }
         }
 
-        private void Excahnge(string meta)
-        {
-
-        }
+        
 
         // "="を "" マウスで "" 押したとき
         // ＋－×÷
@@ -277,7 +274,7 @@ namespace Calculator_beta
             //入力された計算式
             //×の省略は不可
             //string input_exp = formula.Text;
-            string input_exp = "10－56469*846+6!";
+            string input_exp = "548!×4!－98!＋31!÷587!";
 
             /*
              * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
@@ -313,20 +310,51 @@ namespace Calculator_beta
             var pattern = input_exp;
             while (input_exp.Contains("!"))
             {
-                if (Regex.IsMatch(pattern, "[＋－×÷]"))
-                {
 
-                }
                 //間の文字を抽出
-                //正規表現を使えばパターン化した文字列を簡単に抽出できるかも
-                
-                //演算子の抽出
-                var match_R = Regex.Matches(pattern, @"[+－/*]\d\d[!]");
-                foreach (Match match_factr in match_R)
+                //正規表現を使ってパターン化した文字列を抽出
+
+                //1桁
+                var match_1 = Regex.Matches(pattern, @"[^＋－×÷|^0-9]\d[!]");
+                foreach (Match match_factr1 in match_1)
                 {
-                    Console.WriteLine("正規表現 : " + match_factr.Value);
+                    Console.WriteLine("正規表現 1 : " + match_factr1.Value);
+                }
+                //演算子有
+                var match_1_ope = Regex.Matches(pattern, @"[＋－×÷]\d[!]");
+                foreach (Match match_factr1_ope in match_1_ope)
+                {
+                    Console.WriteLine("正規表現 1 a: " + match_factr1_ope.Value);
                 }
 
+                //2桁
+                var match_2 = Regex.Matches(pattern, @"[^＋－×÷|^0-9]\d\d[!]");
+                foreach (Match match_factr2 in match_2)
+                {
+                    Console.WriteLine("正規表現 2 : " + match_factr2.Value);
+                }
+                //演算子有
+                var match_2_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[!]");
+                foreach (Match match_factr2_ope in match_2_ope)
+                {
+                    Console.WriteLine("正規表現 2 a : " + match_factr2_ope.Value);
+                }
+
+                //3桁
+                var match_3 = Regex.Matches(pattern, @"[^＋|－|×|÷|\d]\d\d\d[!]");
+                foreach (Match match_factr3 in match_3)
+                {
+                    Console.WriteLine("正規表現 3 : " + match_factr3.Value);
+                }
+                //演算子有
+                var match_3_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d\d[!]");
+                foreach (Match match_factr3_ope in match_3_ope)
+                {
+                    Console.WriteLine("正規表現 3 a : " + match_factr3_ope.Value);
+                }
+
+
+                //正規表現の例
                 var str = "ABC123DEF456GHI";
                 var match_ = Regex.Match(str, @"[A-Za-z][0-9]");
                 Console.WriteLine("Test : " + match_.Value);
@@ -339,8 +367,6 @@ namespace Calculator_beta
                     Console.WriteLine("数値 : " + match__.Value);
                 }
 
-
-                //input_exp = input_exp.Replace(replace_fact, final_factr.ToString());
                 break;
             }
 
@@ -348,9 +374,12 @@ namespace Calculator_beta
             try
             {
                 //計算用の記号に変換する
-                while (input_exp.Contains("－"))
+                while (Regex.IsMatch(input_exp, "[＋－×÷]"))
                 {
+                    exp = exp.Replace("＋", "+");
                     exp = exp.Replace("－", "-");
+                    exp = exp.Replace("×", "*");
+                    exp = exp.Replace("÷", "/");
                     break;
                 }
 
@@ -358,6 +387,7 @@ namespace Calculator_beta
                 DataTable dt = new DataTable();
                 //Debug
                 Console.WriteLine("計算式" + input_exp);
+                Console.WriteLine("計算式 Compute用" + exp);
 
                 var result = dt.Compute(exp, "");
 

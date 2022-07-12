@@ -288,7 +288,7 @@ namespace Calculator_beta
             //入力された計算式
             //×の省略は不可
             //string input_exp = formula.Text;
-            string input_exp = "10+3!";
+            string input_exp = "10+3!*465494*98491!";
 
             /*
              * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
@@ -324,7 +324,7 @@ namespace Calculator_beta
             {
                 //間の文字を抽出
                 //正規表現を使えばパターン化した文字列を簡単に抽出できるかも
-                Match match = Regex.Match(input_exp, "(^[＋－×÷])/d+?([!]+$)");
+                Match match = Regex.Match(input_exp, "(^[＋－×÷])/d+?($[!])");
                 
                 Console.WriteLine(match.Groups[1].Value);
 

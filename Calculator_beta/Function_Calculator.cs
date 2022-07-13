@@ -315,7 +315,7 @@ namespace Calculator_beta
                 //正規表現を使ってパターン化した文字列を抽出
 
                 //1桁
-                var match_1 = Regex.Matches(pattern, @"\W\d[!]");
+                var match_1 = Regex.Matches(pattern, @"\W\W\d[!]");
                 foreach (Match match_factr1 in match_1)
                 {
                     Console.WriteLine("正規表現 1 : " + match_factr1.Value);
@@ -341,10 +341,18 @@ namespace Calculator_beta
                 }
 
                 //3桁
-                var match_3 = Regex.Matches(pattern, @"\W\d\d\d[!]");
+                var match_3 = Regex.Matches(pattern, @"\d\d\d[!]");
                 foreach (Match match_factr3 in match_3)
                 {
-                    Console.WriteLine("正規表現 3 : " + match_factr3.Value);
+                    if (Regex.IsMatch(match_factr3.Value, @"[＋－×÷]\d\d\d[!]", RegexOptions.Compiled))
+                    {
+                        Console.WriteLine("過剰な取り出しです : " + match_factr3.Value);
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("正規表現 3 : " + match_factr3.Value);
+                    }
                 }
                 //演算子有
                 var match_3_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d\d[!]");
@@ -367,6 +375,10 @@ namespace Calculator_beta
                     Console.WriteLine("数値 : " + match__.Value);
                 }
 
+                //170!まで計算可能
+                var test = 170;
+                Console.WriteLine("階乗の結果 : " + factr(test));
+
                 break;
             }
 
@@ -374,7 +386,7 @@ namespace Calculator_beta
             try
             {
                 //計算用の記号に変換する
-                while (Regex.IsMatch(input_exp, "[＋－×÷]"))
+                while (Regex.IsMatch(input_exp, "[＋－×÷]", RegexOptions.Compiled))
                 {
                     exp = exp.Replace("＋", "+");
                     exp = exp.Replace("－", "-");
@@ -548,7 +560,9 @@ namespace Calculator_beta
         //計算Method
         //
         //階乗 num!
-        private static int factr(int num)
+        //doubleなどだと桁数に上限有り
+        //変数代入に変更した方が良いかも
+        private static double factr(double num)
         {
             if (num <= 1)
                 return 1;

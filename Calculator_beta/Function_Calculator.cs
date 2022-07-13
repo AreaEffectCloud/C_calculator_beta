@@ -315,7 +315,7 @@ namespace Calculator_beta
                 //正規表現を使ってパターン化した文字列を抽出
 
                 //1桁
-                var match_1 = Regex.Matches(pattern, @"[^＋－×÷|^0-9]\d[!]");
+                var match_1 = Regex.Matches(pattern, @"\W\d[!]");
                 foreach (Match match_factr1 in match_1)
                 {
                     Console.WriteLine("正規表現 1 : " + match_factr1.Value);
@@ -328,7 +328,7 @@ namespace Calculator_beta
                 }
 
                 //2桁
-                var match_2 = Regex.Matches(pattern, @"[^＋－×÷|^0-9]\d\d[!]");
+                var match_2 = Regex.Matches(pattern, @"\W\d\d[!]");
                 foreach (Match match_factr2 in match_2)
                 {
                     Console.WriteLine("正規表現 2 : " + match_factr2.Value);
@@ -341,7 +341,7 @@ namespace Calculator_beta
                 }
 
                 //3桁
-                var match_3 = Regex.Matches(pattern, @"[^＋|－|×|÷|\d]\d\d\d[!]");
+                var match_3 = Regex.Matches(pattern, @"\W\d\d\d[!]");
                 foreach (Match match_factr3 in match_3)
                 {
                     Console.WriteLine("正規表現 3 : " + match_factr3.Value);

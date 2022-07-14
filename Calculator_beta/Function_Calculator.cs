@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Data;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Calculator_beta
@@ -260,9 +259,8 @@ namespace Calculator_beta
             }
         }
 
-        
 
-        // "="を "" マウスで "" 押したとき
+        // "="をマウスで押したとき
         // ＋－×÷
         // このメソッドで全ての式を計算する -> 同時に履歴への追加も
         private void click_Eq(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -272,9 +270,9 @@ namespace Calculator_beta
             operation = btn.Text;
 
             //入力された計算式
-            //×の省略は不可
+            //×の省略は不可　➞ 桁として認識される
             //string input_exp = formula.Text;
-            string input_exp = "548!×4!－98!＋31!÷587!";
+            string input_exp = "4!×4!－98!＋31!÷999!";
 
             /*
              * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
@@ -284,6 +282,7 @@ namespace Calculator_beta
             //π 三角関数と共に使う場合は、そちらを優先
             while (input_exp.Contains("π"))
             {
+                //三角関数の中に含まれているかも重要か？
                 input_exp = input_exp.Replace("π", Math.PI.ToString());
                 break;
             }
@@ -302,20 +301,23 @@ namespace Calculator_beta
                 break;
             }
 
-            //Regex.IsMatch(input_str, "[＋－×÷]"))
-            //Regex "[!]"
 
             //階乗
             //正規表現用の式
             var pattern = input_exp;
             while (input_exp.Contains("!"))
             {
+                if (Regex.IsMatch(pattern, "[＋－×÷]"))
+                {
 
+                }
                 //間の文字を抽出
-                //正規表現を使ってパターン化した文字列を抽出
+                //正規表現を使えばパターン化した文字列を簡単に抽出できるかも
+                //桁数に応じてパターンを変える必要有
 
+                //演算子の抽出
                 //1桁
-                var match_1 = Regex.Matches(pattern, @"\W\W\d[!]");
+                var match_1 = Regex.Matches(pattern, @"^(\d{1})?[!]");
                 foreach (Match match_factr1 in match_1)
                 {
                     Console.WriteLine("正規表現 1 : " + match_factr1.Value);
@@ -328,7 +330,7 @@ namespace Calculator_beta
                 }
 
                 //2桁
-                var match_2 = Regex.Matches(pattern, @"\W\d\d[!]");
+                var match_2 = Regex.Matches(pattern, @"^(\d{2})?[!]");
                 foreach (Match match_factr2 in match_2)
                 {
                     Console.WriteLine("正規表現 2 : " + match_factr2.Value);
@@ -340,25 +342,11 @@ namespace Calculator_beta
                     Console.WriteLine("正規表現 2 a : " + match_factr2_ope.Value);
                 }
 
-                //3桁
+                //3桁まで
                 var match_3 = Regex.Matches(pattern, @"\d\d\d[!]");
                 foreach (Match match_factr3 in match_3)
                 {
-                    if (Regex.IsMatch(match_factr3.Value, @"[＋－×÷]\d\d\d[!]", RegexOptions.Compiled))
-                    {
-                        Console.WriteLine("過剰な取り出しです : " + match_factr3.Value);
-                        return;
-                    }
-                    else
-                    {
-                        Console.WriteLine("正規表現 3 : " + match_factr3.Value);
-                    }
-                }
-                //演算子有
-                var match_3_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d\d[!]");
-                foreach (Match match_factr3_ope in match_3_ope)
-                {
-                    Console.WriteLine("正規表現 3 a : " + match_factr3_ope.Value);
+                    Console.WriteLine("正規表現 3桁 : " + match_factr3.Value);
                 }
 
 
@@ -367,7 +355,6 @@ namespace Calculator_beta
                 var match_ = Regex.Match(str, @"[A-Za-z][0-9]");
                 Console.WriteLine("Test : " + match_.Value);
 
-                var str_ = "ABC123DEF456GHI";
                 var matchs = Regex.Matches(str, @"\d");
                 //一致した文字列の表示
                 foreach (Match match__ in matchs)
@@ -376,8 +363,13 @@ namespace Calculator_beta
                 }
 
                 //170!まで計算可能
-                var test = 170;
-                Console.WriteLine("階乗の結果 : " + factr(test));
+                var test = 159;
+                if (test > 170)
+                {
+                    Console.WriteLine("\n階乗の結果 : Value too large\n");
+                }
+                else
+                    Console.WriteLine("\n階乗の結果 : " + factr(test) + "\n");
 
                 break;
             }
@@ -560,8 +552,6 @@ namespace Calculator_beta
         //計算Method
         //
         //階乗 num!
-        //doubleなどだと桁数に上限有り
-        //変数代入に変更した方が良いかも
         private static double factr(double num)
         {
             if (num <= 1)
@@ -602,7 +592,7 @@ namespace Calculator_beta
                 {
                     if (ctrl.Controls == History_form.Instance.Controls)
                     {
-                        return;
+                        ctrl.Enabled = true;
                     }
                     ctrl.Enabled = use;
                 }

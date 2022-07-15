@@ -271,7 +271,7 @@ namespace Calculator_beta
 
             //×の省略等は不可　➞ 桁として認識される
             //string input_exp = formula.Text;
-            string input_exp = "2^8＋123!";
+            string input_exp = "225^100＋9^9×48^12÷0";
 
             /*
              * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
@@ -378,14 +378,14 @@ namespace Calculator_beta
             //
             //冪乗
             //BigInteger を使うと、全て数値で表示 (E＋は使われない)
-            double power_resu = Math.Pow(9, 5);
-            Console.WriteLine("冪乗 Math.Pow のテスト : " + power_resu);
-
             while (input_exp.Contains("^"))
             {
                 string first = "";
                 string second = "";
+                string power_cal = "";
                 double pow_result = 0;
+
+                //
                 //1桁 ^ 数桁(3桁まで)
                 // 1 ^ 1
                 var match_pow1_1 = Regex.Matches(pattern, @"^(\d{1})?[\^](\d{1})");
@@ -393,80 +393,187 @@ namespace Calculator_beta
                 {
                     first = power_1to1.Value.Substring(0, 1);
                     second = power_1to1.Value.Substring(2);
-                    Console.WriteLine("Power : " + first + ", " + second);
 
                     pow_result = Math.Pow(double.Parse(first), double.Parse(second));
-
-                    Console.WriteLine("冪乗の結果 : " + pow_result.ToString());
-                    break;
+                    pattern = pattern.Replace(power_1to1.Value, pow_result.ToString());
+                    input_exp = pattern;
                 }
+                //演算子有
+                var match_pow1_1_ope = Regex.Matches(pattern, @"[＋－×÷]\d[\^]\d");
+                foreach (Match power_1to1_ope in match_pow1_1_ope)
+                {
+                    power_cal = power_1to1_ope.Value.Trim('＋', '－', '×', '÷');
+                    first = power_1to1_ope.Value.Substring(1, 1);
+                    second = power_1to1_ope.Value.Substring(3);
+
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_cal, pow_result.ToString());
+                    input_exp = pattern;
+                }
+
                 // 1 ^ 11
                 var match_pow1_2 = Regex.Matches(pattern, @"^(\d{1})?[\^](\d{2})");
-                foreach (Math power_1to2 in match_pow1_2)
+                foreach (Match power_1to2 in match_pow1_2)
                 {
+                    first = power_1to2.Value.Substring(0, 1);
+                    second = power_1to2.Value.Substring(2);
 
-                    break;
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_1to2.Value, pow_result.ToString());
+                    input_exp = pattern;
                 }
+                //演算子有
+                var match_pow1_2_ope = Regex.Matches(pattern, @"[＋－×÷]\d[\^]\d");
+                foreach (Match power_1to2_ope in match_pow1_2_ope)
+                {
+                    power_cal = power_1to2_ope.Value.Trim('＋', '－', '×', '÷');
+                    first = power_1to2_ope.Value.Substring(1, 1);
+                    second = power_1to2_ope.Value.Substring(3);
+
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_cal, pow_result.ToString());
+                    input_exp = pattern;
+                }
+
                 // 1 ^ 111
-                var match_pow1_3 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
-                foreach (Math power_1to3 in match_pow1_3)
+                var match_pow1_3 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{3})?");
+                foreach (Match power_1to3 in match_pow1_3)
                 {
+                    first = power_1to3.Value.Substring(0, 1);
+                    second = power_1to3.Value.Substring(2);
 
-                    break;
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_1to3.Value, pow_result.ToString());
+                    input_exp = pattern;
+                }
+                //演算子有
+                var match_pow1_3_ope = Regex.Matches(pattern, @"[＋－×÷]\d[\^]\d");
+                foreach (Match power_1to3_ope in match_pow1_3_ope)
+                {
+                    power_cal = power_1to3_ope.Value.Trim('＋', '－', '×', '÷');
+                    first = power_1to3_ope.Value.Substring(1, 1);
+                    second = power_1to3_ope.Value.Substring(3);
+
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_cal, pow_result.ToString());
+                    input_exp = pattern;
                 }
 
+                //
                 //2桁 ^ 数桁
-                // 1 ^ 1
-                var match_pow2_1 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{1})?");
+                // 11 ^ 1
+                var match_pow2_1 = Regex.Matches(pattern, @"^(\d{2})?[\^]^(\d{1})?");
                 foreach (Match power_2to1 in match_pow2_1)
                 {
+                    first = power_2to1.Value.Substring(0, 2);
+                    second = power_2to1.Value.Substring(3);
 
-                    break;
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_2to1.Value, pow_result.ToString());
+                    input_exp = pattern;
                 }
-                // 1 ^ 11
-                var match_pow2_2 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
-                foreach (Math power_2to2 in match_pow2_2)
+                //演算子有
+                var match_pow2_1_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[\^]\d");
+                foreach (Match power_2to1_ope in match_pow2_1_ope)
                 {
+                    power_cal = power_2to1_ope.Value.Trim('＋', '－', '×', '÷');
+                    first = power_2to1_ope.Value.Substring(1, 2);
+                    second = power_2to1_ope.Value.Substring(4);
 
-                    break;
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_cal, pow_result.ToString());
+                    input_exp = pattern;
                 }
-                // 1 ^ 111
-                var match_pow2_3 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
-                foreach (Math power_2to3 in match_pow2_3)
+
+                // 11 ^ 11
+                var match_pow2_2 = Regex.Matches(pattern, @"^(\d{2})?[\^]^(\d{2})?");
+                foreach (Match power_2to2 in match_pow2_2)
                 {
+                    first = power_2to2.Value.Substring(0, 2);
+                    second = power_2to2.Value.Substring(3);
 
-                    break;
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_2to2.Value, pow_result.ToString());
+                    input_exp = pattern;
+                }
+                //演算子有
+                var match_pow2_2_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[\^]\d\d");
+                foreach (Match power_2to2_ope in match_pow2_2_ope)
+                {
+                    power_cal = power_2to2_ope.Value.Trim('＋', '－', '×', '÷');
+                    first = power_2to2_ope.Value.Substring(1, 2);
+                    second = power_2to2_ope.Value.Substring(4);
+
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_cal, pow_result.ToString());
+                    input_exp = pattern;
                 }
 
-                //2桁 ^ 数桁
-                // 1 ^ 1
-                var match_pow3_1 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{1})?");
+                // 11 ^ 111
+                var match_pow2_3 = Regex.Matches(pattern, @"^(\d{2})?[\^]^(\d{3})?");
+                foreach (Match power_2to3 in match_pow2_3)
+                {
+                    first = power_2to3.Value.Substring(0, 2);
+                    second = power_2to3.Value.Substring(3);
+
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_2to3.Value, pow_result.ToString());
+                    input_exp = pattern;
+                }
+                //演算子有
+                var match_pow2_3_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[\^]\d\d\d");
+                foreach (Match power_2to3_ope in match_pow2_3_ope)
+                {
+                    power_cal = power_2to3_ope.Value.Trim('＋', '－', '×', '÷');
+                    first = power_2to3_ope.Value.Substring(1, 2);
+                    second = power_2to3_ope.Value.Substring(4);
+
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_cal, pow_result.ToString());
+                    input_exp = pattern;
+                }
+
+                //
+                //3桁 ^ 数桁
+                // 111 ^ 1
+                var match_pow3_1 = Regex.Matches(pattern, @"\d\d\d[\^]\d");
                 foreach (Match power_3to1 in match_pow3_1)
                 {
+                    first = power_3to1.Value.Substring(0, 3);
+                    second = power_3to1.Value.Substring(4);
 
-                    break;
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_3to1.Value, pow_result.ToString());
+                    input_exp = pattern;
                 }
-                // 1 ^ 11
-                var match_pow3_2 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
-                foreach (Math power_3to2 in match_pow3_2)
+
+                // 111 ^ 11
+                var match_pow3_2 = Regex.Matches(pattern, @"\d\d\d[\^]\d\d");
+                foreach (Match power_3to2 in match_pow3_2)
                 {
+                    first = power_3to2.Value.Substring(0, 3);
+                    second = power_3to2.Value.Substring(4);
 
-                    break;
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_3to2.Value, pow_result.ToString());
+                    input_exp = pattern;
                 }
-                // 1 ^ 111
-                var match_pow3_3 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
-                foreach (Math power_3to3 in match_pow3_3)
+                // 111 ^ 111
+                var match_pow3_3 = Regex.Matches(pattern, @"\d\d\d[\^]\d\d\d");
+                foreach (Match power_3to3 in match_pow3_3)
                 {
+                    first = power_3to3.Value.Substring(0, 3);
+                    second = power_3to3.Value.Substring(4);
 
-                    break;
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                    pattern = pattern.Replace(power_3to3.Value, pow_result.ToString());
+                    input_exp = pattern;
                 }
 
-                // メッセージ・キューにあるWindowsメッセージをすべて処理する
-                //Windows Form がフリーズするのを回避
-                Application.DoEvents();
+                break;
             }
 
-            string exp = input_exp;
+            var exp = input_exp;
             try
             {
                 //計算用の記号に変換
@@ -498,9 +605,15 @@ namespace Calculator_beta
                 History_form.Instance.ListAddItem(exp, result.ToString());
 
             }
+            //ゼロ除算
+            catch (DivideByZeroException dbzex)
+            {
+                Error("Cant't Calculate");
+                Console.WriteLine(dbzex);
+            }
             catch (OverflowException overflow)
             {
-                Error("Over flow");
+                Error("Value too large");
                 Console.WriteLine(overflow);
             }
             catch (SyntaxErrorException syntaxerror)
@@ -511,20 +624,6 @@ namespace Calculator_beta
             catch (InvalidCastException icex)
             {
                 Console.WriteLine(icex);
-            }
-            //ゼロ除算
-            catch (DivideByZeroException dbzex)
-            {
-                Console.WriteLine(dbzex);
-            }
-
-
-            bool formula_dot = formula.Text.Contains(".");
-
-            //Dotの検討中  
-            if (formula_dot)
-            {
-                formula.Text = String.Format("{0:#,0.############################################################}", input_str);
             }
 
             if (formula.Text == "")

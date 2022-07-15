@@ -269,16 +269,13 @@ namespace Calculator_beta
             Button btn = (Button)sender;
             operation = btn.Text;
 
-            //入力された計算式
-            //×の省略は不可　➞ 桁として認識される
+            //×の省略等は不可　➞ 桁として認識される
             //string input_exp = formula.Text;
-            string input_exp = "5^9";
+            string input_exp = "2^8＋123!";
 
             /*
              * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
              */
-
-            //据え置き
             //π 三角関数と共に使う場合は、そちらを優先
             while (input_exp.Contains("π"))
             {
@@ -386,17 +383,25 @@ namespace Calculator_beta
 
             while (input_exp.Contains("^"))
             {
+                string first = "";
+                string second = "";
+                double pow_result = 0;
                 //1桁 ^ 数桁(3桁まで)
                 // 1 ^ 1
-                var match_pow1_1 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{1})?");
+                var match_pow1_1 = Regex.Matches(pattern, @"^(\d{1})?[\^](\d{1})");
                 foreach (Match power_1to1 in match_pow1_1)
                 {
-                    string first = power_1to1.Value.Substring(0, 1);
-                    Console.WriteLine(first);
+                    first = power_1to1.Value.Substring(0, 1);
+                    second = power_1to1.Value.Substring(2);
+                    Console.WriteLine("Power : " + first + ", " + second);
+
+                    pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+
+                    Console.WriteLine("冪乗の結果 : " + pow_result.ToString());
                     break;
                 }
                 // 1 ^ 11
-                var match_pow1_2 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
+                var match_pow1_2 = Regex.Matches(pattern, @"^(\d{1})?[\^](\d{2})");
                 foreach (Math power_1to2 in match_pow1_2)
                 {
 
@@ -460,8 +465,6 @@ namespace Calculator_beta
                 //Windows Form がフリーズするのを回避
                 Application.DoEvents();
             }
-
-            this.Enabled = true;
 
             string exp = input_exp;
             try

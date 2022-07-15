@@ -272,7 +272,7 @@ namespace Calculator_beta
             //入力された計算式
             //×の省略は不可　➞ 桁として認識される
             //string input_exp = formula.Text;
-            string input_exp = "9!×4!－98!＋31!÷999!";
+            string input_exp = "5^9";
 
             /*
              * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
@@ -301,70 +301,172 @@ namespace Calculator_beta
                 break;
             }
 
-
             //階乗
-            //正規表現用の式
             var pattern = input_exp;
             while (input_exp.Contains("!"))
             {
-                if (Regex.IsMatch(pattern, "[＋－×÷]"))
-                {
-
-                }
-                //間の文字を抽出
-                //正規表現を使えばパターン化した文字列を簡単に抽出できるかも
-                //桁数に応じてパターンを変える必要有
+                //計算用の数値
+                string fact_cal = "";
+                //階乗した結果
+                double factr_resu = 0;
 
                 //演算子の抽出
                 //1桁
                 var match_1 = Regex.Matches(pattern, @"^(\d{1})?[!]");
                 foreach (Match match_factr1 in match_1)
                 {
-                    Console.WriteLine("正規表現 1 : " + match_factr1.Value);
+                    //match_factr1 -> 抽出した文字
+                    fact_cal = match_factr1.ToString().TrimEnd('!');
+                    factr_resu = factr(double.Parse(fact_cal));
+                    pattern = pattern.Replace(match_factr1.ToString(), factr_resu.ToString());
+                    input_exp = pattern;
+                    //Reset
+                    fact_cal = "";
                 }
                 //演算子有
                 var match_1_ope = Regex.Matches(pattern, @"[＋－×÷]\d[!]");
                 foreach (Match match_factr1_ope in match_1_ope)
                 {
-                    Console.WriteLine("正規表現 1 a: " + match_factr1_ope.Value);
+                    fact_cal = match_factr1_ope.Value.Trim('＋', '－', '×', '÷', '!');
+                    factr_resu = factr(double.Parse(fact_cal));
+                    pattern = pattern.Replace(match_factr1_ope.Value.Trim('＋', '－', '×', '÷'), factr_resu.ToString());
+                    input_exp = pattern;
+                    fact_cal = "";
                 }
 
                 //2桁
                 var match_2 = Regex.Matches(pattern, @"^(\d{2})?[!]");
                 foreach (Match match_factr2 in match_2)
                 {
-                    Console.WriteLine("正規表現 2 : " + match_factr2.Value);
+                    fact_cal = match_factr2.ToString().TrimEnd('!');
+                    factr_resu = factr(double.Parse(fact_cal));
+                    pattern = pattern.Replace(match_factr2.ToString(), factr_resu.ToString());
+                    input_exp = pattern;
+                    fact_cal = "";
                 }
                 //演算子有
                 var match_2_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[!]");
                 foreach (Match match_factr2_ope in match_2_ope)
                 {
-                    Console.WriteLine("正規表現 2 a : " + match_factr2_ope.Value);
+                    fact_cal = match_factr2_ope.ToString().Trim('＋', '－', '×', '÷', '!');
+                    factr_resu = factr(double.Parse(fact_cal));
+                    pattern = pattern.Replace(match_factr2_ope.Value.Trim('＋', '－', '×', '÷'), factr_resu.ToString());
+                    input_exp = pattern;
+                    fact_cal = "";
                 }
 
                 //3桁 (演算子も含む)
                 var match_3 = Regex.Matches(pattern, @"\d\d\d[!]");
                 foreach (Match match_factr3 in match_3)
                 {
-                    Console.WriteLine("正規表現 3桁 : " + match_factr3.Value);
-                }
+                    fact_cal = match_factr3.ToString().Trim('＋', '－', '×', '÷', '!');
 
-                //170!まで計算可能
-                var test = 159;
-                if (test > 170)
-                {
-                    Console.WriteLine("\n階乗の結果 : Value too large\n");
+                    //170! まで計算可能
+                    if (double.Parse(fact_cal) > 170)
+                    {
+                        Error("Value too large");
+                        return;
+                    }
+                    else
+                    {
+                        factr_resu = factr(double.Parse(fact_cal));
+                        pattern = pattern.Replace(match_factr3.Value.Trim('＋', '－', '×', '÷'), factr_resu.ToString());
+                    }
+                    input_exp = pattern;
+                    fact_cal = "";
                 }
-                else
-                    Console.WriteLine("\n階乗の結果 : " + factr(test) + "\n");
-
                 break;
             }
+
+            //
+            //冪乗
+            //BigInteger を使うと、全て数値で表示 (E＋は使われない)
+            double power_resu = Math.Pow(9, 5);
+            Console.WriteLine("冪乗 Math.Pow のテスト : " + power_resu);
+
+            while (input_exp.Contains("^"))
+            {
+                //1桁 ^ 数桁(3桁まで)
+                // 1 ^ 1
+                var match_pow1_1 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{1})?");
+                foreach (Match power_1to1 in match_pow1_1)
+                {
+                    string first = power_1to1.Value.Substring(0, 1);
+                    Console.WriteLine(first);
+                    break;
+                }
+                // 1 ^ 11
+                var match_pow1_2 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
+                foreach (Math power_1to2 in match_pow1_2)
+                {
+
+                    break;
+                }
+                // 1 ^ 111
+                var match_pow1_3 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
+                foreach (Math power_1to3 in match_pow1_3)
+                {
+
+                    break;
+                }
+
+                //2桁 ^ 数桁
+                // 1 ^ 1
+                var match_pow2_1 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{1})?");
+                foreach (Match power_2to1 in match_pow2_1)
+                {
+
+                    break;
+                }
+                // 1 ^ 11
+                var match_pow2_2 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
+                foreach (Math power_2to2 in match_pow2_2)
+                {
+
+                    break;
+                }
+                // 1 ^ 111
+                var match_pow2_3 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
+                foreach (Math power_2to3 in match_pow2_3)
+                {
+
+                    break;
+                }
+
+                //2桁 ^ 数桁
+                // 1 ^ 1
+                var match_pow3_1 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{1})?");
+                foreach (Match power_3to1 in match_pow3_1)
+                {
+
+                    break;
+                }
+                // 1 ^ 11
+                var match_pow3_2 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
+                foreach (Math power_3to2 in match_pow3_2)
+                {
+
+                    break;
+                }
+                // 1 ^ 111
+                var match_pow3_3 = Regex.Matches(pattern, @"^(\d{1})?[\^]^(\d{2})?");
+                foreach (Math power_3to3 in match_pow3_3)
+                {
+
+                    break;
+                }
+
+                // メッセージ・キューにあるWindowsメッセージをすべて処理する
+                //Windows Form がフリーズするのを回避
+                Application.DoEvents();
+            }
+
+            this.Enabled = true;
 
             string exp = input_exp;
             try
             {
-                //計算用の記号に変換する
+                //計算用の記号に変換
                 while (Regex.IsMatch(input_exp, "[＋－×÷]", RegexOptions.Compiled))
                 {
                     exp = exp.Replace("＋", "+");
@@ -376,13 +478,15 @@ namespace Calculator_beta
 
                 //計算
                 DataTable dt = new DataTable();
+
                 //Debug
                 Console.WriteLine("計算式" + input_exp);
                 Console.WriteLine("計算式 Compute用" + exp);
 
                 var result = dt.Compute(exp, "");
+                Console.WriteLine("結果" + result);
+                formula.Text = result.ToString();
 
-                Console.WriteLine(result);
                 //記号表現に変換
                 exp = exp.Replace(Math.PI.ToString(), "π");
                 exp = exp.Replace(Math.E.ToString(), "e");
@@ -393,7 +497,7 @@ namespace Calculator_beta
             }
             catch (OverflowException overflow)
             {
-                OverFlow();
+                Error("Over flow");
                 Console.WriteLine(overflow);
             }
             catch (SyntaxErrorException syntaxerror)
@@ -551,26 +655,19 @@ namespace Calculator_beta
         //
         //   基本的なエラー
         //
-        //Format error
-        public void Format_Error()
+
+        //Error
+        public void Error(string error)
         {
             operation = "";
             formula.ForeColor = Color.DarkRed;
-            formula.Text = "Format error!";
+            //エラーの表示
+            formula.Text += "\n" + error;
 
             button_Enable(false);
             input_str = "";
         }
-        //Over Flow
-        public void OverFlow()
-        {
-            operation = "";
-            formula.ForeColor = Color.DarkRed;
-            formula.Text = "Over Flow!";
 
-            button_Enable(false);
-            input_str = "";
-        }
         //ボタンの無効化
         private void button_Enable(bool use)
         {
@@ -582,11 +679,11 @@ namespace Calculator_beta
                     if (ctrl.Controls == History_form.Instance.Controls)
                     {
                         ctrl.Enabled = true;
+                        Console.WriteLine("History form button is now enable. ");
                     }
                     ctrl.Enabled = use;
                 }
             }
-            History_form.Instance.Enabled = true;
         }
 
         // 

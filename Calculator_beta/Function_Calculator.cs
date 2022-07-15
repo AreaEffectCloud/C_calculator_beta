@@ -272,7 +272,7 @@ namespace Calculator_beta
             //入力された計算式
             //×の省略は不可　➞ 桁として認識される
             //string input_exp = formula.Text;
-            string input_exp = "4!×4!－98!＋31!÷999!";
+            string input_exp = "9!×4!－98!＋31!÷999!";
 
             /*
              * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
@@ -342,24 +342,11 @@ namespace Calculator_beta
                     Console.WriteLine("正規表現 2 a : " + match_factr2_ope.Value);
                 }
 
-                //3桁まで
+                //3桁 (演算子も含む)
                 var match_3 = Regex.Matches(pattern, @"\d\d\d[!]");
                 foreach (Match match_factr3 in match_3)
                 {
                     Console.WriteLine("正規表現 3桁 : " + match_factr3.Value);
-                }
-
-
-                //正規表現の例
-                var str = "ABC123DEF456GHI";
-                var match_ = Regex.Match(str, @"[A-Za-z][0-9]");
-                Console.WriteLine("Test : " + match_.Value);
-
-                var matchs = Regex.Matches(str, @"\d");
-                //一致した文字列の表示
-                foreach (Match match__ in matchs)
-                {
-                    Console.WriteLine("数値 : " + match__.Value);
                 }
 
                 //170!まで計算可能
@@ -536,7 +523,9 @@ namespace Calculator_beta
             tab_name = e.TabPage.Text;
         }
 
-        //null
+        /*
+         * 特定のキーを押したときに、ボタンを押したときと同様の動作をする
+         */
         private void Normal_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //null

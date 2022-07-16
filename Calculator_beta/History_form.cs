@@ -45,7 +45,8 @@ namespace Calculator_beta
          */
         public void ListAddItem(string formula, string result)
         {
-            string bar = "-------------------------------------------";
+            formula = formula + " = ";
+            string bar = "--------------------------------------------";
             //途中式と計算結果を色で差別化
             if (history_box.Text == "")
             {
@@ -68,13 +69,15 @@ namespace Calculator_beta
             for (; ; )
             {
                 //文字列を検索して、選択状態にする
-                pos = history_box.Find(result, pos, RichTextBoxFinds.None);
+                pos = history_box.Find(formula, pos, RichTextBoxFinds.None);
                 if (pos < 0)
                 {
                     break;
                 }
                 //字の色を灰色
                 history_box.SelectionColor = Color.Gray;
+                //計算式のフォントを少し小さくしたい
+
                 pos++;
             }
             pos = 0;

@@ -43,13 +43,13 @@ namespace Calculator_beta
             this.button04 = new System.Windows.Forms.Button();
             this.button01 = new System.Windows.Forms.Button();
             this.BackSpace = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
+            this.pi = new System.Windows.Forms.Button();
+            this.factorial = new System.Windows.Forms.Button();
+            this.percent = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.napiers = new System.Windows.Forms.Button();
+            this.root = new System.Windows.Forms.Button();
+            this.power_multiplier = new System.Windows.Forms.Button();
             this.divide = new System.Windows.Forms.Button();
             this.multi = new System.Windows.Forms.Button();
             this.minus = new System.Windows.Forms.Button();
@@ -94,13 +94,13 @@ namespace Calculator_beta
             this.tabPage1.Controls.Add(this.button04);
             this.tabPage1.Controls.Add(this.button01);
             this.tabPage1.Controls.Add(this.BackSpace);
-            this.tabPage1.Controls.Add(this.button13);
-            this.tabPage1.Controls.Add(this.button14);
-            this.tabPage1.Controls.Add(this.button15);
+            this.tabPage1.Controls.Add(this.pi);
+            this.tabPage1.Controls.Add(this.factorial);
+            this.tabPage1.Controls.Add(this.percent);
             this.tabPage1.Controls.Add(this.button6);
-            this.tabPage1.Controls.Add(this.button8);
-            this.tabPage1.Controls.Add(this.button9);
-            this.tabPage1.Controls.Add(this.button10);
+            this.tabPage1.Controls.Add(this.napiers);
+            this.tabPage1.Controls.Add(this.root);
+            this.tabPage1.Controls.Add(this.power_multiplier);
             this.tabPage1.Controls.Add(this.divide);
             this.tabPage1.Controls.Add(this.multi);
             this.tabPage1.Controls.Add(this.minus);
@@ -291,47 +291,50 @@ namespace Calculator_beta
             this.BackSpace.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_BS);
             this.BackSpace.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
-            // button13
+            // pi
             // 
-            this.button13.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button13.Location = new System.Drawing.Point(147, 25);
-            this.button13.Margin = new System.Windows.Forms.Padding(4);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(89, 74);
-            this.button13.TabIndex = 12;
-            this.button13.TabStop = false;
-            this.button13.Text = "π";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
-            this.button13.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
+            this.pi.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.pi.Location = new System.Drawing.Point(147, 25);
+            this.pi.Margin = new System.Windows.Forms.Padding(4);
+            this.pi.Name = "pi";
+            this.pi.Size = new System.Drawing.Size(89, 74);
+            this.pi.TabIndex = 12;
+            this.pi.TabStop = false;
+            this.pi.Text = "π";
+            this.pi.UseVisualStyleBackColor = true;
+            this.pi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.pi.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
+            this.pi.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
-            // button14
+            // factorial
             // 
-            this.button14.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button14.Location = new System.Drawing.Point(147, 118);
-            this.button14.Margin = new System.Windows.Forms.Padding(4);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(89, 74);
-            this.button14.TabIndex = 11;
-            this.button14.TabStop = false;
-            this.button14.Text = "!";
-            this.button14.UseVisualStyleBackColor = true;
-            this.button14.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
-            this.button14.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
+            this.factorial.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.factorial.Location = new System.Drawing.Point(147, 118);
+            this.factorial.Margin = new System.Windows.Forms.Padding(4);
+            this.factorial.Name = "factorial";
+            this.factorial.Size = new System.Drawing.Size(89, 74);
+            this.factorial.TabIndex = 11;
+            this.factorial.TabStop = false;
+            this.factorial.Text = "!";
+            this.factorial.UseVisualStyleBackColor = true;
+            this.factorial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.factorial.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
+            this.factorial.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
-            // button15
+            // percent
             // 
-            this.button15.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button15.Location = new System.Drawing.Point(147, 210);
-            this.button15.Margin = new System.Windows.Forms.Padding(4);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(89, 74);
-            this.button15.TabIndex = 10;
-            this.button15.TabStop = false;
-            this.button15.Text = "％";
-            this.button15.UseVisualStyleBackColor = true;
-            this.button15.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
-            this.button15.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
+            this.percent.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.percent.Location = new System.Drawing.Point(147, 210);
+            this.percent.Margin = new System.Windows.Forms.Padding(4);
+            this.percent.Name = "percent";
+            this.percent.Size = new System.Drawing.Size(89, 74);
+            this.percent.TabIndex = 10;
+            this.percent.TabStop = false;
+            this.percent.Text = "％";
+            this.percent.UseVisualStyleBackColor = true;
+            this.percent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.percent.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
+            this.percent.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button6
             // 
@@ -348,47 +351,50 @@ namespace Calculator_beta
             this.button6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_AC);
             this.button6.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
-            // button8
+            // napiers
             // 
-            this.button8.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button8.Location = new System.Drawing.Point(24, 25);
-            this.button8.Margin = new System.Windows.Forms.Padding(4);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(89, 74);
-            this.button8.TabIndex = 7;
-            this.button8.TabStop = false;
-            this.button8.Text = "e";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
-            this.button8.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
+            this.napiers.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.napiers.Location = new System.Drawing.Point(24, 25);
+            this.napiers.Margin = new System.Windows.Forms.Padding(4);
+            this.napiers.Name = "napiers";
+            this.napiers.Size = new System.Drawing.Size(89, 74);
+            this.napiers.TabIndex = 7;
+            this.napiers.TabStop = false;
+            this.napiers.Text = "e";
+            this.napiers.UseVisualStyleBackColor = true;
+            this.napiers.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.napiers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
+            this.napiers.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
-            // button9
+            // root
             // 
-            this.button9.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button9.Location = new System.Drawing.Point(24, 118);
-            this.button9.Margin = new System.Windows.Forms.Padding(4);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(89, 74);
-            this.button9.TabIndex = 6;
-            this.button9.TabStop = false;
-            this.button9.Text = "√";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
-            this.button9.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
+            this.root.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.root.Location = new System.Drawing.Point(24, 118);
+            this.root.Margin = new System.Windows.Forms.Padding(4);
+            this.root.Name = "root";
+            this.root.Size = new System.Drawing.Size(89, 74);
+            this.root.TabIndex = 6;
+            this.root.TabStop = false;
+            this.root.Text = "√";
+            this.root.UseVisualStyleBackColor = true;
+            this.root.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.root.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
+            this.root.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
-            // button10
+            // power_multiplier
             // 
-            this.button10.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button10.Location = new System.Drawing.Point(24, 210);
-            this.button10.Margin = new System.Windows.Forms.Padding(4);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(89, 74);
-            this.button10.TabIndex = 5;
-            this.button10.TabStop = false;
-            this.button10.Text = "^";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
-            this.button10.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
+            this.power_multiplier.Font = new System.Drawing.Font("游明朝 Demibold", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.power_multiplier.Location = new System.Drawing.Point(24, 210);
+            this.power_multiplier.Margin = new System.Windows.Forms.Padding(4);
+            this.power_multiplier.Name = "power_multiplier";
+            this.power_multiplier.Size = new System.Drawing.Size(89, 74);
+            this.power_multiplier.TabIndex = 5;
+            this.power_multiplier.TabStop = false;
+            this.power_multiplier.Text = "^";
+            this.power_multiplier.UseVisualStyleBackColor = true;
+            this.power_multiplier.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.power_multiplier.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
+            this.power_multiplier.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // divide
             // 
@@ -559,13 +565,13 @@ namespace Calculator_beta
         private System.Windows.Forms.Button button04;
         private System.Windows.Forms.Button button01;
         private System.Windows.Forms.Button BackSpace;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button pi;
+        private System.Windows.Forms.Button factorial;
+        private System.Windows.Forms.Button percent;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button napiers;
+        private System.Windows.Forms.Button root;
+        private System.Windows.Forms.Button power_multiplier;
         private System.Windows.Forms.Button history;
     }
 }

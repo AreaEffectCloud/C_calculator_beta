@@ -639,7 +639,6 @@ namespace Calculator_beta
         private void click_AC(object sender, MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
-            //初期化
             formula.Text = "";
             input_str = "";
             operation = "";
@@ -661,7 +660,6 @@ namespace Calculator_beta
                     {
                         try // 小数点有りでエラー
                         {
-                            //
                             if (bs_text.Length == 0)
                             {
                                 formula.Text = input_str = bs_text;
@@ -699,8 +697,7 @@ namespace Calculator_beta
         }
 
         /*
-         * 文字打った時に、対応する奴が反応する
-         * 
+         * 文字打った時に、対応する奴が反応する -> null
          */
         private void result_PressKey(object sender, KeyPressEventArgs e)
         {
@@ -722,7 +719,7 @@ namespace Calculator_beta
         }
 
         /*
-         * 特定のキーを押したときに、ボタンを押したときと同様の動作をする
+         * 特定のキーを押したときに、ボタンを押したときと同様の動作をする -> null
          */
         private void Normal_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -739,6 +736,7 @@ namespace Calculator_beta
         /*
          *  変数メソッド
          */
+
         //階乗 num!
         private static double factr(double num)
         {
@@ -751,9 +749,7 @@ namespace Calculator_beta
         public void Error(string error)
         {
             formula.ForeColor = Color.DarkRed;
-            //エラーの表示
             formula.Text = "\n" + error;
-
             button_Enable(false);
             input_str = "";
             operation = "";
@@ -770,7 +766,6 @@ namespace Calculator_beta
                     ctrl.Enabled = use;
                 }
             }
-
             Control[] history_ctr = this.Controls.Find("History", true);
             if (history_ctr.Length > 0)
             {
@@ -778,7 +773,7 @@ namespace Calculator_beta
             }
         }
 
-        //計算履歴
+        //計算履歴のフォームを表示
         private void click_History(object sender, MouseEventArgs e)
         {
             //Calculator_beta.csproj に変更加える必要有

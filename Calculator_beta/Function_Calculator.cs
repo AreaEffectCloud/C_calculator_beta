@@ -261,6 +261,8 @@ namespace Calculator_beta
         private void click_Eq(object sender, MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
+            double test = Math.Sqrt(257);
+            Console.WriteLine("√256 = " + test.ToString());
 
             if (formula.Text == "")
             {
@@ -304,13 +306,12 @@ namespace Calculator_beta
 
                     //階乗
                     var pattern = input_exp;
+                    //計算用の数値
+                    string fact_cal = "";
+                    //階乗した結果
+                    double factr_resu = 0;
                     while (input_exp.Contains("!"))
                     {
-                        //計算用の数値
-                        string fact_cal = "";
-                        //階乗した結果
-                        double factr_resu = 0;
-
                         //演算子の抽出
                         //1桁
                         var match_1 = Regex.Matches(pattern, @"^(\d{1})?[!]");
@@ -380,6 +381,7 @@ namespace Calculator_beta
                     }
 
                     //冪乗
+                    //不具合有
                     //BigInteger を使うと、全て数値で表示 (E＋は使われない)
                     while (input_exp.Contains("^"))
                     {
@@ -391,7 +393,7 @@ namespace Calculator_beta
                         //
                         //1桁 ^ 数桁(3桁まで)
                         // 1 ^ 1
-                        var match_pow1_1 = Regex.Matches(pattern, @"^(\d{1})?[\^](\d{1})");
+                        var match_pow1_1 = Regex.Matches(pattern, @"^(\d{1})?[\^](\d{1})?");
                         foreach (Match power_1to1 in match_pow1_1)
                         {
                             first = power_1to1.Value.Substring(0, 1);
@@ -402,7 +404,7 @@ namespace Calculator_beta
                             input_exp = pattern;
                         }
                         //演算子有
-                        var match_pow1_1_ope = Regex.Matches(pattern, @"[＋－×÷]\d[\^]\d");
+                        var match_pow1_1_ope = Regex.Matches(pattern, @"[＋－×÷]\d[\^](\d{1})?");
                         foreach (Match power_1to1_ope in match_pow1_1_ope)
                         {
                             power_cal = power_1to1_ope.Value.Trim('＋', '－', '×', '÷');
@@ -415,7 +417,7 @@ namespace Calculator_beta
                         }
 
                         // 1 ^ 11
-                        var match_pow1_2 = Regex.Matches(pattern, @"^(\d{1})?[\^](\d{2})");
+                        var match_pow1_2 = Regex.Matches(pattern, @"^(\d{1})?[\^](\d{2})?");
                         foreach (Match power_1to2 in match_pow1_2)
                         {
                             first = power_1to2.Value.Substring(0, 1);
@@ -426,7 +428,7 @@ namespace Calculator_beta
                             input_exp = pattern;
                         }
                         //演算子有
-                        var match_pow1_2_ope = Regex.Matches(pattern, @"[＋－×÷]\d[\^]\d");
+                        var match_pow1_2_ope = Regex.Matches(pattern, @"[＋－×÷]\d[\^](\d{2})?");
                         foreach (Match power_1to2_ope in match_pow1_2_ope)
                         {
                             power_cal = power_1to2_ope.Value.Trim('＋', '－', '×', '÷');
@@ -450,7 +452,7 @@ namespace Calculator_beta
                             input_exp = pattern;
                         }
                         //演算子有
-                        var match_pow1_3_ope = Regex.Matches(pattern, @"[＋－×÷]\d[\^]\d");
+                        var match_pow1_3_ope = Regex.Matches(pattern, @"[＋－×÷]\d[\^](\d{3})?");
                         foreach (Match power_1to3_ope in match_pow1_3_ope)
                         {
                             power_cal = power_1to3_ope.Value.Trim('＋', '－', '×', '÷');
@@ -476,7 +478,7 @@ namespace Calculator_beta
                             input_exp = pattern;
                         }
                         //演算子有
-                        var match_pow2_1_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[\^]\d");
+                        var match_pow2_1_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[\^](\d{1})?");
                         foreach (Match power_2to1_ope in match_pow2_1_ope)
                         {
                             power_cal = power_2to1_ope.Value.Trim('＋', '－', '×', '÷');
@@ -500,7 +502,7 @@ namespace Calculator_beta
                             input_exp = pattern;
                         }
                         //演算子有
-                        var match_pow2_2_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[\^]\d\d");
+                        var match_pow2_2_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[\^](\d{2})?");
                         foreach (Match power_2to2_ope in match_pow2_2_ope)
                         {
                             power_cal = power_2to2_ope.Value.Trim('＋', '－', '×', '÷');
@@ -524,7 +526,7 @@ namespace Calculator_beta
                             input_exp = pattern;
                         }
                         //演算子有
-                        var match_pow2_3_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[\^]\d\d\d");
+                        var match_pow2_3_ope = Regex.Matches(pattern, @"[＋－×÷]\d\d[\^](\d{3})?");
                         foreach (Match power_2to3_ope in match_pow2_3_ope)
                         {
                             power_cal = power_2to3_ope.Value.Trim('＋', '－', '×', '÷');
@@ -579,6 +581,82 @@ namespace Calculator_beta
                     //根号
                     while (input_exp.Contains("√"))
                     {
+                        //1桁
+                        var match_1 = Regex.Matches(pattern, @"[√]\d[＋－×÷]");
+                        foreach(Match match_power1 in match_1)
+                        {
+                            fact_cal = match_power1.ToString().Trim('√', '＋', '－', '×', '÷');
+                            factr_resu = Math.Sqrt(double.Parse(fact_cal));
+                            pattern = pattern.Replace(match_power1.ToString(), factr_resu.ToString());
+                            input_exp = pattern;
+                        }
+                        //演算子無し
+                        var match_1_ope = Regex.Matches(pattern, @"[√](\d{1})");
+                        foreach (Match match_power1_ope in match_1_ope)
+                        {
+                            fact_cal = match_power1_ope.ToString().Trim('√');
+                            factr_resu = Math.Sqrt(double.Parse(fact_cal));
+                            pattern = pattern.Replace(match_power1_ope.ToString(), factr_resu.ToString());
+                            input_exp = pattern;
+                        }
+
+                        //2桁
+                        var match_2 = Regex.Matches(pattern, @"[√]\d\d[＋－×÷]");
+                        foreach (Match match_power2 in match_2)
+                        {
+                            fact_cal = match_power2.ToString().Trim('√', '＋', '－', '×', '÷');
+                            factr_resu = Math.Sqrt(double.Parse(fact_cal));
+                            pattern = pattern.Replace(match_power2.ToString(), factr_resu.ToString());
+                            input_exp = pattern;
+                        }
+                        //演算子無し
+                        var match_2_ope = Regex.Matches(pattern, @"[√](\d{2})");
+                        foreach (Match match_power2_ope in match_2_ope)
+                        {
+                            fact_cal = match_power2_ope.ToString().Trim('√');
+                            factr_resu = Math.Sqrt(double.Parse(fact_cal));
+                            pattern = pattern.Replace(match_power2_ope.ToString(), factr_resu.ToString());
+                            input_exp = pattern;
+                        }
+
+                        //3桁
+                        var match_3 = Regex.Matches(pattern, @"[√]\d\d\d[＋－×÷]");
+                        foreach (Match match_power3 in match_3)
+                        {
+                            fact_cal = match_power3.ToString().Trim('√', '＋', '－', '×', '÷');
+                            factr_resu = Math.Sqrt(double.Parse(fact_cal));
+                            pattern = pattern.Replace(match_power3.ToString(), factr_resu.ToString());
+                            input_exp = pattern;
+                        }
+                        //演算子無し
+                        var match_3_ope = Regex.Matches(pattern, @"[√](\d{3})");
+                        foreach (Match match_power3_ope in match_3_ope)
+                        {
+                            fact_cal = match_power3_ope.ToString().Trim('√');
+                            factr_resu = Math.Sqrt(double.Parse(fact_cal));
+                            pattern = pattern.Replace(match_power3_ope.ToString(), factr_resu.ToString());
+                            input_exp = pattern;
+                        }
+
+                        //4桁
+                        var match_4 = Regex.Matches(pattern, @"[√]\d\d\d\d[＋－×÷]");
+                        foreach (Match match_power4 in match_4)
+                        {
+                            fact_cal = match_power4.ToString().Trim('√', '＋', '－', '×', '÷');
+                            factr_resu = Math.Sqrt(double.Parse(fact_cal));
+                            pattern = pattern.Replace(match_power4.ToString(), factr_resu.ToString());
+                            input_exp = pattern;
+                        }
+                        //演算子無し
+                        var match_4_ope = Regex.Matches(pattern, @"[√](\d{4})");
+                        foreach (Match match_power4_ope in match_4_ope)
+                        {
+                            fact_cal = match_power4_ope.ToString().Trim('√');
+                            factr_resu = Math.Sqrt(double.Parse(fact_cal));
+                            pattern = pattern.Replace(match_power4_ope.ToString(), factr_resu.ToString());
+                            input_exp = pattern;
+                        }
+
                         break;
                     }
 

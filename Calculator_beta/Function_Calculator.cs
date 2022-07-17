@@ -816,6 +816,60 @@ namespace Calculator_beta
             //Enter キーのみ取得不可
             string key = e.KeyCode.ToString();
             Console.WriteLine("Key の値 : " + key);
+
+            if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
+            {
+                //click_Number(key, e);
+            }
+            else if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
+            {
+                //click_Number(sender, e);
+
+            }
+            else if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
+            {
+                //click_Number(sender, e);
+
+            }
+            else if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
+            {
+                //click_Number(sender, e);
+
+            }
+            else if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
+            {
+                //click_Number(sender, e);
+
+            }
+            else if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
+            {
+                //click_Number(sender, e);
+
+            }
+            else if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
+            {
+                //click_Number(sender, e);
+
+            }
+            else if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
+            {
+                //click_Number(sender, e);
+
+            }
+            else if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
+            {
+                //click_Number(sender, e);
+
+            }
+
+            if (key == Keys.Enter.ToString())
+            {
+                Console.WriteLine("Key の値 : Enter !!!!!!");
+            }
+            else if (key == Keys.Escape.ToString())
+            {
+                Console.WriteLine("Key の値 : Escape ================");
+            }
         }
 
         /*

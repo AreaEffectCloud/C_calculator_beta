@@ -277,13 +277,9 @@ namespace Calculator_beta
                     //×の省略等は不可　➞ 桁として認識される
                     string input_exp = formula.Text;
 
-                    /*
-                     * 三角関数や対数、円周率など、compute で扱うことのできない記号を数値に変換する
-                     */
-                    //π 三角関数と共に使う場合は、そちらを優先
+                    //π
                     while (input_exp.Contains("π"))
                     {
-                        //三角関数の中に含まれているかも重要か？
                         input_exp = input_exp.Replace("π", Math.PI.ToString());
                         break;
                     }

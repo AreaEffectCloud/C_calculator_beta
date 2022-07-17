@@ -25,9 +25,6 @@ namespace Calculator_beta
             this.MinimumSize = this.Size;
             //フォームが最大化されないようにする
             this.MaximizeBox = false;
-
-            KeyPreview = true;
-            KeyPress += new KeyPressEventHandler(result_PressKey);
         }
 
         //input_str は 演算子記号が TextBox と同等 (＋－×÷)
@@ -178,9 +175,7 @@ namespace Calculator_beta
             }
         }
 
-        //
-        // Normal Type
-        //
+        //特殊文字の入力
         private void click_Special(object sender, MouseEventArgs e)
         {
             eq = false;
@@ -200,7 +195,7 @@ namespace Calculator_beta
                 root_pi_nepiers(btn);
             }
         }
-        //特殊文字の入力
+        
         private void power_fac_per(Button btn)
         {
             //連続した入力は不可
@@ -254,9 +249,7 @@ namespace Calculator_beta
             }
         }
 
-
         // "="をマウスで押したとき
-        // ＋－×÷
         // このメソッドで全ての式を計算する -> 同時に履歴への追加も
         private void click_Eq(object sender, MouseEventArgs e)
         {
@@ -811,41 +804,17 @@ namespace Calculator_beta
         }
 
         /*
-         * 文字打った時に、対応する奴が反応する -> null
+         * 特定のキーを押したときに、対応する奴が反応する
+         * ボタンを押したときと同様の動作
          */
-        private void result_PressKey(object sender, KeyPressEventArgs e)
+        private void press_Key(object sender, KeyEventArgs e)
         {
-            Key key = (Key)e.KeyChar;
-
-            if (tab_name == "Normal")
-            {
-                //四則演算
-            }
-            else if (tab_name == "Other Symbols")
-            {
-                //関数
-            }
+            //???
+            Key key = (Key)e.KeyValue;
+            Console.WriteLine("Key の値 : " + key);
+            Button btn = (Button)sender;
+            Console.WriteLine("btn の値 : " + btn.Text);
         }
-        private void Tab_Changed(object sender, TabControlEventArgs e)
-        {
-            //現在のTabがどれかを取得する
-            tab_name = e.TabPage.Text;
-        }
-
-        /*
-         * 特定のキーを押したときに、ボタンを押したときと同様の動作をする -> null
-         */
-        private void Normal_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            //null
-            Key key_ = (Key)e.KeyData;
-
-            if (key_.Equals("0"))
-            {
-                formula.Text += "0";
-            }
-        }
-
 
         /*
          *  変数メソッド

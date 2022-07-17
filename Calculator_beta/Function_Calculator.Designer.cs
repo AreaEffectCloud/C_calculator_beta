@@ -76,7 +76,6 @@ namespace Calculator_beta
             this.Tab.Size = new System.Drawing.Size(791, 446);
             this.Tab.TabIndex = 0;
             this.Tab.TabStop = false;
-            this.Tab.Selected += new System.Windows.Forms.TabControlEventHandler(this.Tab_Changed);
             // 
             // tabPage1
             // 
@@ -126,8 +125,8 @@ namespace Calculator_beta
             this.button09.TabStop = false;
             this.button09.Text = "9";
             this.button09.UseVisualStyleBackColor = true;
+            this.button09.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button09.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
-            this.button09.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button06
             // 
@@ -140,8 +139,8 @@ namespace Calculator_beta
             this.button06.TabStop = false;
             this.button06.Text = "6";
             this.button06.UseVisualStyleBackColor = true;
+            this.button06.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button06.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
-            this.button06.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button03
             // 
@@ -154,8 +153,8 @@ namespace Calculator_beta
             this.button03.TabStop = false;
             this.button03.Text = "3";
             this.button03.UseVisualStyleBackColor = true;
+            this.button03.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button03.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
-            this.button03.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // dot
             // 
@@ -168,9 +167,8 @@ namespace Calculator_beta
             this.dot.TabStop = false;
             this.dot.Text = ".";
             this.dot.UseVisualStyleBackColor = true;
-            this.dot.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.dot.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.dot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Dot);
-            this.dot.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button08
             // 
@@ -183,8 +181,8 @@ namespace Calculator_beta
             this.button08.TabStop = false;
             this.button08.Text = "8";
             this.button08.UseVisualStyleBackColor = true;
+            this.button08.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button08.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
-            this.button08.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button05
             // 
@@ -197,8 +195,8 @@ namespace Calculator_beta
             this.button05.TabStop = false;
             this.button05.Text = "5";
             this.button05.UseVisualStyleBackColor = true;
+            this.button05.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button05.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
-            this.button05.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button02
             // 
@@ -211,8 +209,8 @@ namespace Calculator_beta
             this.button02.TabStop = false;
             this.button02.Text = "2";
             this.button02.UseVisualStyleBackColor = true;
+            this.button02.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button02.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
-            this.button02.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button00
             // 
@@ -227,8 +225,8 @@ namespace Calculator_beta
             this.button00.Text = "0";
             this.button00.UseVisualStyleBackColor = true;
             this.button00.Click += new System.EventHandler(this.button25_Click);
+            this.button00.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button00.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
-            this.button00.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button07
             // 
@@ -242,8 +240,8 @@ namespace Calculator_beta
             this.button07.Text = "7";
             this.button07.UseVisualStyleBackColor = true;
             this.button07.Click += new System.EventHandler(this.button17_Click);
+            this.button07.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button07.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
-            this.button07.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button04
             // 
@@ -256,8 +254,8 @@ namespace Calculator_beta
             this.button04.TabStop = false;
             this.button04.Text = "4";
             this.button04.UseVisualStyleBackColor = true;
+            this.button04.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button04.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
-            this.button04.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button01
             // 
@@ -271,8 +269,8 @@ namespace Calculator_beta
             this.button01.Text = "1";
             this.button01.UseVisualStyleBackColor = true;
             this.button01.Click += new System.EventHandler(this.button19_Click);
+            this.button01.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button01.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
-            this.button01.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // BackSpace
             // 
@@ -285,9 +283,8 @@ namespace Calculator_beta
             this.BackSpace.TabStop = false;
             this.BackSpace.Text = "Back\r\nspace";
             this.BackSpace.UseVisualStyleBackColor = true;
-            this.BackSpace.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.BackSpace.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.BackSpace.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_BS);
-            this.BackSpace.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // pi
             // 
@@ -300,9 +297,8 @@ namespace Calculator_beta
             this.pi.TabStop = false;
             this.pi.Text = "π";
             this.pi.UseVisualStyleBackColor = true;
-            this.pi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.pi.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.pi.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
-            this.pi.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // factorial
             // 
@@ -315,9 +311,8 @@ namespace Calculator_beta
             this.factorial.TabStop = false;
             this.factorial.Text = "!";
             this.factorial.UseVisualStyleBackColor = true;
-            this.factorial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.factorial.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.factorial.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
-            this.factorial.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // percent
             // 
@@ -330,9 +325,8 @@ namespace Calculator_beta
             this.percent.TabStop = false;
             this.percent.Text = "％";
             this.percent.UseVisualStyleBackColor = true;
-            this.percent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.percent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.percent.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
-            this.percent.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button6
             // 
@@ -345,9 +339,8 @@ namespace Calculator_beta
             this.button6.TabStop = false;
             this.button6.Text = "All  Clear";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.button6.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_AC);
-            this.button6.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // napiers
             // 
@@ -360,9 +353,8 @@ namespace Calculator_beta
             this.napiers.TabStop = false;
             this.napiers.Text = "e";
             this.napiers.UseVisualStyleBackColor = true;
-            this.napiers.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.napiers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.napiers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
-            this.napiers.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // root
             // 
@@ -375,9 +367,8 @@ namespace Calculator_beta
             this.root.TabStop = false;
             this.root.Text = "√";
             this.root.UseVisualStyleBackColor = true;
-            this.root.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.root.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.root.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
-            this.root.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // power_multiplier
             // 
@@ -390,9 +381,8 @@ namespace Calculator_beta
             this.power_multiplier.TabStop = false;
             this.power_multiplier.Text = "^";
             this.power_multiplier.UseVisualStyleBackColor = true;
-            this.power_multiplier.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.power_multiplier.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.power_multiplier.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
-            this.power_multiplier.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // divide
             // 
@@ -406,9 +396,8 @@ namespace Calculator_beta
             this.divide.Text = "÷";
             this.divide.UseVisualStyleBackColor = true;
             this.divide.Click += new System.EventHandler(this.divide_Click);
-            this.divide.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.click_Operation);
+            this.divide.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.divide.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_ope);
-            this.divide.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // multi
             // 
@@ -422,9 +411,8 @@ namespace Calculator_beta
             this.multi.Text = "×";
             this.multi.UseVisualStyleBackColor = true;
             this.multi.Click += new System.EventHandler(this.multi_Click);
-            this.multi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.click_Operation);
+            this.multi.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.multi.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_ope);
-            this.multi.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // minus
             // 
@@ -438,9 +426,8 @@ namespace Calculator_beta
             this.minus.Text = "－";
             this.minus.UseVisualStyleBackColor = true;
             this.minus.Click += new System.EventHandler(this.minus_Click);
-            this.minus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.click_Operation);
+            this.minus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.minus.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_ope);
-            this.minus.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // plus
             // 
@@ -454,9 +441,8 @@ namespace Calculator_beta
             this.plus.Text = "＋";
             this.plus.UseVisualStyleBackColor = true;
             this.plus.Click += new System.EventHandler(this.plus_Click);
-            this.plus.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.click_Operation);
+            this.plus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.plus.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_ope);
-            this.plus.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // button1
             // 
@@ -470,9 +456,8 @@ namespace Calculator_beta
             this.button1.Text = "=";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
+            this.button1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.button1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Eq);
-            this.button1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
             // formula
             // 
@@ -488,7 +473,6 @@ namespace Calculator_beta
             this.formula.TabIndex = 1;
             this.formula.TabStop = false;
             this.formula.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.formula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.result_PressKey);
             // 
             // history
             // 

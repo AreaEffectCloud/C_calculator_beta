@@ -472,6 +472,7 @@ namespace Calculator_beta
             this.formula.TabIndex = 1;
             this.formula.TabStop = false;
             this.formula.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.formula.KeyDown += new System.Windows.Forms.KeyEventHandler(this.formula_KeyPress);
             // 
             // history
             // 

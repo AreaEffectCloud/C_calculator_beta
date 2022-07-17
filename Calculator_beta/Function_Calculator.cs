@@ -865,13 +865,25 @@ namespace Calculator_beta
 
             }
 
-            if (key == Keys.Return.ToString())
+            if (e.KeyCode == Keys.Return)
             {
                 Console.WriteLine("Key の値 : Enter !!!!!!");
             }
             else if (key == Keys.Escape.ToString())
             {
                 Console.WriteLine("Key の値 : Escape ================");
+            }
+        }
+
+        private void formula_KeyPress(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Console.WriteLine("Key の値 : Enter !!!!!!!!!");
+            }
+            else
+            {
+                Console.WriteLine("Nulllllllllllllllllllllllllllll");
             }
         }
 

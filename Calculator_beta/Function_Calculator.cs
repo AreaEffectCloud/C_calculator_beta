@@ -815,12 +815,7 @@ namespace Calculator_beta
             //???
             //Enter キーのみ取得不可
             string key = e.KeyCode.ToString();
-            Console.WriteLine("Key の値 : " + key);            
-        }
-
-        private void press_enter(object sender, EventArgs e)
-        {
-            Console.WriteLine("enter : " + e.ToString());
+            Console.WriteLine("Key の値 : " + key);
         }
 
         /*

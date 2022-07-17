@@ -25,6 +25,9 @@ namespace Calculator_beta
             this.MinimumSize = this.Size;
             //フォームが最大化されないようにする
             this.MaximizeBox = false;
+
+            KeyPreview = true;
+            KeyDown += new KeyEventHandler(press_Key);
         }
 
         //input_str は 演算子記号が TextBox と同等 (＋－×÷)
@@ -810,10 +813,14 @@ namespace Calculator_beta
         private void press_Key(object sender, KeyEventArgs e)
         {
             //???
-            Key key = (Key)e.KeyValue;
-            Console.WriteLine("Key の値 : " + key);
-            Button btn = (Button)sender;
-            Console.WriteLine("btn の値 : " + btn.Text);
+            //Enter キーのみ取得不可
+            string key = e.KeyCode.ToString();
+            Console.WriteLine("Key の値 : " + key);            
+        }
+
+        private void press_enter(object sender, EventArgs e)
+        {
+            Console.WriteLine("enter : " + e.ToString());
         }
 
         /*

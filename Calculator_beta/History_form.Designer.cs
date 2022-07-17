@@ -38,6 +38,7 @@ namespace Calculator_beta
             this.history_box.Location = new System.Drawing.Point(-3, 1);
             this.history_box.Margin = new System.Windows.Forms.Padding(4);
             this.history_box.Name = "history_box";
+            this.history_box.ReadOnly = true;
             this.history_box.Size = new System.Drawing.Size(556, 683);
             this.history_box.TabIndex = 2;
             this.history_box.Text = "";

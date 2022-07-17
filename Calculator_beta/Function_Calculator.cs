@@ -1,19 +1,23 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Windows.Input;
 using System.Data;
 using System.Text.RegularExpressions;
 
 namespace Calculator_beta
 {
-    public partial class Function_Calculator : Form
+    public partial class Calculator : Form
     {
         //Display Console -> Delete soon
         [System.Runtime.InteropServices.DllImport("kernel32.dll")]
         private static extern bool AllocConsole();
 
-        public Function_Calculator()
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            AcceptButton = equal;
+        }
+
+        public Calculator()
         {
             InitializeComponent();
             //output to Cmd -> Delete soon
@@ -33,7 +37,6 @@ namespace Calculator_beta
         //input_str は 演算子記号が TextBox と同等 (＋－×÷)
         //DataTable では、+-*/ に変換する
         public string input_str = "";
-        private string tab_name = "";
 
         private bool enzanshi = false;
         public bool eq = true;
@@ -862,7 +865,7 @@ namespace Calculator_beta
 
             }
 
-            if (key == Keys.Enter.ToString())
+            if (key == Keys.Return.ToString())
             {
                 Console.WriteLine("Key の値 : Enter !!!!!!");
             }
@@ -919,17 +922,7 @@ namespace Calculator_beta
             History_form.Instance.Show();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
         {
 
         }
@@ -954,32 +947,7 @@ namespace Calculator_beta
 
         }
 
-        private void button35_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button49_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void click_Operation(object sender, EventArgs e)
         {
 
         }

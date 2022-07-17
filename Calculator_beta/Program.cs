@@ -13,7 +13,7 @@ namespace Calculator_beta
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Function_Calculator());
+            Application.Run(new Calculator());
         }
     }
 }

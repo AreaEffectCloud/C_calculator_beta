@@ -1,8 +1,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Windows.Input;
-
 
 namespace Calculator_beta
 {
@@ -38,64 +36,37 @@ namespace Calculator_beta
                 return hf_instance;
             }
         }
-        // Ex. History_form.Instance.---();
 
-        /*
-         * 一行ごとに色変えられるかも？
-         */
-        public void ListAddItem(string formula, string result)
+        public void ListAddItem(string input_str, string result)
         {
-            formula = formula + " = ";
-            string bar = "--------------------------------------------";
-            //途中式と計算結果を色で差別化
+            input_str = input_str + " = ";
+            string bar = "-------------------------------------------";
+            //Barのみ色で差別化
             if (history_box.Text == "")
             {
-                history_box.Text += formula;
+                history_box.Text += input_str;
             }
             else if (history_box.Text != "")
             {
-                history_box.Text += "\n" + formula;
+                history_box.Text += "\n" + input_str;
             }
             history_box.Text += "\n" + result;
             history_box.Text += "\n" + bar;
 
-            //現在の選択状態を覚えておく
             int currentSelectionStart = history_box.SelectionStart;
             int currentSelectionLength = history_box.SelectionLength;
 
             int pos = 0;
-
-            //Result
             for (; ; )
             {
-                //文字列を検索して、選択状態にする
-                pos = history_box.Find(formula, pos, RichTextBoxFinds.None);
-                if (pos < 0)
-                {
-                    break;
-                }
-                //字の色を灰色
-                history_box.SelectionColor = Color.Gray;
-                //計算式のフォントを少し小さくしたい
-
-                pos++;
-            }
-            pos = 0;
-            //Bar
-            for (; ; )
-            {
-                //文字列を検索して、選択状態にする
                 pos = history_box.Find(bar, pos, RichTextBoxFinds.None);
                 if (pos < 0)
                 {
                     break;
                 }
-                //字の色を灰色
                 history_box.SelectionColor = Color.Gray;
                 pos++;
             }
-
-            //選択状態を元に戻す
             history_box.Select(currentSelectionStart, currentSelectionLength);
         }
 

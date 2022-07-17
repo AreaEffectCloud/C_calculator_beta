@@ -55,7 +55,6 @@ namespace Calculator_beta
             this.minus = new System.Windows.Forms.Button();
             this.plus = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.formula = new System.Windows.Forms.TextBox();
             this.history = new System.Windows.Forms.Button();
             this.Tab.SuspendLayout();
@@ -68,7 +67,6 @@ namespace Calculator_beta
             this.Tab.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Tab.Controls.Add(this.tabPage1);
-            this.Tab.Controls.Add(this.tabPage3);
             this.Tab.Font = new System.Drawing.Font("游明朝 Demibold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.Tab.ItemSize = new System.Drawing.Size(84, 26);
             this.Tab.Location = new System.Drawing.Point(16, 206);
@@ -476,18 +474,6 @@ namespace Calculator_beta
             this.button1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Eq);
             this.button1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.Normal_PreviewKeyDown);
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 30);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Size = new System.Drawing.Size(783, 412);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Tag = "symbol";
-            this.tabPage3.Text = "Other Symbols";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
             // formula
             // 
             this.formula.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -551,7 +537,6 @@ namespace Calculator_beta
         private System.Windows.Forms.Button minus;
         private System.Windows.Forms.Button plus;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TextBox formula;
         private System.Windows.Forms.Button button09;
         private System.Windows.Forms.Button button06;

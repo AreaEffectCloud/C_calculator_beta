@@ -14,7 +14,7 @@ namespace Calculator_beta
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.AcceptButton = null;
+            this.AcceptButton = equal;
         }
 
         public Calculator()

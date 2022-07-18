@@ -466,6 +466,7 @@ namespace Calculator_beta
             this.formula.Margin = new System.Windows.Forms.Padding(4);
             this.formula.Multiline = true;
             this.formula.Name = "formula";
+            this.formula.ReadOnly = true;
             this.formula.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.formula.Size = new System.Drawing.Size(787, 183);
             this.formula.TabIndex = 1;

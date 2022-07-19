@@ -17,6 +17,153 @@ namespace Calculator_beta
             this.AcceptButton = equal;
         }
 
+        [System.Security.Permissions.UIPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Window = System.Security.Permissions.UIPermissionWindow.AllWindows)]
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            Keys key = Keys.KeyCode;
+
+            //Enter
+            if ((keyData & Keys.KeyCode) == Keys.Enter)
+            {
+                Console.WriteLine("Enter キーが押されました。");
+            }
+            //Escape
+            else if ((keyData & Keys.KeyCode) == Keys.Escape)
+            {
+                Console.WriteLine("Escape キーが押されました。");
+            }
+
+            //数字
+            //0
+            else if ((keyData & Keys.KeyCode) == Keys.NumPad0)
+            {
+                Console.WriteLine("0 キーが押されました。");
+            }
+            else if ((keyData & Keys.KeyCode) == Keys.D0)
+            {
+                Console.WriteLine("0 キーが押されました。");
+            }
+
+            //1
+            else if ((keyData & Keys.KeyCode) == Keys.NumPad1)
+            {
+                Console.WriteLine("1 キーが押されました。");
+            }
+            else if ((keyData & Keys.KeyCode) == Keys.D1)
+            {
+                Console.WriteLine("1 キーが押されました。");
+            }
+
+            //2
+            else if ((keyData & Keys.KeyCode) == Keys.NumPad2)
+            {
+                Console.WriteLine("2 キーが押されました。");
+            }
+            else if ((keyData & Keys.KeyCode) == Keys.D2)
+            {
+                Console.WriteLine("2 キーが押されました。");
+            }
+
+            //3
+            else if ((keyData & Keys.KeyCode) == Keys.NumPad3)
+            {
+                Console.WriteLine("3 キーが押されました。");
+            }
+            else if ((keyData & Keys.KeyCode) == Keys.D3)
+            {
+                Console.WriteLine("3 キーが押されました。");
+            }
+
+            //4
+            else if ((keyData & Keys.KeyCode) == Keys.NumPad4)
+            {
+                Console.WriteLine("4 キーが押されました。");
+            }
+            else if ((keyData & Keys.KeyCode) == Keys.D4)
+            {
+                Console.WriteLine("4 キーが押されました。");
+            }
+
+            //5
+            else if ((keyData & Keys.KeyCode) == Keys.NumPad5)
+            {
+                Console.WriteLine("5 キーが押されました。");
+            }
+            else if ((keyData & Keys.KeyCode) == Keys.D5)
+            {
+                Console.WriteLine("5 キーが押されました。");
+            }
+
+            //6
+            else if ((keyData & Keys.KeyCode) == Keys.NumPad6)
+            {
+                Console.WriteLine("6 キーが押されました。");
+            }
+            else if ((keyData & Keys.KeyCode) == Keys.D6)
+            {
+                Console.WriteLine("6 キーが押されました。");
+            }
+
+            //7
+            else if ((keyData & Keys.KeyCode) == Keys.NumPad7)
+            {
+                Console.WriteLine("7 キーが押されました。");
+            }
+            else if ((keyData & Keys.KeyCode) == Keys.D7)
+            {
+                Console.WriteLine("7 キーが押されました。");
+            }
+
+            //8
+            else if ((keyData & Keys.KeyCode) == Keys.NumPad8)
+            {
+                Console.WriteLine("8 キーが押されました。");
+            }
+            else if ((keyData & Keys.KeyCode) == Keys.D8)
+            {
+                Console.WriteLine("8 キーが押されました。");
+            }
+
+            //9
+            else if ((keyData & Keys.KeyCode) == Keys.NumPad9)
+            {
+                Console.WriteLine("9 キーが押されました。");
+            }
+            else if ((keyData & Keys.KeyCode) == Keys.D9)
+            {
+                Console.WriteLine("9 キーが押されました。");
+            }
+
+            //演算子
+            //＋
+            else if ((keyData & Keys.KeyCode) == Keys.Add)
+            {
+                Console.WriteLine("＋ キーが押されました。");
+            }
+
+            //－
+            else if ((keyData & Keys.KeyCode) == Keys.)
+            {
+                Console.WriteLine("＋ キーが押されました。");
+            }
+
+            //×            
+            else if ((keyData & Keys.KeyCode) == Keys.Multiply)
+            {
+                Console.WriteLine("＋ キーが押されました。");
+            }
+
+            //÷
+            else if ((keyData & Keys.KeyCode) == Keys.Divide)
+            {
+                Console.WriteLine("＋ キーが押されました。");
+            }
+
+            return base.ProcessDialogKey(keyData);
+        }
+
         public Calculator()
         {
             InitializeComponent();
@@ -31,7 +178,7 @@ namespace Calculator_beta
             this.MaximizeBox = false;
 
             KeyPreview = true;
-            KeyDown += new KeyEventHandler(press_Key);
+            PreviewKeyDown += new PreviewKeyDownEventHandler(down_Key);
         }
 
         //input_str は 演算子記号が TextBox と同等 (＋－×÷)
@@ -201,7 +348,7 @@ namespace Calculator_beta
                 root_pi_nepiers(btn);
             }
         }
-        
+
         private void power_fac_per(Button btn)
         {
             //連続した入力は不可
@@ -241,7 +388,6 @@ namespace Calculator_beta
             if (btn.Name == "root")
             {
                 formula.Text = input_str += "√";
-                Console.WriteLine(" +Root : " + input_str);
             }
             //円周率
             else if (btn.Name == "pi")
@@ -299,6 +445,8 @@ namespace Calculator_beta
 
                     //階乗
                     var pattern = input_exp;
+                    //計算式
+                    string fact_formula = "";
                     //計算用の数値
                     string fact_cal = "";
                     //階乗した結果
@@ -617,13 +765,17 @@ namespace Calculator_beta
                     while (input_exp.Contains("√"))
                     {
                         //1桁
-                        var match_1 = Regex.Matches(pattern, @"[√]\d[＋－×÷]$");
-                        foreach(Match match_power1 in match_1)
+                        var match_1 = Regex.Matches(pattern, @"[√]\d[＋－×÷]");
+                        foreach (Match match_power1 in match_1)
                         {
+                            fact_formula = match_power1.ToString().Trim('＋', '－', '×', '÷');
                             fact_cal = match_power1.ToString().Trim('√', '＋', '－', '×', '÷');
                             factr_resu = Math.Sqrt(double.Parse(fact_cal));
-                            pattern = pattern.Replace(match_power1.ToString(), factr_resu.ToString());
+                            pattern = pattern.Replace(fact_formula.ToString(), factr_resu.ToString());
                             input_exp = pattern;
+
+                            Console.WriteLine("抽出 : " + match_power1);
+                            Console.WriteLine("After Trimming : " + fact_cal);
                         }
                         //演算子無し
                         var match_1_ope = Regex.Matches(pattern, @"[√](\d{1})$");
@@ -633,15 +785,18 @@ namespace Calculator_beta
                             factr_resu = Math.Sqrt(double.Parse(fact_cal));
                             pattern = pattern.Replace(match_power1_ope.ToString(), factr_resu.ToString());
                             input_exp = pattern;
+
+                            Console.WriteLine("After Trimming (Non Ope) : " + fact_cal);
                         }
 
                         //2桁
-                        var match_2 = Regex.Matches(pattern, @"[√]\d\d[＋－×÷]$");
+                        var match_2 = Regex.Matches(pattern, @"[√]\d\d[＋－×÷]");
                         foreach (Match match_power2 in match_2)
                         {
+                            fact_formula = match_power2.ToString().Trim('＋', '－', '×', '÷');
                             fact_cal = match_power2.ToString().Trim('√', '＋', '－', '×', '÷');
                             factr_resu = Math.Sqrt(double.Parse(fact_cal));
-                            pattern = pattern.Replace(match_power2.ToString(), factr_resu.ToString());
+                            pattern = pattern.Replace(fact_formula, factr_resu.ToString());
                             input_exp = pattern;
                         }
                         //演算子無し
@@ -655,12 +810,13 @@ namespace Calculator_beta
                         }
 
                         //3桁
-                        var match_3 = Regex.Matches(pattern, @"[√]\d\d\d[＋－×÷]$");
+                        var match_3 = Regex.Matches(pattern, @"[√]\d\d\d[＋－×÷]");
                         foreach (Match match_power3 in match_3)
                         {
+                            fact_formula = match_power3.ToString().Trim('＋', '－', '×', '÷');
                             fact_cal = match_power3.ToString().Trim('√', '＋', '－', '×', '÷');
                             factr_resu = Math.Sqrt(double.Parse(fact_cal));
-                            pattern = pattern.Replace(match_power3.ToString(), factr_resu.ToString());
+                            pattern = pattern.Replace(fact_formula, factr_resu.ToString());
                             input_exp = pattern;
                         }
                         //演算子無し
@@ -674,12 +830,13 @@ namespace Calculator_beta
                         }
 
                         //4桁
-                        var match_4 = Regex.Matches(pattern, @"[√]\d\d\d\d[＋－×÷]$");
+                        var match_4 = Regex.Matches(pattern, @"[√]\d\d\d\d[＋－×÷]");
                         foreach (Match match_power4 in match_4)
                         {
+                            fact_formula = match_power4.ToString().Trim('＋', '－', '×', '÷');
                             fact_cal = match_power4.ToString().Trim('√', '＋', '－', '×', '÷');
                             factr_resu = Math.Sqrt(double.Parse(fact_cal));
-                            pattern = pattern.Replace(match_power4.ToString(), factr_resu.ToString());
+                            pattern = pattern.Replace(fact_formula, factr_resu.ToString());
                             input_exp = pattern;
                         }
                         //演算子無し
@@ -693,12 +850,13 @@ namespace Calculator_beta
                         }
 
                         //5桁
-                        var match_5 = Regex.Matches(pattern, @"[√]\d\d\d\d\d[＋－×÷]$");
+                        var match_5 = Regex.Matches(pattern, @"[√]\d\d\d\d\d[＋－×÷]");
                         foreach (Match match_power5 in match_5)
                         {
+                            fact_formula = match_power5.ToString().Trim('＋', '－', '×', '÷');
                             fact_cal = match_power5.ToString().Trim('√', '＋', '－', '×', '÷');
                             factr_resu = Math.Sqrt(double.Parse(fact_cal));
-                            pattern = pattern.Replace(match_power5.ToString(), factr_resu.ToString());
+                            pattern = pattern.Replace(fact_formula, factr_resu.ToString());
                             input_exp = pattern;
                         }
                         //演算子無し
@@ -836,71 +994,66 @@ namespace Calculator_beta
          * 特定のキーを押したときに、対応する奴が反応する
          * ボタンを押したときと同様の動作
          */
-        private void press_Key(object sender, KeyEventArgs e)
+        private void down_Key(object sender, PreviewKeyDownEventArgs e)
         {
-            //???
-            //Enter キーのみ取得不可
-            string key = e.KeyCode.ToString();
-            Console.WriteLine("Key の値 : " + key);
-
-            if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1)
+            Keys key = e.KeyCode;
+            if (key == Keys.NumPad0 || key == Keys.D0)
             {
-                //click_Number(key, e);
+                Console.WriteLine("0が押されました。");
             }
-            else if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2)
+            else if (key == Keys.NumPad1 || key == Keys.D1)
             {
-                //click_Number(sender, e);
-
+                Console.WriteLine("1が押されました。");
             }
-            else if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3)
+            else if (key == Keys.NumPad2 || key == Keys.D2)
             {
-                //click_Number(sender, e);
-
+                Console.WriteLine("2が押されました。");
             }
-            else if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4)
+            else if (key == Keys.NumPad3 || key == Keys.D3)
             {
-                //click_Number(sender, e);
-
+                Console.WriteLine("3が押されました。");
             }
-            else if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5)
+            else if (key == Keys.NumPad4 || key == Keys.D4)
             {
-                //click_Number(sender, e);
-
+                Console.WriteLine("4が押されました。");
             }
-            else if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6)
+            else if (key == Keys.NumPad5 || key == Keys.D5)
             {
-                //click_Number(sender, e);
-
+                Console.WriteLine("5が押されました。");
             }
-            else if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7)
+            else if (key == Keys.NumPad6 || key == Keys.D6)
             {
-                //click_Number(sender, e);
-
+                Console.WriteLine("6が押されました。");
             }
-            else if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8)
+            else if (key == Keys.NumPad7 || key == Keys.D7)
             {
-                //click_Number(sender, e);
-
+                Console.WriteLine("7が押されました。");
             }
-            else if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9)
+            else if (key == Keys.NumPad8 || key == Keys.D8)
             {
-                //click_Number(sender, e);
-
+                Console.WriteLine("8が押されました。");
+            }
+            else if (key == Keys.NumPad9 || key == Keys.D9)
+            {
+                Console.WriteLine("9が押されました。");
             }
 
-            //Enterキーが押されているか確認
-            //AltかCtrlキーが押されている時は無視する
-            if ((e.KeyCode == Keys.Enter)
-                && !e.Alt && !e.Control)
+            switch (e.KeyCode)
             {
-                Console.WriteLine("Key の値 ( 特殊 ) : " + key);
-                //あたかもTabキーが押されたかのようにする
-                //Shiftが押されている時は前のコントロールのフォーカスを移動
-                this.ProcessTabKey(!e.Shift);
+                case Keys.Up:
+                case Keys.Left:
+                case Keys.Right:
+                case Keys.Down:
+                    Console.WriteLine("矢印キーが押されました。");
+                    break;
 
-                e.Handled = true;
-                //.NET Framework 2.0以降
-                e.SuppressKeyPress = true;
+                case Keys.Escape:
+                    Console.WriteLine("Escaperキーが押されました。");
+                    break;
+
+                case Keys.Enter:
+                    Console.WriteLine("Enterキーが押されました。");
+                    break;
             }
         }
 
@@ -995,6 +1148,11 @@ namespace Calculator_beta
         private void button2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void press_Key(object sender, KeyPressEventArgs e)
+        {
+            
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Calculator_beta
         [System.Runtime.InteropServices.DllImport("kernel32.dll")]
         private static extern bool AllocConsole();
 
-
+        //キー入力
         [System.Security.Permissions.UIPermission(
         System.Security.Permissions.SecurityAction.Demand,
         Window = System.Security.Permissions.UIPermissionWindow.AllWindows)]

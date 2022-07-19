@@ -144,7 +144,7 @@ namespace Calculator_beta
             }
 
             //－
-            else if ((keyData & Keys.KeyCode) == Keys.)
+            else if ((keyData & Keys.KeyCode) == Keys.Subtract)
             {
                 Console.WriteLine("＋ キーが押されました。");
             }
@@ -1101,7 +1101,6 @@ namespace Calculator_beta
         //計算履歴のフォームを表示
         private void click_History(object sender, MouseEventArgs e)
         {
-            //Calculator_beta.csproj に変更加える必要有
             History_form.Instance.Show();
         }
 

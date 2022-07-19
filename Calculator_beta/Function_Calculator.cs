@@ -691,6 +691,25 @@ namespace Calculator_beta
                             pattern = pattern.Replace(match_power4_ope.ToString(), factr_resu.ToString());
                             input_exp = pattern;
                         }
+
+                        //5桁
+                        var match_5 = Regex.Matches(pattern, @"[√]\d\d\d\d\d[＋－×÷]$");
+                        foreach (Match match_power5 in match_5)
+                        {
+                            fact_cal = match_power5.ToString().Trim('√', '＋', '－', '×', '÷');
+                            factr_resu = Math.Sqrt(double.Parse(fact_cal));
+                            pattern = pattern.Replace(match_power5.ToString(), factr_resu.ToString());
+                            input_exp = pattern;
+                        }
+                        //演算子無し
+                        var match_5_ope = Regex.Matches(pattern, @"[√](\d{5})$");
+                        foreach (Match match_power5_ope in match_5_ope)
+                        {
+                            fact_cal = match_power5_ope.ToString().Trim('√');
+                            factr_resu = Math.Sqrt(double.Parse(fact_cal));
+                            pattern = pattern.Replace(match_power5_ope.ToString(), factr_resu.ToString());
+                            input_exp = pattern;
+                        }
                         break;
                     }
 
@@ -725,7 +744,7 @@ namespace Calculator_beta
                     //ゼロ除算
                     catch (DivideByZeroException dbzex)
                     {
-                        Error("Cant't Calculate");
+                        Error("Cant't calculate");
                         Console.WriteLine(dbzex);
                     }
                     catch (OverflowException overflow)
@@ -736,8 +755,13 @@ namespace Calculator_beta
                     catch (SyntaxErrorException syntaxerror)
                     {
                         eq = false;
-                        Error("Format Error");
+                        Error("Format error");
                         Console.WriteLine(syntaxerror);
+                    }
+                    catch (EvaluateException ee)
+                    {
+                        Error("Can't calculate");
+                        Console.WriteLine(ee);
                     }
                     //can't Cast (for Debug)
                     catch (InvalidCastException icex)
@@ -895,8 +919,9 @@ namespace Calculator_beta
         //Error
         public void Error(string error)
         {
+            //ReadOnly = false の時のみ色を変更が可能
             formula.ForeColor = Color.DarkRed;
-            formula.Text = "\n" + error;
+            formula.Text = error;
             button_Enable(false);
             input_str = "";
             operation = "";

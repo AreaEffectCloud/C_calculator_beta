@@ -12,153 +12,154 @@ namespace Calculator_beta
         [System.Runtime.InteropServices.DllImport("kernel32.dll")]
         private static extern bool AllocConsole();
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            this.AcceptButton = equal;
-        }
 
         [System.Security.Permissions.UIPermission(
         System.Security.Permissions.SecurityAction.Demand,
         Window = System.Security.Permissions.UIPermissionWindow.AllWindows)]
         protected override bool ProcessDialogKey(Keys keyData)
         {
-            Keys key = Keys.KeyCode;
-
             //Enter
             if ((keyData & Keys.KeyCode) == Keys.Enter)
             {
-                Console.WriteLine("Enter キーが押されました。");
+                click_Eq("", null);
             }
             //Escape
             else if ((keyData & Keys.KeyCode) == Keys.Escape)
             {
-                Console.WriteLine("Escape キーが押されました。");
+                click_AC("", null);
+            }
+            //BackSpace
+            else if ((keyData & Keys.KeyCode) == Keys.Back)
+            {
+                click_BS("", null);
+            }
+            //Dot
+            else if ((keyData & Keys.KeyCode) == Keys.OemPeriod || (keyData & Keys.KeyCode) == Keys.Decimal)
+            {
+                click_Dot("", null);
             }
 
             //数字
             //0
-            else if ((keyData & Keys.KeyCode) == Keys.NumPad0)
+            else if (((keyData & Keys.KeyCode) == Keys.NumPad0) || ((keyData & Keys.KeyCode) == Keys.D0))
             {
-                Console.WriteLine("0 キーが押されました。");
-            }
-            else if ((keyData & Keys.KeyCode) == Keys.D0)
-            {
-                Console.WriteLine("0 キーが押されました。");
+                click_Number(zero, null);
             }
 
             //1
-            else if ((keyData & Keys.KeyCode) == Keys.NumPad1)
+            else if (((keyData & Keys.KeyCode) == Keys.NumPad1) || ((keyData & Keys.KeyCode) == Keys.D1))
             {
-                Console.WriteLine("1 キーが押されました。");
-            }
-            else if ((keyData & Keys.KeyCode) == Keys.D1)
-            {
-                Console.WriteLine("1 キーが押されました。");
+                click_Number(one, null);
             }
 
             //2
-            else if ((keyData & Keys.KeyCode) == Keys.NumPad2)
+            else if (((keyData & Keys.KeyCode) == Keys.NumPad2) || ((keyData & Keys.KeyCode) == Keys.D2))
             {
-                Console.WriteLine("2 キーが押されました。");
-            }
-            else if ((keyData & Keys.KeyCode) == Keys.D2)
-            {
-                Console.WriteLine("2 キーが押されました。");
+                click_Number(two, null);
             }
 
             //3
-            else if ((keyData & Keys.KeyCode) == Keys.NumPad3)
+            else if (((keyData & Keys.KeyCode) == Keys.NumPad3) || ((keyData & Keys.KeyCode) == Keys.D3))
             {
-                Console.WriteLine("3 キーが押されました。");
-            }
-            else if ((keyData & Keys.KeyCode) == Keys.D3)
-            {
-                Console.WriteLine("3 キーが押されました。");
+                click_Number(three, null);
             }
 
             //4
-            else if ((keyData & Keys.KeyCode) == Keys.NumPad4)
+            else if (((keyData & Keys.KeyCode) == Keys.NumPad4) || ((keyData & Keys.KeyCode) == Keys.D4))
             {
-                Console.WriteLine("4 キーが押されました。");
-            }
-            else if ((keyData & Keys.KeyCode) == Keys.D4)
-            {
-                Console.WriteLine("4 キーが押されました。");
+                click_Number(four, null);
             }
 
             //5
-            else if ((keyData & Keys.KeyCode) == Keys.NumPad5)
+            else if (((keyData & Keys.KeyCode) == Keys.NumPad5) || ((keyData & Keys.KeyCode) == Keys.D7))
             {
-                Console.WriteLine("5 キーが押されました。");
-            }
-            else if ((keyData & Keys.KeyCode) == Keys.D5)
-            {
-                Console.WriteLine("5 キーが押されました。");
+                click_Number(five, null);
             }
 
             //6
-            else if ((keyData & Keys.KeyCode) == Keys.NumPad6)
+            else if (((keyData & Keys.KeyCode) == Keys.NumPad6) || ((keyData & Keys.KeyCode) == Keys.D6))
             {
-                Console.WriteLine("6 キーが押されました。");
-            }
-            else if ((keyData & Keys.KeyCode) == Keys.D6)
-            {
-                Console.WriteLine("6 キーが押されました。");
+                click_Number(six, null);
             }
 
             //7
-            else if ((keyData & Keys.KeyCode) == Keys.NumPad7)
+            else if (((keyData & Keys.KeyCode) == Keys.NumPad7) || ((keyData & Keys.KeyCode) == Keys.D7))
             {
-                Console.WriteLine("7 キーが押されました。");
-            }
-            else if ((keyData & Keys.KeyCode) == Keys.D7)
-            {
-                Console.WriteLine("7 キーが押されました。");
+                click_Number(seven, null);
             }
 
             //8
-            else if ((keyData & Keys.KeyCode) == Keys.NumPad8)
+            else if (((keyData & Keys.KeyCode) == Keys.NumPad8) || ((keyData & Keys.KeyCode) == Keys.D8))
             {
-                Console.WriteLine("8 キーが押されました。");
-            }
-            else if ((keyData & Keys.KeyCode) == Keys.D8)
-            {
-                Console.WriteLine("8 キーが押されました。");
+                click_Number(eight, null);
             }
 
             //9
-            else if ((keyData & Keys.KeyCode) == Keys.NumPad9)
+            else if (((keyData & Keys.KeyCode) == Keys.NumPad9) || ((keyData & Keys.KeyCode) == Keys.D9))
             {
-                Console.WriteLine("9 キーが押されました。");
-            }
-            else if ((keyData & Keys.KeyCode) == Keys.D9)
-            {
-                Console.WriteLine("9 キーが押されました。");
+                click_Number(nine, null);
             }
 
             //演算子
             //＋
             else if ((keyData & Keys.KeyCode) == Keys.Add)
             {
-                Console.WriteLine("＋ キーが押されました。");
+                click_ope(plus, null);
             }
 
             //－
             else if ((keyData & Keys.KeyCode) == Keys.Subtract)
             {
-                Console.WriteLine("＋ キーが押されました。");
+                click_ope(minus, null);
             }
 
             //×            
             else if ((keyData & Keys.KeyCode) == Keys.Multiply)
             {
-                Console.WriteLine("＋ キーが押されました。");
+                click_ope(multi, null);
             }
 
             //÷
             else if ((keyData & Keys.KeyCode) == Keys.Divide)
             {
-                Console.WriteLine("＋ キーが押されました。");
+                click_ope(divide, null);
+            }
+
+            //その他記号
+            //π PI
+            else if ((keyData & Keys.KeyCode) == Keys.P)
+            {
+                click_Special(pi, null);
+            }
+
+            //e Napier
+            else if ((keyData & Keys.KeyCode) == Keys.E)
+            {
+                click_Special(napiers, null);
+            }
+
+            //√ Root
+            else if ((keyData & Keys.KeyCode) == Keys.R)
+            {
+                click_Special(root, null);
+            }
+
+            //^  Caret    
+            else if ((keyData & Keys.KeyCode) == Keys.C)
+            {
+                click_Special(power_multiplier, null);
+            }
+
+            //%
+            else if ((keyData & Keys.KeyCode) == Keys.T)
+            {
+                click_Special(percent, null);
+            }
+
+            //!
+            else if ((keyData & Keys.KeyCode) == Keys.F)
+            {
+                click_Special(factorial, null);
             }
 
             return base.ProcessDialogKey(keyData);
@@ -176,9 +177,6 @@ namespace Calculator_beta
             this.MinimumSize = this.Size;
             //フォームが最大化されないようにする
             this.MaximizeBox = false;
-
-            KeyPreview = true;
-            PreviewKeyDown += new PreviewKeyDownEventHandler(down_Key);
         }
 
         //input_str は 演算子記号が TextBox と同等 (＋－×÷)
@@ -437,9 +435,9 @@ namespace Calculator_beta
                     }
 
                     // % (剰余を求めるものではない ≠ mod)
-                    while (input_exp.Contains("%"))
+                    while (input_exp.Contains("％"))
                     {
-                        input_exp = input_exp.Replace("%", "*0.01");
+                        input_exp = input_exp.Replace("％", "*0.01");
                         break;
                     }
 
@@ -522,8 +520,7 @@ namespace Calculator_beta
                     }
 
                     //冪乗
-                    //不具合有
-                    //BigInteger を使うと、全て数値で表示 (E＋は使われない)
+                    //不具合有???
                     while (input_exp.Contains("^"))
                     {
                         string first = "";
@@ -892,7 +889,16 @@ namespace Calculator_beta
 
                         var result = dt.Compute(input_exp, "");
                         Console.WriteLine("結果 : " + result);
-                        formula.Text = result.ToString();
+                        //結果のみカンマ区切りを適用
+                        try
+                        {
+                            formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(result.ToString()));
+                        }
+                        catch (FormatException fex)
+                        {
+                            formula.Text = result.ToString();
+                            Console.WriteLine("カンマ区切り不可な場合 : " + fex);
+                        }
 
                         //履歴に追加
                         History_form.Instance.ListAddItem(input_str, result.ToString());
@@ -991,73 +997,6 @@ namespace Calculator_beta
         }
 
         /*
-         * 特定のキーを押したときに、対応する奴が反応する
-         * ボタンを押したときと同様の動作
-         */
-        private void down_Key(object sender, PreviewKeyDownEventArgs e)
-        {
-            Keys key = e.KeyCode;
-            if (key == Keys.NumPad0 || key == Keys.D0)
-            {
-                Console.WriteLine("0が押されました。");
-            }
-            else if (key == Keys.NumPad1 || key == Keys.D1)
-            {
-                Console.WriteLine("1が押されました。");
-            }
-            else if (key == Keys.NumPad2 || key == Keys.D2)
-            {
-                Console.WriteLine("2が押されました。");
-            }
-            else if (key == Keys.NumPad3 || key == Keys.D3)
-            {
-                Console.WriteLine("3が押されました。");
-            }
-            else if (key == Keys.NumPad4 || key == Keys.D4)
-            {
-                Console.WriteLine("4が押されました。");
-            }
-            else if (key == Keys.NumPad5 || key == Keys.D5)
-            {
-                Console.WriteLine("5が押されました。");
-            }
-            else if (key == Keys.NumPad6 || key == Keys.D6)
-            {
-                Console.WriteLine("6が押されました。");
-            }
-            else if (key == Keys.NumPad7 || key == Keys.D7)
-            {
-                Console.WriteLine("7が押されました。");
-            }
-            else if (key == Keys.NumPad8 || key == Keys.D8)
-            {
-                Console.WriteLine("8が押されました。");
-            }
-            else if (key == Keys.NumPad9 || key == Keys.D9)
-            {
-                Console.WriteLine("9が押されました。");
-            }
-
-            switch (e.KeyCode)
-            {
-                case Keys.Up:
-                case Keys.Left:
-                case Keys.Right:
-                case Keys.Down:
-                    Console.WriteLine("矢印キーが押されました。");
-                    break;
-
-                case Keys.Escape:
-                    Console.WriteLine("Escaperキーが押されました。");
-                    break;
-
-                case Keys.Enter:
-                    Console.WriteLine("Enterキーが押されました。");
-                    break;
-            }
-        }
-
-        /*
          *  変数メソッド
          */
 
@@ -1104,6 +1043,11 @@ namespace Calculator_beta
             History_form.Instance.Show();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -1147,11 +1091,6 @@ namespace Calculator_beta
         private void button2_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void press_Key(object sender, KeyPressEventArgs e)
-        {
-            
         }
     }
 }

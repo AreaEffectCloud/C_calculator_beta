@@ -125,7 +125,6 @@ namespace Calculator_beta
             this.nine.TabStop = false;
             this.nine.Text = "9";
             this.nine.UseVisualStyleBackColor = true;
-            this.nine.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.nine.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             // 
             // six
@@ -139,7 +138,6 @@ namespace Calculator_beta
             this.six.TabStop = false;
             this.six.Text = "6";
             this.six.UseVisualStyleBackColor = true;
-            this.six.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.six.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             // 
             // three
@@ -153,7 +151,6 @@ namespace Calculator_beta
             this.three.TabStop = false;
             this.three.Text = "3";
             this.three.UseVisualStyleBackColor = true;
-            this.three.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.three.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             // 
             // dot
@@ -167,7 +164,6 @@ namespace Calculator_beta
             this.dot.TabStop = false;
             this.dot.Text = ".";
             this.dot.UseVisualStyleBackColor = true;
-            this.dot.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.dot.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Dot);
             // 
             // eight
@@ -181,7 +177,6 @@ namespace Calculator_beta
             this.eight.TabStop = false;
             this.eight.Text = "8";
             this.eight.UseVisualStyleBackColor = true;
-            this.eight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.eight.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             // 
             // five
@@ -195,7 +190,6 @@ namespace Calculator_beta
             this.five.TabStop = false;
             this.five.Text = "5";
             this.five.UseVisualStyleBackColor = true;
-            this.five.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.five.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             // 
             // two
@@ -209,7 +203,6 @@ namespace Calculator_beta
             this.two.TabStop = false;
             this.two.Text = "2";
             this.two.UseVisualStyleBackColor = true;
-            this.two.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.two.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             // 
             // zero
@@ -224,7 +217,6 @@ namespace Calculator_beta
             this.zero.TabStop = false;
             this.zero.Text = "0";
             this.zero.UseVisualStyleBackColor = true;
-            this.zero.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.zero.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             // 
             // seven
@@ -239,7 +231,6 @@ namespace Calculator_beta
             this.seven.Text = "7";
             this.seven.UseVisualStyleBackColor = true;
             this.seven.Click += new System.EventHandler(this.button17_Click);
-            this.seven.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.seven.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             // 
             // four
@@ -253,7 +244,6 @@ namespace Calculator_beta
             this.four.TabStop = false;
             this.four.Text = "4";
             this.four.UseVisualStyleBackColor = true;
-            this.four.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.four.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             // 
             // one
@@ -268,7 +258,6 @@ namespace Calculator_beta
             this.one.Text = "1";
             this.one.UseVisualStyleBackColor = true;
             this.one.Click += new System.EventHandler(this.button19_Click);
-            this.one.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.one.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Number);
             // 
             // BackSpace
@@ -282,7 +271,6 @@ namespace Calculator_beta
             this.BackSpace.TabStop = false;
             this.BackSpace.Text = "Back\r\nspace";
             this.BackSpace.UseVisualStyleBackColor = true;
-            this.BackSpace.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.BackSpace.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_BS);
             // 
             // pi
@@ -296,7 +284,6 @@ namespace Calculator_beta
             this.pi.TabStop = false;
             this.pi.Text = "π";
             this.pi.UseVisualStyleBackColor = true;
-            this.pi.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.pi.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
             // 
             // factorial
@@ -310,7 +297,6 @@ namespace Calculator_beta
             this.factorial.TabStop = false;
             this.factorial.Text = "!";
             this.factorial.UseVisualStyleBackColor = true;
-            this.factorial.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.factorial.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
             // 
             // percent
@@ -324,7 +310,6 @@ namespace Calculator_beta
             this.percent.TabStop = false;
             this.percent.Text = "％";
             this.percent.UseVisualStyleBackColor = true;
-            this.percent.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.percent.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
             // 
             // AllClear
@@ -338,7 +323,6 @@ namespace Calculator_beta
             this.AllClear.TabStop = false;
             this.AllClear.Text = "All  Clear";
             this.AllClear.UseVisualStyleBackColor = true;
-            this.AllClear.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.AllClear.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_AC);
             // 
             // napiers
@@ -352,7 +336,6 @@ namespace Calculator_beta
             this.napiers.TabStop = false;
             this.napiers.Text = "e";
             this.napiers.UseVisualStyleBackColor = true;
-            this.napiers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.napiers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
             // 
             // root
@@ -366,7 +349,6 @@ namespace Calculator_beta
             this.root.TabStop = false;
             this.root.Text = "√";
             this.root.UseVisualStyleBackColor = true;
-            this.root.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.root.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
             // 
             // power_multiplier
@@ -380,7 +362,6 @@ namespace Calculator_beta
             this.power_multiplier.TabStop = false;
             this.power_multiplier.Text = "^";
             this.power_multiplier.UseVisualStyleBackColor = true;
-            this.power_multiplier.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.power_multiplier.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Special);
             // 
             // divide
@@ -395,7 +376,6 @@ namespace Calculator_beta
             this.divide.Text = "÷";
             this.divide.UseVisualStyleBackColor = true;
             this.divide.Click += new System.EventHandler(this.divide_Click);
-            this.divide.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.divide.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_ope);
             // 
             // multi
@@ -410,7 +390,6 @@ namespace Calculator_beta
             this.multi.Text = "×";
             this.multi.UseVisualStyleBackColor = true;
             this.multi.Click += new System.EventHandler(this.multi_Click);
-            this.multi.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.multi.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_ope);
             // 
             // minus
@@ -425,7 +404,6 @@ namespace Calculator_beta
             this.minus.Text = "－";
             this.minus.UseVisualStyleBackColor = true;
             this.minus.Click += new System.EventHandler(this.minus_Click);
-            this.minus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.minus.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_ope);
             // 
             // plus
@@ -440,7 +418,6 @@ namespace Calculator_beta
             this.plus.Text = "＋";
             this.plus.UseVisualStyleBackColor = true;
             this.plus.Click += new System.EventHandler(this.plus_Click);
-            this.plus.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.plus.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_ope);
             // 
             // equal
@@ -454,7 +431,6 @@ namespace Calculator_beta
             this.equal.TabStop = false;
             this.equal.Text = "=";
             this.equal.UseVisualStyleBackColor = true;
-            this.equal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.press_Key);
             this.equal.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_Eq);
             // 
             // formula

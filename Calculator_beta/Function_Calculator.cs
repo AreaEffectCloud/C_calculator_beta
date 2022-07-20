@@ -203,12 +203,26 @@ namespace Calculator_beta
 
             if (text == "0")
             {
+                //0で始まるとき
                 if (input_str.StartsWith("0"))
                 {
-                    formula.Text = input_str = text;
+                    //第一項
+                    //小数点有
+                    if (dot_)
+                    {
+                        input_str += text;
+                        formula.Text = input_str;
+                    }
+                    //整数
+                    else
+                    {
+                        formula.Text = input_str = text;
+                    }
                 }
+                //other
                 else
                 {
+                    //第二項以降が0で始まるとき
                     if (Regex.IsMatch(input_str, @"[＋－×÷][0]"))
                         return;
                     else
@@ -309,11 +323,24 @@ namespace Calculator_beta
         private void click_Dot(object sender, MouseEventArgs e)
         {
             bool dot_ = input_str.EndsWith(".");
+            bool dot_contains = input_str.Contains(".");
             formula.ForeColor = Color.Black;
+
+            //Dotを数字の間に挟めば一項に複数入力が可能 -> 仕様
+            //Format error になるので、関係ない
             if (input_str != "")
             {
-                if (dot_)
-                    return;
+                ////Dotが含まれるかどうか
+                if (dot_contains)
+                {
+                    if (dot_)
+                        return;
+                    else
+                    {
+                        input_str += dot.Text;
+                        formula.Text = input_str;
+                    }
+                }
                 else
                 {
                     input_str += dot.Text;
@@ -350,9 +377,9 @@ namespace Calculator_beta
         private void power_fac_per(Button btn)
         {
             //連続した入力は不可
-            bool power = formula.Text.Contains("^");
-            bool fac = formula.Text.Contains("!");
-            bool per = formula.Text.Contains("％");
+            bool power = formula.Text.EndsWith("^");
+            bool fac = formula.Text.EndsWith("!");
+            bool per = formula.Text.EndsWith("％");
 
             //冪乗
             if (btn.Name == "power_multiplier")
@@ -381,21 +408,34 @@ namespace Calculator_beta
         }
         private void root_pi_nepiers(Button btn)
         {
-            // これらは連続で打っても計算可  ->  √ は例外
+            //連続した入力は不可
+            bool root = formula.Text.EndsWith("√");
+            bool pi = formula.Text.EndsWith("π");
+            bool napiers = formula.Text.EndsWith("e");
+            
             //根号
             if (btn.Name == "root")
             {
-                formula.Text = input_str += "√";
+                if (root)
+                    return;
+                else
+                    formula.Text = input_str += "√";
             }
             //円周率
             else if (btn.Name == "pi")
             {
-                formula.Text = input_str += "π";
+                if (pi)
+                    return;
+                else
+                    formula.Text = input_str += "π";
             }
             //ネピア数
             else if (btn.Name == "napiers")
             {
-                formula.Text = input_str += "e";
+                if (napiers)
+                    return;
+                else
+                    formula.Text = input_str += "e";
             }
         }
 
@@ -894,10 +934,9 @@ namespace Calculator_beta
                         {
                             formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(result.ToString()));
                         }
-                        catch (FormatException fex)
+                        catch (FormatException)
                         {
                             formula.Text = result.ToString();
-                            Console.WriteLine("カンマ区切り不可な場合 : " + fex);
                         }
 
                         //履歴に追加

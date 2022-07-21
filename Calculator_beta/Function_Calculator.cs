@@ -989,52 +989,14 @@ namespace Calculator_beta
         private void click_BS(object sender, MouseEventArgs e)
         {
             if (formula.Text == null)
-            {
                 return;
-            }
             else
             {
-                try
-                {
-                    string bs_text = input_str.Remove(input_str.Length - 1);
-                    if (bs_text.Length >= 0)
-                    {
-                        //カンマ区切りで表現しないから簡略化できる
-                        //try - catch も不必要
-                        try
-                        {
-                            if (bs_text.Length == 0)
-                            {
-                                formula.Text = input_str = bs_text;
-                            }
-                            else
-                            {
-                                //数字の末尾がドットかどうか
-                                bool dot_end = bs_text.EndsWith(".");
-                                if (dot_end)
-                                {
-                                    formula.Text = input_str = bs_text;
-                                    formula.Text = input_str;
-                                }
-                                else if (!dot_end)
-                                {
-                                    formula.Text = input_str = bs_text;
-                                }
-                            }
-                        }
-                        catch (FormatException ex)
-                        {
-                            formula.Text = bs_text;
-                            Console.WriteLine(ex);
-                        }
-                    }
-
-                }
-                catch (ArgumentOutOfRangeException argumentoutofrange)
-                {
-                    Console.WriteLine(argumentoutofrange);
+                string bs_text = input_str.Remove(input_str.Length - 1);
+                if (bs_text.Length >= 0)
+                    formula.Text = input_str = bs_text;
+                else
                     return;
-                }
             }
         }
 

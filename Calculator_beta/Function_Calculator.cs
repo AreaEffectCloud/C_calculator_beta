@@ -104,7 +104,7 @@ namespace Calculator_beta
             }
 
             //－
-            else if ((keyData & Keys.KeyCode) == Keys.Subtract)
+            else if (((keyData & Keys.KeyCode) == Keys.Subtract) || ((keyData & Keys.KeyCode) == Keys.OemBackslash))
             {
                 click_ope(minus, null);
             }
@@ -116,7 +116,7 @@ namespace Calculator_beta
             }
 
             //÷
-            else if ((keyData & Keys.KeyCode) == Keys.Divide)
+            else if (((keyData & Keys.KeyCode) == Keys.Divide) || ((keyData & Keys.KeyCode) == Keys.OemQuestion))
             {
                 click_ope(divide, null);
             }

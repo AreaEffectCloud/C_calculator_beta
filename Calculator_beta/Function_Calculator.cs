@@ -999,7 +999,9 @@ namespace Calculator_beta
                     string bs_text = input_str.Remove(input_str.Length - 1);
                     if (bs_text.Length >= 0)
                     {
-                        try // 小数点有りでエラー
+                        //カンマ区切りで表現しないから簡略化できる
+                        //try - catch も不必要
+                        try
                         {
                             if (bs_text.Length == 0)
                             {

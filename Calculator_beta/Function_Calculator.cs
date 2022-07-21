@@ -8,10 +8,6 @@ namespace Calculator_beta
 {
     public partial class Calculator : Form
     {
-        //Display Console -> Delete soon
-        [System.Runtime.InteropServices.DllImport("kernel32.dll")]
-        private static extern bool AllocConsole();
-
         //キー入力
         [System.Security.Permissions.UIPermission(
         System.Security.Permissions.SecurityAction.Demand,
@@ -168,8 +164,6 @@ namespace Calculator_beta
         public Calculator()
         {
             InitializeComponent();
-            //output to Cmd -> Delete soon
-            AllocConsole();
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             //最大サイズ、最小サイズを固定
@@ -190,13 +184,12 @@ namespace Calculator_beta
         public string operation = "";
 
         //0から9の数字を "" マウスで "" 押したとき
-        //カンマ区切り表現は廃止
-        //Console.WriteLine(input_str); -> Delete soon
         private void click_Number(object sender, MouseEventArgs e)
         {
             enzanshi = false;
             bool dot_ = input_str.Contains(".");
             formula.ForeColor = Color.Black;
+            formula.ReadOnly = true;
 
             Button btn = (Button)sender;
             string text = btn.Text;
@@ -215,9 +208,7 @@ namespace Calculator_beta
                     }
                     //整数
                     else
-                    {
                         formula.Text = input_str = text;
-                    }
                 }
                 //other
                 else
@@ -262,8 +253,6 @@ namespace Calculator_beta
                     }
                 }
             }
-            // -> Delete soon
-            Console.WriteLine("入力 : " + input_str);
         }
 
         //四則演算を "" マウスで "" 押したとき  ＋－÷×
@@ -272,11 +261,9 @@ namespace Calculator_beta
             eq = false;
             bool dot_ = input_str.Contains(".");
             formula.ForeColor = Color.Black;
+            formula.ReadOnly = true;
             Button btn = (Button)sender;
             operation = btn.Text;
-
-            // -> Delete soon
-            Console.WriteLine("色々な処理をする前 : " + input_str);
 
             if (enzanshi)//演算子ボタンが連続で押されたときに置換
             {
@@ -294,27 +281,15 @@ namespace Calculator_beta
                         formula.Text = keisan + operation;
                     }
                 }
-                catch (NullReferenceException nrex)
+                catch (NullReferenceException)
                 {
-                    Console.WriteLine(nrex);
                     return;
                 }
             }
             else
             {
-                // -> Delete soon
-                Console.WriteLine("演算子 Before : " + input_str);
-
                 input_str += operation;
-
-                // -> Delete soon
-                Console.WriteLine("演算子 After : " + input_str);
-
                 formula.Text = input_str;
-
-                // -> Delete soon
-                Console.WriteLine("計算式に代入後 : " + input_str);
-
                 enzanshi = true;
             }
         }
@@ -325,6 +300,7 @@ namespace Calculator_beta
             bool dot_ = input_str.EndsWith(".");
             bool dot_contains = input_str.Contains(".");
             formula.ForeColor = Color.Black;
+            formula.ReadOnly = true;
 
             //Dotを数字の間に挟めば一項に複数入力が可能 -> 仕様
             //Format error になるので、関係ない
@@ -335,11 +311,6 @@ namespace Calculator_beta
                 {
                     if (dot_)
                         return;
-                    else
-                    {
-                        input_str += dot.Text;
-                        formula.Text = input_str;
-                    }
                 }
                 else
                 {
@@ -359,18 +330,17 @@ namespace Calculator_beta
             eq = false;
             enzanshi = false;
             formula.ForeColor = Color.Black;
+            formula.ReadOnly = true;
             Button btn = (Button)sender;
 
-            //数字がないとエラーになる特殊文字
-            //Designer.cs も変更しないと Name が反映されない
-            if (formula.Text != "")
+            if (input_str != "")
             {
                 power_fac_per(btn);
-                root_pi_nepiers(btn);
+                root_pi_napiers(btn);
             }
-            else if (formula.Text == "")
+            else if (input_str == "")
             {
-                root_pi_nepiers(btn);
+                root_pi_napiers(btn);
             }
         }
 
@@ -387,7 +357,10 @@ namespace Calculator_beta
                 if (power)
                     return;
                 else
-                    formula.Text = input_str += "^";
+                {
+                    input_str += "^";
+                    formula.Text = input_str;
+                }
             }
             //階乗
             else if (btn.Name == "factorial")
@@ -395,7 +368,10 @@ namespace Calculator_beta
                 if (fac)
                     return;
                 else
-                    formula.Text = input_str += "!";
+                {
+                    input_str += "!";
+                    formula.Text = input_str;
+                }
             }
             //パーセント
             else if (btn.Name == "percent")
@@ -403,10 +379,13 @@ namespace Calculator_beta
                 if (per)
                     return;
                 else
-                    formula.Text = input_str += "％";
+                {
+                    input_str += "％";
+                    formula.Text = input_str;
+                }
             }
         }
-        private void root_pi_nepiers(Button btn)
+        private void root_pi_napiers(Button btn)
         {
             //連続した入力は不可
             bool root = formula.Text.EndsWith("√");
@@ -419,7 +398,10 @@ namespace Calculator_beta
                 if (root)
                     return;
                 else
-                    formula.Text = input_str += "√";
+                {
+                    input_str += "√";
+                    formula.Text = input_str;
+                }
             }
             //円周率
             else if (btn.Name == "pi")
@@ -427,7 +409,10 @@ namespace Calculator_beta
                 if (pi)
                     return;
                 else
-                    formula.Text = input_str += "π";
+                {
+                    input_str += "π";
+                    formula.Text = input_str;
+                }
             }
             //ネピア数
             else if (btn.Name == "napiers")
@@ -435,7 +420,10 @@ namespace Calculator_beta
                 if (napiers)
                     return;
                 else
-                    formula.Text = input_str += "e";
+                {
+                    input_str += "e";
+                    formula.Text = input_str;
+                }
             }
         }
 
@@ -444,6 +432,7 @@ namespace Calculator_beta
         private void click_Eq(object sender, MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
+            formula.ReadOnly = true;
 
             if (input_str == "")
             {
@@ -496,7 +485,6 @@ namespace Calculator_beta
                         var match_1 = Regex.Matches(pattern, @"^(\d{1})?[!]");
                         foreach (Match match_factr1 in match_1)
                         {
-                            //match_factr1 -> 抽出した文字
                             fact_cal = match_factr1.ToString().TrimEnd('!');
                             factr_resu = factr(double.Parse(fact_cal));
                             pattern = pattern.Replace(match_factr1.ToString(), factr_resu.ToString());
@@ -560,7 +548,6 @@ namespace Calculator_beta
                     }
 
                     //冪乗
-                    //不具合有???
                     while (input_exp.Contains("^"))
                     {
                         string first = "";
@@ -647,7 +634,7 @@ namespace Calculator_beta
                         {
                             power_cal = power_1to2_ope_back.Value.Trim('＋', '－', '×', '÷');
                             first = power_1to2_ope_back.Value.Substring(0, 1);
-                            second = power_1to2_ope_back.Value.Substring(3, 2);
+                            second = power_1to2_ope_back.Value.Substring(2, 2);
 
                             pow_result = Math.Pow(double.Parse(first), double.Parse(second));
                             pattern = pattern.Replace(power_cal, pow_result.ToString());
@@ -723,9 +710,6 @@ namespace Calculator_beta
                             first = power_2to1.Value.Substring(0, 2);
                             second = power_2to1.Value.Substring(3);
 
-                            //-> Delete soon
-                            Console.WriteLine("first : " + first + "\nsecond : " + second);
-
                             pow_result = Math.Pow(double.Parse(first), double.Parse(second));
                             pattern = pattern.Replace(power_2to1.Value, pow_result.ToString());
                             input_exp = pattern;
@@ -774,9 +758,6 @@ namespace Calculator_beta
                             first = power_2to2.Value.Substring(0, 2);
                             second = power_2to2.Value.Substring(3);
 
-                            //-> Delete soon
-                            Console.WriteLine("first : " + first + "\nsecond : " + second);
-
                             pow_result = Math.Pow(double.Parse(first), double.Parse(second));
                             pattern = pattern.Replace(power_2to2.Value, pow_result.ToString());
                             input_exp = pattern;
@@ -817,7 +798,7 @@ namespace Calculator_beta
                             pattern = pattern.Replace(power_cal, pow_result.ToString());
                             input_exp = pattern;
                         }
-
+                        
                         // 11 ^ 111
                         var match_pow2_3 = Regex.Matches(pattern, @"^(\d{2})?[\^](\d{3})$");
                         foreach (Match power_2to3 in match_pow2_3)
@@ -836,6 +817,30 @@ namespace Calculator_beta
                             power_cal = power_2to3_ope.Value.Trim('＋', '－', '×', '÷');
                             first = power_2to3_ope.Value.Substring(1, 2);
                             second = power_2to3_ope.Value.Substring(4);
+
+                            pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                            pattern = pattern.Replace(power_cal, pow_result.ToString());
+                            input_exp = pattern;
+                        }
+                        //後ろ
+                        var match_pow2_3_ope_back = Regex.Matches(pattern, @"^(\d{2})?[\^](\d{3})[＋－×÷]");
+                        foreach (Match power_2to3_ope_back in match_pow2_3_ope_back)
+                        {
+                            power_cal = power_2to3_ope_back.Value.Trim('＋', '－', '×', '÷');
+                            first = power_2to3_ope_back.Value.Substring(0, 2);
+                            second = power_2to3_ope_back.Value.Substring(3, 3);
+
+                            pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                            pattern = pattern.Replace(power_cal, pow_result.ToString());
+                            input_exp = pattern;
+                        }
+                        //両方
+                        var match_pow2_3_ope_both = Regex.Matches(pattern, @"[＋－×÷]\d\d[\^]\d\d\d[＋－×÷]");
+                        foreach (Match power_2to3_ope_both in match_pow2_3_ope_both)
+                        {
+                            power_cal = power_2to3_ope_both.Value.Trim('＋', '－', '×', '÷');
+                            first = power_2to3_ope_both.Value.Substring(1, 2);
+                            second = power_2to3_ope_both.Value.Substring(5, 3);
 
                             pow_result = Math.Pow(double.Parse(first), double.Parse(second));
                             pattern = pattern.Replace(power_cal, pow_result.ToString());
@@ -860,8 +865,8 @@ namespace Calculator_beta
                         foreach (Match power_3to1_ope in match_pow3_1_ope)
                         {
                             power_cal = power_3to1_ope.Value.Trim('＋', '－', '×', '÷');
-                            first = power_cal.Substring(1, 3);
-                            second = power_cal.Substring(5, 1);
+                            first = power_3to1_ope.Value.Substring(1, 3);
+                            second = power_3to1_ope.Value.Substring(5, 1);
 
                             pow_result = Math.Pow(double.Parse(first), double.Parse(second));
                             pattern = pattern.Replace(power_cal, pow_result.ToString());
@@ -908,8 +913,8 @@ namespace Calculator_beta
                         foreach (Match power_3to2_ope in match_pow3_2_ope)
                         {
                             power_cal = power_3to2_ope.Value.Trim('＋', '－', '×', '÷');
-                            first = power_cal.Substring(1, 3);
-                            second = power_cal.Substring(5, 1);
+                            first = power_3to2_ope.Value.Substring(1, 3);
+                            second = power_3to2_ope.Value.Substring(5);
 
                             pow_result = Math.Pow(double.Parse(first), double.Parse(second));
                             pattern = pattern.Replace(power_cal, pow_result.ToString());
@@ -945,7 +950,7 @@ namespace Calculator_beta
                         foreach (Match power_3to3 in match_pow3_3)
                         {
                             first = power_3to3.Value.Substring(0, 3);
-                            second = power_3to3.Value.Substring(4, 3);
+                            second = power_3to3.Value.Substring(4);
 
                             pow_result = Math.Pow(double.Parse(first), double.Parse(second));
                             pattern = pattern.Replace(power_3to3.Value, pow_result.ToString());
@@ -956,8 +961,8 @@ namespace Calculator_beta
                         foreach (Match power_3to3_ope in match_pow3_3_ope)
                         {
                             power_cal = power_3to3_ope.Value.Trim('＋', '－', '×', '÷');
-                            first = power_cal.Substring(1, 3);
-                            second = power_cal.Substring(5, 3);
+                            first = power_3to3_ope.Value.Substring(1, 3);
+                            second = power_3to3_ope.Value.Substring(5);
 
                             pow_result = Math.Pow(double.Parse(first), double.Parse(second));
                             pattern = pattern.Replace(power_cal, pow_result.ToString());
@@ -965,16 +970,29 @@ namespace Calculator_beta
                         }
                         //後ろ
                         var match_pow3_3_ope_back = Regex.Matches(pattern, @"^(\d{3})?[\^](\d{3})[＋－×÷]");
-                        foreach (Match power_3to3_ope in match_pow3_3_ope)
+                        foreach (Match power_3to3_ope_back in match_pow3_3_ope_back)
                         {
-                            power_cal = power_3to3_ope.Value.Trim('＋', '－', '×', '÷');
-                            first = power_cal.Substring(0, 3);
-                            second = power_cal.Substring(4);
+                            power_cal = power_3to3_ope_back.Value.Trim('＋', '－', '×', '÷');
+                            first = power_3to3_ope_back.Value.Substring(0, 3);
+                            second = power_3to3_ope_back.Value.Substring(4, 3);
 
                             pow_result = Math.Pow(double.Parse(first), double.Parse(second));
                             pattern = pattern.Replace(power_cal, pow_result.ToString());
                             input_exp = pattern;
                         }
+                        //両方
+                        var match_pow3_3_ope_both = Regex.Matches(pattern, @"[＋－×÷]\d\d\d[\^]\d\d\d[＋－×÷]");
+                        foreach (Match power_3to3_ope_both in match_pow3_3_ope_both)
+                        {
+                            power_cal = power_3to3_ope_both.Value.Trim('＋', '－', '×', '÷');
+                            first = power_3to3_ope_both.Value.Substring(1, 3);
+                            second = power_3to3_ope_both.Value.Substring(5, 3);
+
+                            pow_result = Math.Pow(double.Parse(first), double.Parse(second));
+                            pattern = pattern.Replace(power_cal, pow_result.ToString());
+                            input_exp = pattern;
+                        }
+
                         break;
                     }
 
@@ -991,9 +1009,6 @@ namespace Calculator_beta
                             factr_resu = Math.Sqrt(double.Parse(fact_cal));
                             pattern = pattern.Replace(fact_formula.ToString(), factr_resu.ToString());
                             input_exp = pattern;
-
-                            Console.WriteLine("抽出 : " + match_power1);
-                            Console.WriteLine("After Trimming : " + fact_cal);
                         }
                         //演算子無し
                         var match_1_ope = Regex.Matches(pattern, @"[√](\d{1})$");
@@ -1003,8 +1018,6 @@ namespace Calculator_beta
                             factr_resu = Math.Sqrt(double.Parse(fact_cal));
                             pattern = pattern.Replace(match_power1_ope.ToString(), factr_resu.ToString());
                             input_exp = pattern;
-
-                            Console.WriteLine("After Trimming (Non Ope) : " + fact_cal);
                         }
 
                         //2桁
@@ -1104,53 +1117,50 @@ namespace Calculator_beta
 
                         //計算
                         DataTable dt = new DataTable();
-
-                        //Debug
-                        Console.WriteLine("計算式 Compute用 : " + input_exp);
-
                         var result = dt.Compute(input_exp, "");
-                        Console.WriteLine("結果 : " + result);
-                        //結果のみカンマ区切りを適用
-                        try
+
+                        if (result.ToString() == "∞")
                         {
-                            formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(result.ToString()));
+                            //ゼロ除算
+                            Error("Cant't calculate");
                         }
-                        catch (FormatException)
+                        else
                         {
-                            formula.Text = result.ToString();
+                            //結果のみカンマ区切りを適用
+                            try
+                            {
+                                formula.Text = String.Format("{0:#,0.############################################################}", decimal.Parse(result.ToString()));
+                            }
+                            catch (FormatException)
+                            {
+                                formula.Text = result.ToString();
+                            }
                         }
 
                         //履歴に追加
                         History_form.Instance.ListAddItem(input_str, result.ToString());
                         input_str = "";
-
                     }
-                    //ゼロ除算
-                    catch (DivideByZeroException dbzex)
+                    //ゼロ除算(?)
+                    catch (DivideByZeroException)
                     {
                         Error("Cant't calculate");
-                        Console.WriteLine(dbzex);
                     }
-                    catch (OverflowException overflow)
+                    //オーバーフロー
+                    catch (OverflowException)
                     {
                         Error("Value too large");
-                        Console.WriteLine(overflow);
                     }
-                    catch (SyntaxErrorException syntaxerror)
+                    //計算式の形式に誤り
+                    catch (SyntaxErrorException)
                     {
                         eq = false;
                         Error("Format error");
-                        Console.WriteLine(syntaxerror);
                     }
-                    catch (EvaluateException ee)
+                    //オーバーフロー???
+                    catch (EvaluateException)
                     {
-                        Error("Can't calculate");
-                        Console.WriteLine(ee);
-                    }
-                    //can't Cast (for Debug)
-                    catch (InvalidCastException icex)
-                    {
-                        Console.WriteLine(icex);
+                        Error("Value too large");
                     }
                 }
             }
@@ -1160,6 +1170,7 @@ namespace Calculator_beta
         private void click_AC(object sender, MouseEventArgs e)
         {
             formula.ForeColor = Color.Black;
+            formula.ReadOnly = true;
             formula.Text = "";
             input_str = "";
             operation = "";
@@ -1180,10 +1191,6 @@ namespace Calculator_beta
             }
         }
 
-        /*
-         *  変数メソッド
-         */
-
         //階乗 num!
         private static double factr(double num)
         {
@@ -1195,7 +1202,7 @@ namespace Calculator_beta
         //Error
         public void Error(string error)
         {
-            //ReadOnly = false の時のみ色を変更が可能
+            formula.ReadOnly = false;
             formula.ForeColor = Color.DarkRed;
             formula.Text = error;
             button_Enable(false);
@@ -1214,6 +1221,7 @@ namespace Calculator_beta
                     ctrl.Enabled = use;
                 }
             }
+            //履歴ボタンだけ有効化
             Control[] history_ctr = this.Controls.Find("History", true);
             if (history_ctr.Length > 0)
             {

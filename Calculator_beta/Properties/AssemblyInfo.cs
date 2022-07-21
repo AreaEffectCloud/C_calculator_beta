@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // 制御されます。アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更します。
 [assembly: AssemblyTitle("Calculator_beta")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("四則演算などが連続で計算できるアプリ。")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Calculator_beta")]

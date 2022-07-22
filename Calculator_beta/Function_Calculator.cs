@@ -997,7 +997,6 @@ namespace Calculator_beta
                     }
 
                     //平方根
-                    //階乗や冪乗の処理の前に実行したほうが良い
                     while (input_exp.Contains("√"))
                     {
                         //1桁
